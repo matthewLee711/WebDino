@@ -1,0 +1,63 @@
+# ----- Core Application properties ----
+spring:
+  application:
+    name: webdino
+  main:
+    banner-mode: on
+  profiles:
+    active: prod
+
+server:
+  port: 8080
+  context-path: /webdino
+  error:
+    path: /error
+  tomcat:
+    basedir: tomcat_webdino
+  compression:
+    enabled: true
+    mime-types: application/json,application/xml,text/html,text/xml,text/plain
+    min-response-size: 1000
+
+logging:
+  level:
+    ROOT: INFO
+    com.interns.webdino: ERROR
+    org.springframework: ERROR
+    org.springframework.test: ERROR
+
+# -------
+
+#  ---- Spring Actuator properties for health and metrics collection ----
+#management:
+#  port: 9991
+
+endpoints:
+  enabled: true
+  info:
+    enabled: true
+    path: "/admin/info"
+  health:
+    enabled: true
+    path: "/admin/health"
+  metrics:
+    enabled: true
+    path: "/admin/metrics"
+  beans:
+    enabled: false
+  shutdown:
+    enabled: false
+
+#  ------
+# reduce usage of Spring profiles by putting environment specific values in external appconfig.properties which is managed by consul
+
+#  --- Application specific custom properties ------
+http-pool:
+    maxConnections: 1000
+    routeMaxConnections: 200
+
+http-timeouts:
+    socketReadTimeout: 5000
+    socketConnectTimeout: 2000
+
+---
