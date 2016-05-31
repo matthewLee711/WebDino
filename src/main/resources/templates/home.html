@@ -12,6 +12,18 @@
 <body>
 	<h1>{{message}}</h1>
 	<h2>{{> partial}}</h2>
+	<table>
+		<tr>
+		{{red}}
+		</tr>
+	</table>
+	
+	{{#red?}}
+  		Hi {{name}}!
+	{{/red?}}
+	
+	
+	
 	<h3>Matthew Lee!</h3>
 	<p>Test pull</p>
 </body>
