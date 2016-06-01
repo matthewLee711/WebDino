@@ -7,7 +7,7 @@
 	integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7"
 	crossorigin="anonymous">
 
-<link rel="stylesheet" href="./css/main.css"/>
+<link rel="stylesheet" href="./css/main.css" />
 
 </head>
 <body role="document">
@@ -52,6 +52,14 @@
 			<h1>Welcome to WebDino!</h1>
 			<p>A Summer intern project to monitor web site performance</p>
 		</div>
+		<div id="ApiResult"></div>
+		<div class="result"></div>
+		<div class="result"></div>
+		<div class="result"></div>
+		<div class="result chris"></div>
+		<div class="result"></div>
+		<div class="result"></div>
+		<div class=".chris">I should have nothing in me</div>
 	</div>
 
 	<!-- jQuery -->
@@ -62,6 +70,42 @@
 	<script
 		src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"
 		integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS"
-		crossorigin="anonymous"></script>
+		crossorigin="anonymous">
+		
+	</script>
+
+	<script>
+
+		var reqData = {
+            protocol : "http",
+            url : "www.homedepot.com",
+            startTime : "14:15:00 06-01-2016",
+            endTime : "14:15:00 06-01-2016",
+            interval : {
+                hours : 0,
+                minutes : 5,
+                seconds : 0,
+                cron : ""
+            }
+		};
+
+		
+		$.ajax({
+			url : "http://localhost:8080/webdino/echo",
+		    type: "POST",
+		    data: {"data" : JSON.stringify(reqData)},
+			success : function(result) {
+
+				var apiResult = $("#ApiResult");
+				var stuff = JSON.parse(decodeURIComponent(result.value));
+			    apiResult.html(stuff.url);
+			},
+			error : function() {
+				$("#ApiResult").html(
+						"<strong>" + "It FAILED :(" + "</strong>");
+			}
+		});
+	</script>
+
 </body>
 </html>
