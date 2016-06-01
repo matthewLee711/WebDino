@@ -53,19 +53,6 @@ bin/
 target/
 /.apt_generated/
 node_modules
-src/main/webapp/scripts-build
-.vagrant/machines/default/virtualbox
-test/coverage-js
-src/test/coverage
-src/main/webapp/js-build
-test/coverage
-src/test/karma_html
-nexus.maven.settings.xml
-npmrc.txt
-.sass-cache
-src/main/webapp/css
-src/main/resources/static/css
-src/main/resources/static/js-build
 
 #Tomcat working
 tomcat_*/
