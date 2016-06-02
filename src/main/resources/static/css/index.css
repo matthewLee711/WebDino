@@ -1,0 +1,40 @@
+#hourInterval{
+	width:30%;
+}
+#minuteInterval{
+	width:30%;
+}
+#secondInterval{
+	width:30%;
+}
+#UrlInput{
+	width:40%;
+}
+#url{
+	font-size: 35px;
+}
+#addButton{
+	font-size:30px;
+}
+#tableHeading
+{
+	font-size:30px;
+}
+#tableInput
+{
+	font-size:30px;
+}
+#resultPanel{
+	font-size:30px;
+}
+#largeResultPanel{
+	font-size:22px;
+}
+.panel-body{
+	background:#9be995;
+
+}
+table{
+	width:100%;
+	text-align: left;
+}
