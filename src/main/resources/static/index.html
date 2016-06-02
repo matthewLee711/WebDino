@@ -52,6 +52,11 @@
 			<h1>Welcome to WebDino!</h1>
 			<p>A Summer intern project to monitor web site performance</p>
 		</div>
+		<div>
+			<input type="text" id="urlInput" name="urlInput" value="yey">
+			<button type="button" onclick="doTheThing()">Add</button>
+		</div>
+		<div id="input"></div>
 		<div id="ApiResult"></div>
 		<div class="result"></div>
 		<div class="result"></div>
@@ -75,10 +80,14 @@
 	</script>
 
 	<script>
-
+		var text = document.getElementsByName("URLInput").value;
+		//Serialize form into json
+		var formData = JSON.stringify($("#myForm").serializeArray());
+		
 		var reqData = {
             protocol : "http",
             url : "www.homedepot.com",
+            test : text,
             startTime : "14:15:00 06-01-2016",
             endTime : "14:15:00 06-01-2016",
             interval : {
@@ -90,21 +99,59 @@
 		};
 
 		
-		$.ajax({
+		/*$.ajax({
 			url : "http://localhost:8080/webdino/echo",
 		    type: "POST",
 		    data: {"data" : JSON.stringify(reqData)},
 			success : function(result) {
 
-				var apiResult = $("#ApiResult");
-				var stuff = JSON.parse(decodeURIComponent(result.value));
+				var apiResult = $("#ApiResult");//create selector for ApiResult class
+				var stuff = JSON.parse(decodeURIComponent(result.value));//convert into json
 			    apiResult.html(stuff.url);
 			},
 			error : function() {
 				$("#ApiResult").html(
 						"<strong>" + "It FAILED :(" + "</strong>");
 			}
+		});*/
+		
+		/*
+		$.ajax({
+			url : "http://localhost:8080/webdino/matthew",
+		    type: "POST",
+		    data: {"data" : JSON.stringify(reqData)},
+			success : function(result) {
+
+				var apiResult = $("#input");//create selector for ApiResult class
+				var stuff = JSON.parse(decodeURIComponent(result.value));//convert into json
+			    apiResult.html(stuff.url);
+			},
+			error : function() {
+				$("#input").html(
+						"<strong>" + "It failed" + "</strong>");
+			}
 		});
+		*/
+				
+		function doTheThing(){
+			
+			console.log($("#urlInput").val());
+			
+			$.ajax({
+				url : "http://localhost:8080/webdino/echo",
+			    type: "POST",
+			    data: {'urlInput' : $("#urlInput").val()},
+				success : function(result) {
+					var inputResult = $("#input");//create selector for ApiResult class
+				    inputResult.html(result.value);
+				},
+				error : function() {
+					$("#ApiResult").html(
+							"<strong>" + "It .... :(" + "</strong>");
+				}
+			});			
+		}
+
 	</script>
 
 </body>
