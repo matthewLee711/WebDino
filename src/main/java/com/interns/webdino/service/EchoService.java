@@ -19,17 +19,17 @@ import com.interns.webdino.model.EchoResponseModel;
 public class EchoService {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(EchoService.class);
-
-    @RequestMapping(method = {RequestMethod.GET, RequestMethod.POST})
+    //Perform get and post request
+    @RequestMapping(method = {RequestMethod.POST})
     public ResponseEntity<EchoResponseModel> echo(
             HttpServletRequest req,
             @RequestParam(value="value", required=false) String value,
             @RequestParam(value="data", required=false) String data,
-            @RequestBody String body){
+            @RequestParam(value="urlInput", required=false) String urlInput){
 
         EchoResponseModel response;
 
-        if (value == null && data == null) {
+        if (value == null && data == null && urlInput == null) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
         }
 
@@ -38,8 +38,10 @@ public class EchoService {
 
         if(value != null){
             response = new EchoResponseModel(value);
-        } else {
+        } else if (data != null){
             response = new EchoResponseModel(data);
+        } else {
+        	response = new EchoResponseModel(urlInput);
         }
 
         return new ResponseEntity<>(response, HttpStatus.OK);
