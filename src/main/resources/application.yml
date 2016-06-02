@@ -23,7 +23,7 @@ logging:
   level:
     ROOT: INFO
     com.interns.webdino: ERROR
-    org.springframework: ERROR
+    org.springframework: DEBUG
     org.springframework.test: ERROR
 
 # -------

@@ -53,7 +53,13 @@
 			<p>A Summer intern project to monitor web site performance</p>
 		</div>
 		<div id="ApiResult"></div>
-		<div class="result"></div>
+		<div class="result">
+		
+			<p>Name: <input type="text" id="inputBox" value = "Moose"></p>
+			<button id="showVal">Show Value</button>
+		</div>
+		<div id="flip">Click Here to slide down panel</div>
+		<div id="panel">Hello from Panel!</div>
 		<div class="result"></div>
 		<div class="result"></div>
 		<div class="result chris"></div>
@@ -73,7 +79,44 @@
 		crossorigin="anonymous">
 		
 	</script>
+	
+	<script>
+		var dataInput = "";
+		$(document).ready(function(){
+			$("#showVal").click(function(){
+				dataInput = $("#inputBox").val();
+				alert("Value " + dataInput);
+			});
+		})
+	</script>
+	
+	<script>
+	
+	$(document).ready(function(){
+		$("#flip").click(function(){
+			$("#panel").slideToggle("slow",function(){
+				//alert("Panel has Moved ");
+			});
+		});
+	});
+	
+	</script>
 
+	<style>
+	#panel, #flip{
+		padding:5px;
+		text-align: center;
+		background-color: #e5eecc;
+		border: solid 1px #c3c3c3;
+	}
+	
+	#panel{
+	padding : 50px;
+	displey: none;
+	}
+	
+	
+	</style>
 	<script>
 
 		var reqData = {
@@ -104,6 +147,11 @@
 				$("#ApiResult").html(
 						"<strong>" + "It FAILED :(" + "</strong>");
 			}
+		});
+				
+		var hiddenBox = $( "#banner-message" );
+		$( "#button-container button" ).on( "click", function( event ) {
+		  hiddenBox.show();
 		});
 	</script>
 
