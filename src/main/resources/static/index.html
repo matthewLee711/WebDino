@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+<link rel="stylesheet" type="text/css" href="./css/index.css">
 <!-- Latest compiled and minified CSS -->
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"
@@ -28,19 +29,6 @@
 				<ul class="nav navbar-nav">
 					<li class="active"><a href="#">Home</a></li>
 					<li><a href="#about">About</a></li>
-					<li><a href="#contact">Contact</a></li>
-					<li class="dropdown"><a href="#" class="dropdown-toggle"
-						data-toggle="dropdown" role="button" aria-haspopup="true"
-						aria-expanded="false">Dropdown <span class="caret"></span></a>
-						<ul class="dropdown-menu">
-							<li><a href="#">Action</a></li>
-							<li><a href="#">Another action</a></li>
-							<li><a href="#">Something else here</a></li>
-							<li role="separator" class="divider"></li>
-							<li class="dropdown-header">Nav header</li>
-							<li><a href="#">Separated link</a></li>
-							<li><a href="#">One more separated link</a></li>
-						</ul></li>
 				</ul>
 			</div>
 			<!--/.nav-collapse -->
@@ -49,23 +37,154 @@
 
 	<div class="container" role="main">
 		<div class="jumbotron">
-			<h1>Welcome to WebDino!</h1>
-			<p>A Summer intern project to monitor web site performance</p>
+			<h1>
+				Welcome to WebDino! <img src="CuteDino.png" style="width: 133px;">
+			</h1>
 		</div>
+		<!--  
+		<div>
+			<input type="text" id="urlInput" name="urlInput" value="yey">
+			<button type="button" onclick="doTheThing()">Add</button>
+		</div>
+		<div id="input"></div>
 		<div id="ApiResult"></div>
 		<div class="result">
-		
-			<p>Name: <input type="text" id="inputBox" value = "Moose"></p>
+
+			<p>
+				Name: <input type="text" id="inputBox" value="Moose">
+			</p>
 			<button id="showVal">Show Value</button>
 		</div>
-		<div id="flip">Click Here to slide down panel</div>
-		<div id="panel">Hello from Panel!</div>
+-->
+
+
+		<div class="panel-group">
+			<div class="panel panel-info">
+				<div class="panel-heading">
+					<h4 class="panel-title">
+						<a data-toggle="collapse" href="#collapse1">Collapsible</a>
+					</h4>
+				</div>
+				<div id="collapse1" class="panel-collapse collapse">
+					<div id="url">
+						URL <input type="radio" name="prefixHTTP" value="HTTP://" checked>
+						HTTP:// <input type="radio" name="prefixHTTPS" value="HTTPS://">
+						HTTPS:// <input type="text" id="UrlInput" name="UrlInput"
+							id="UrlInput" placeholder="Enter URL Here">
+						<button type="button" name="addButton" id="addButton"
+							class="btn btn-primary">ADD</button>
+					</div>
+					<br>
+
+					<table>
+						<col width="300">
+						<col width="300">
+						<tr id="tableHeading">
+							<th>Start Date:</th>
+							<th>End Date:</th>
+							<th>Interval:</th>
+						</tr>
+
+						<tr id="tableInput">
+							<td>Calendar</td>
+							<td>Calendar</td>
+							<td><input type="text" id="hourInterval" name="hourInterval"
+								placeholder="Hour(s)"> <input type="text"
+								id="minuteInterval" name="minuteInterval"
+								placeholder="Minutes(s)"> <input type="text"
+								id="secondInterval" name="secondInterval"
+								placeholder="Second(s)"></td>
+
+						</tr>
+
+					</table>
+
+
+				</div>
+			</div>
+		</div>
+
+
+
+		<div class="panel panel-success" id="resultPanel">
+
+			<div class=panel-body>www.homedepot.com</div>
+			<div class=panel-footer>
+
+				<table>
+					<tr>
+						<th>Time to First Byte:</th>
+						<th>Time to Full Load:</th>
+						<th>Date of Initial Request:</th>
+
+					</tr>
+
+					<tr>
+						<td>5 Seconds</td>
+						<td>10 Seconds</td>
+						<td>Some Date</td>
+
+					</tr>
+
+				</table>
+			</div>
+
+		</div>
+
+
+		<div class="panel panel-warning" id="largeResultPanel">
+
+			<div class=panel-body id="resultPanel">www.homedepot.com</div>
+			<div class=panel-footer>
+
+				<table>
+					<tr>
+						<th>Average Time to First Byte:</th>
+						<th>Average Time to Full Load:</th>
+						<th>Time to First Byte:</th>
+						<th>Time to Full Load:</th>
+					</tr>
+
+					<tr>
+						<td>5 Seconds</td>
+						<td>10 Seconds</td>
+						<td>6 Seconds</td>
+						<td>12 Seconds</td>
+
+					</tr>
+
+					<tr>
+						<th>Date of Initial Request:</th>
+						<th>Ending Date:</th>
+						<th>Interval:</th>
+						<th>Iterations Completed:</th>
+					</tr>
+
+					<tr>
+						<td>Yea first date</td>
+						<td>ooh second date</td>
+						<td>6 hours</td>
+						<td>27</td>
+
+					</tr>
+
+				</table>
+
+
+
+			</div>
+
+		</div>
+
+		<!-- 
 		<div class="result"></div>
 		<div class="result"></div>
 		<div class="result chris"></div>
 		<div class="result"></div>
 		<div class="result"></div>
 		<div class=".chris">I should have nothing in me</div>
+		
+		-->
 	</div>
 
 	<!-- jQuery -->
@@ -79,80 +198,130 @@
 		crossorigin="anonymous">
 		
 	</script>
-	
+
 	<script>
 		var dataInput = "";
-		$(document).ready(function(){
-			$("#showVal").click(function(){
+		$(document).ready(function() {
+			$("#showVal").click(function() {
 				dataInput = $("#inputBox").val();
 				alert("Value " + dataInput);
 			});
 		})
 	</script>
-	
+
 	<script>
-	
-	$(document).ready(function(){
-		$("#flip").click(function(){
-			$("#panel").slideToggle("slow",function(){
-				//alert("Panel has Moved ");
+		var dataInput = "";
+		$(document).ready(function() {
+			$("#addButton").click(function() {
+				dataInput = $("#UrlInput").val();
+				alert("Value " + dataInput);
+			});
+		})
+	</script>
+
+	<script>
+		$(document).ready(function() {
+			$("#flip").click(function() {
+				$("#panel").slideToggle("slow", function() {
+					//alert("Panel has Moved ");
+				});
 			});
 		});
-	});
-	
 	</script>
 
 	<style>
-	#panel, #flip{
-		padding:5px;
-		text-align: center;
-		background-color: #e5eecc;
-		border: solid 1px #c3c3c3;
-	}
-	
-	#panel{
-	padding : 50px;
+#panel, #flip {
+	padding: 5px;
+	text-align: center;
+	background-color: #e5eecc;
+	border: solid 1px #c3c3c3;
+}
+
+#panel {
+	padding: 50px;
 	displey: none;
-	}
-	
-	
-	</style>
+}
+</style>
 	<script>
+		var text = document.getElementsByName("URLInput").value;
+		//Serialize form into json
+		var formData = JSON.stringify($("#myForm").serializeArray());
 
 		var reqData = {
-            protocol : "http",
-            url : "www.homedepot.com",
-            startTime : "14:15:00 06-01-2016",
-            endTime : "14:15:00 06-01-2016",
-            interval : {
-                hours : 0,
-                minutes : 5,
-                seconds : 0,
-                cron : ""
-            }
+			protocol : "http",
+			url : "www.homedepot.com",
+			test : text,
+			startTime : "14:15:00 06-01-2016",
+			endTime : "14:15:00 06-01-2016",
+			interval : {
+				hours : 0,
+				minutes : 5,
+				seconds : 0,
+				cron : ""
+			}
 		};
 
-		
-		$.ajax({
+		/*$.ajax({
 			url : "http://localhost:8080/webdino/echo",
 		    type: "POST",
 		    data: {"data" : JSON.stringify(reqData)},
 			success : function(result) {
 
-				var apiResult = $("#ApiResult");
-				var stuff = JSON.parse(decodeURIComponent(result.value));
+				var apiResult = $("#ApiResult");//create selector for ApiResult class
+				var stuff = JSON.parse(decodeURIComponent(result.value));//convert into json
 			    apiResult.html(stuff.url);
 			},
 			error : function() {
 				$("#ApiResult").html(
 						"<strong>" + "It FAILED :(" + "</strong>");
 			}
+		});*/
+
+		/*
+		$.ajax({
+			url : "http://localhost:8080/webdino/matthew",
+		    type: "POST",
+		    data: {"data" : JSON.stringify(reqData)},
+			success : function(result) {
+
+				var apiResult = $("#input");//create selector for ApiResult class
+				var stuff = JSON.parse(decodeURIComponent(result.value));//convert into json
+			    apiResult.html(stuff.url);
+			},
+			error : function() {
+				$("#input").html(
+						"<strong>" + "It failed" + "</strong>");
+			}
 		});
+		<<<<<<< HEAD
 				
 		var hiddenBox = $( "#banner-message" );
 		$( "#button-container button" ).on( "click", function( event ) {
 		  hiddenBox.show();
 		});
+		=======
+		 */
+
+		function doTheThing() {
+
+			console.log($("#urlInput").val());
+
+			$.ajax({
+				url : "http://localhost:8080/webdino/echo",
+				type : "POST",
+				data : {
+					'urlInput' : $("#urlInput").val()
+				},
+				success : function(result) {
+					var inputResult = $("#input");//create selector for ApiResult class
+					inputResult.html(result.value);
+				},
+				error : function() {
+					$("#ApiResult").html(
+							"<strong>" + "It .... :(" + "</strong>");
+				}
+			});
+		}
 	</script>
 
 </body>

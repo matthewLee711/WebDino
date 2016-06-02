@@ -18,9 +18,12 @@ public class HomeEndpoint {
             HttpServletResponse res) throws Exception{
 
         ModelAndView mav = new ModelAndView();
-
+        
+        String i[] = {"blops"};
         mav.addObject("message", "Welcome to WebDino!");
+        mav.addObject("red", i);
         mav.setViewName("home");
+        
 
         return mav;
 

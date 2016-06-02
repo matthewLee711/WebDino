@@ -21,7 +21,7 @@ public class EchoService {
     private static final Logger LOGGER = LoggerFactory.getLogger(EchoService.class);
 
     //make two methods, one for get and one for post
-    @RequestMapping(method = RequestMethod.GET)
+    @RequestMapping(method = {RequestMethod.GET})
     public ResponseEntity<EchoResponseModel> echoGet(
             HttpServletRequest req,
             @RequestBody String body){
@@ -31,7 +31,7 @@ public class EchoService {
 
 
     }
-    @RequestMapping(method = RequestMethod.POST)
+    @RequestMapping(method = {RequestMethod.POST})
     public ResponseEntity<EchoResponseModel> echoPost(
             HttpServletRequest req,
             @RequestParam(value="value", required=false) String value,
@@ -81,7 +81,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.interns.webdino.model.EchoResponseModel;
+import com.interns.webdino.model.EchoResponseModel;    
 
 @RestController
 @RequestMapping("/echo")
