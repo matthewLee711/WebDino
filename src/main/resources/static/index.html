@@ -91,7 +91,7 @@
 							<td><input type="text" id="hourInterval" name="hourInterval"
 								placeholder="Hour(s)"> <input type="text"
 								id="minuteInterval" name="minuteInterval"
-								placeholder="Minutes(s)"> <input type="text"
+								placeholder="Minute(s)"> <input type="text"
 								id="secondInterval" name="secondInterval"
 								placeholder="Second(s)"></td>
 
@@ -199,7 +199,35 @@
 		
 	</script>
 
-	<script>
+	<script type="text/javascript"
+		src="https://www.gstatic.com/charts/loader.js"></script>
+	<script type="text/javascript">
+		google.charts.load('current', {
+			'packages' : [ 'corechart' ]
+		});
+		google.charts.setOnLoadCallback(drawChart);
+
+		function drawChart() {
+			var data = google.visualization.arrayToDataTable([
+					[ 'Year', 'Sales', 'Expenses' ], [ '2004', 1000, 400 ],
+					[ '2005', 1170, 460 ], [ '2006', 660, 1120 ],
+					[ '2007', 1030, 540 ] ]);
+
+			var options = {
+				title : 'Company Performance',
+				curveType : 'function',
+				legend : {
+					position : 'bottom'
+				}
+			};
+
+			var chart = new google.visualization.LineChart(document
+					.getElementById('curve_chart'));
+
+			chart.draw(data, options);
+		}
+		</script>
+		<script>
 		var dataInput = "";
 		$(document).ready(function() {
 			$("#showVal").click(function() {
@@ -210,13 +238,19 @@
 	</script>
 
 	<script>
-		var dataInput = "";
-		$(document).ready(function() {
-			$("#addButton").click(function() {
-				dataInput = $("#UrlInput").val();
-				alert("Value " + dataInput);
-			});
-		})
+		var data = "";
+		$(document).ready(
+				function() {
+					$("#addButton").click(
+							function() {
+								data = $("#UrlInput").val() + " "
+										+ $("#hourInterval").val() + " "
+										+ $("#minuteInterval").val() + " "
+										+ $("#secondInterval").val();
+								;
+								alert("Value: " + data);
+							});
+				})
 	</script>
 
 	<script>
