@@ -2,20 +2,20 @@ package com.interns.webdino.service;
 
 import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
+import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.json.JSONArray;
 import org.json.JSONObject;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
-import org.jsoup.select.Elements;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -26,16 +26,17 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.fasterxml.jackson.core.JsonParser;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
 import com.interns.webdino.model.EchoResponseModel;
 
 @RestController
 @RequestMapping("/echo")
-public class EchoService {
+public class EchoService extends Thread {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(EchoService.class);
+	//Threads
+	private Thread t;
+	// Create Map to store threads
+	Map<String, Thread> hm = new HashMap<String, Thread>();
 
 	// make two methods, one for get and one for post
 	@RequestMapping(method = { RequestMethod.GET })
@@ -46,6 +47,7 @@ public class EchoService {
 
 	}
 
+	// each time input is made, create a thread for it.
 	@RequestMapping(method = { RequestMethod.POST })
 	public ResponseEntity<EchoResponseModel> echoPost(HttpServletRequest req,
 			@RequestParam(value = "value", required = false) String value,
@@ -53,7 +55,18 @@ public class EchoService {
 
 		EchoResponseModel response;
 		System.out.println("asdjfkasjdfskjdffdshksdfhkdsfjkd");
-
+		
+		/*
+		//spawn thread
+		Thread t = new Thread();
+		//store thread in map
+		addThreadToMap(t);
+		
+		//check threads in map
+		//call thread from map
+		hm.get("t" + hm.size()).run();
+		*/
+		
 		// put a thread around this function
 		urlTester("www.homedepot.com", "1", "xml", "dasfdsfadsf");
 
@@ -72,6 +85,31 @@ public class EchoService {
 
 		return new ResponseEntity<>(response, HttpStatus.OK);
 
+	}
+	
+	//starts thread
+	public void start(String urlTester, String runs, String fileType, String key) throws Exception {
+		// put a thread around this function
+		urlTester("www.homedepot.com", "1", "xml", "dasfdsfadsf");
+	}
+
+	// This will add the thread with the key [t0 .... tn]
+	public void addThreadToMap(Thread t) {
+		/*Set set = hm.entrySet();
+		Iterator i = set.iterator();
+		Map.Entry me;
+		//check map keys that each 
+		while(i.hasNext()) {
+			//iterate through map
+			me = (Map.Entry)i.next();
+		}*/
+		//return null key
+		
+		//random key generator -- prevent key collision
+		
+		
+		//add thread to map -- keys should actually delete themselves
+		hm.put("t" + hm.size(), t);
 	}
 
 	public void urlTester(String urlTester, String runs, String fileType, String key) throws Exception {
@@ -96,42 +134,42 @@ public class EchoService {
 			// Web link to JSON
 			String linkText = link.text();
 
-			//String json = "http://www.webpagetest.org/jsonResult.php?test=160606_GS_X0N";
+			// String json =
+			// "http://www.webpagetest.org/jsonResult.php?test=160606_GS_X0N";
 			String extractJson = readUrl(linkText);// replace with link Text
 			System.out.println("beep");
 			System.out.println(extractJson.toString());
 
 			// Create json extractor
 			JSONObject obj = new JSONObject(extractJson);
-			
 
-			//String pageData = obj.getJSONObject("data").getString("id");
+			// String pageData = obj.getJSONObject("data").getString("id");
 			int status = (int) obj.get("statusCode");
-			//System.out.println(status);
-			
-			//Checks if Test is complete
+			// System.out.println(status);
+
+			// Checks if Test is complete
 			String reset;
-			while(200 != status) {
+			while (200 != status) {
 				reset = readUrl(linkText);
 				obj = new JSONObject(reset);
 				status = (int) obj.get("statusCode");
-				
-				//Testing status
-				if(100 == status) {
+
+				// Testing status
+				if (100 == status) {
 					TimeUnit.SECONDS.sleep(3);
 					System.out.println("Testing");
 				}
-				//Wait status
-				else if(200 != status) {
+				// Wait status
+				else if (200 != status) {
 					try {
-					    TimeUnit.SECONDS.sleep(3);
-					    System.out.println("waiting");
+						TimeUnit.SECONDS.sleep(3);
+						System.out.println("waiting");
 					} catch (InterruptedException e) {
-					    //Handle exception
+						// Handle exception
 					}
 				}
-				//Error handling
-				else if(400 <= status) {
+				// Error handling
+				else if (400 <= status) {
 					System.out.println("error");
 					break;
 				}
@@ -139,8 +177,10 @@ public class EchoService {
 			}
 			System.out.println("ayy");
 
-			int TTFB = obj.getJSONObject("data").getJSONObject("runs").getJSONObject("1").getJSONObject("firstView").getInt("TTFB");
-			int loadTime = obj.getJSONObject("data").getJSONObject("runs").getJSONObject("1").getJSONObject("firstView").getInt("loadTime");
+			int TTFB = obj.getJSONObject("data").getJSONObject("runs").getJSONObject("1").getJSONObject("firstView")
+					.getInt("TTFB");
+			int loadTime = obj.getJSONObject("data").getJSONObject("runs").getJSONObject("1").getJSONObject("firstView")
+					.getInt("loadTime");
 			System.out.println("ttfb: " + TTFB);
 			System.out.println("loadtime: " + loadTime);
 
