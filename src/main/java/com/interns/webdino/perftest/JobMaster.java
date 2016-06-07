@@ -26,7 +26,7 @@ public class JobMaster {
         Job job = jobs.get(name);
 
         if(job != null){
-            new Thread(job).start();
+            job.run();
         }
     }
 

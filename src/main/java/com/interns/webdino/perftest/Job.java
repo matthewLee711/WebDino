@@ -7,7 +7,7 @@ import org.springframework.web.client.RestTemplate;
 
 import com.interns.webdino.client.support.HttpClientManager;
 
-public class Job implements Runnable {
+public class Job{
 
     private static final Logger LOGGER = LoggerFactory.getLogger(Job.class);
 
@@ -17,7 +17,6 @@ public class Job implements Runnable {
     private HttpClientManager clientManager;
     private JobStatus status;
 
-    @Override
     public void run() {
 
         ResponseEntity<String> resp = null;
