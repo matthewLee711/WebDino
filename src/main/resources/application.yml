@@ -22,8 +22,8 @@ server:
 logging:
   level:
     ROOT: INFO
-    com.interns.webdino: ERROR
-    org.springframework: INFO
+    com.interns.webdino: INFO
+    org.springframework: ERRIR
     org.springframework.test: ERROR
 
 # -------
