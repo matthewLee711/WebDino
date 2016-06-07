@@ -5,9 +5,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.URL;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.Map;
-import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
 import javax.servlet.http.HttpServletRequest;
@@ -40,10 +38,15 @@ public class EchoService extends Thread {
 
 	// make two methods, one for get and one for post
 	@RequestMapping(method = { RequestMethod.GET })
-	public ResponseEntity<EchoResponseModel> echoGet(HttpServletRequest req, @RequestBody String body) {
+	public ResponseEntity<EchoResponseModel> echoGet(
+	        HttpServletRequest req,
+	        @RequestParam(name="value", required = false) String value) {
 
-		EchoResponseModel response;
-		return null;
+		EchoResponseModel model = new EchoResponseModel(value);
+
+		ResponseEntity<EchoResponseModel> result = ResponseEntity.ok(model);
+
+		return result;
 
 	}
 
@@ -55,18 +58,18 @@ public class EchoService extends Thread {
 
 		EchoResponseModel response;
 		System.out.println("asdjfkasjdfskjdffdshksdfhkdsfjkd");
-		
+
 		/*
 		//spawn thread
 		Thread t = new Thread();
 		//store thread in map
 		addThreadToMap(t);
-		
+
 		//check threads in map
 		//call thread from map
 		hm.get("t" + hm.size()).run();
 		*/
-		
+
 		// put a thread around this function
 		urlTester("www.homedepot.com", "1", "xml", "dasfdsfadsf");
 
@@ -86,7 +89,7 @@ public class EchoService extends Thread {
 		return new ResponseEntity<>(response, HttpStatus.OK);
 
 	}
-	
+
 	//starts thread
 	public void start(String urlTester, String runs, String fileType, String key) throws Exception {
 		// put a thread around this function
@@ -98,16 +101,16 @@ public class EchoService extends Thread {
 		/*Set set = hm.entrySet();
 		Iterator i = set.iterator();
 		Map.Entry me;
-		//check map keys that each 
+		//check map keys that each
 		while(i.hasNext()) {
 			//iterate through map
 			me = (Map.Entry)i.next();
 		}*/
 		//return null key
-		
+
 		//random key generator -- prevent key collision
-		
-		
+
+
 		//add thread to map -- keys should actually delete themselves
 		hm.put("t" + hm.size(), t);
 	}
@@ -213,9 +216,9 @@ public class EchoService extends Thread {
 
 /*
  * package com.interns.webdino.service;
- * 
+ *
  * import javax.servlet.http.HttpServletRequest;
- * 
+ *
  * import org.slf4j.Logger; import org.slf4j.LoggerFactory; import
  * org.springframework.http.HttpStatus; import
  * org.springframework.http.ResponseEntity; import
@@ -224,43 +227,43 @@ public class EchoService extends Thread {
  * org.springframework.web.bind.annotation.RequestMethod; import
  * org.springframework.web.bind.annotation.RequestParam; import
  * org.springframework.web.bind.annotation.RestController;
- * 
+ *
  * import com.interns.webdino.model.EchoResponseModel;
- * 
+ *
  * @RestController
- * 
+ *
  * @RequestMapping("/echo") public class EchoService {
- * 
+ *
  * private static final Logger LOGGER =
  * LoggerFactory.getLogger(EchoService.class);
- * 
+ *
  * //make two methods, one for get and one for post
- * 
+ *
  * @RequestMapping(method = {RequestMethod.GET, RequestMethod.POST}) public
  * ResponseEntity<EchoResponseModel> echo( HttpServletRequest req,
- * 
+ *
  * @RequestParam(value="value", required=false) String value,
- * 
+ *
  * @RequestParam(value="data", required=false) String data,
- * 
+ *
  * @RequestBody String body){
- * 
+ *
  * EchoResponseModel response;
- * 
+ *
  * if (value == null && data == null) { return
  * ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null); }
- * 
+ *
  * LOGGER.info("value param was %s", value); LOGGER.info("data param was %s",
  * data);
- * 
+ *
  * if(value != null){ response = new EchoResponseModel(value); } else { response
  * = new EchoResponseModel(data); }
- * 
+ *
  * return new ResponseEntity<>(response, HttpStatus.OK);
- * 
+ *
  * }
- * 
- * 
- * 
+ *
+ *
+ *
  * }
  */
