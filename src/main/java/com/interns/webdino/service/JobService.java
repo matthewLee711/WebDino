@@ -19,6 +19,7 @@ import com.interns.webdino.perftest.JobMaster;
 @RestController
 @RequestMapping("/job")
 public class JobService {
+	
 
     @SuppressWarnings("unused")
     private static final Logger LOGGER = LoggerFactory.getLogger(JobService.class);
@@ -30,34 +31,54 @@ public class JobService {
     HttpClientManager clientManager;
 
     @RequestMapping(method = {RequestMethod.GET})
-    public ResponseEntity<Job> getJob(
+    public String getJob(
             HttpServletRequest req,
             @RequestParam(value="name", required=false) String name){
 
         Job job = null;
+        System.out.println("MooseJobb");
 
         if(null != name){
             job = jobMaster.getJob(name);
         }
 
-        return new ResponseEntity<>(job, HttpStatus.OK);
+        return "Pickles";
+        //return new ResponseEntity<>(job, HttpStatus.OK);
 
     }
-
+    
     @RequestMapping(method = {RequestMethod.POST})
-    public ResponseEntity<Job> startJob(
+    public String startJob(
             HttpServletRequest req,
-            @RequestParam(value="name", required=true) String name,
+            @RequestParam(value="name", required = true) String name,
             @RequestParam(value="url", required = true) String url){
 
         Job job = new Job(name, url, clientManager);
+       // System.out.println("MooseJobPo " + url);
+
+
+        jobMaster.addJob(job);
+        return jobMaster.runJob(job.getName());
+
+    }
+    
+
+   /* @RequestMapping(method = {RequestMethod.POST})
+    public ResponseEntity<Job> startJob(
+            HttpServletRequest req,
+            @RequestParam(value="name", required = true) String name,
+            @RequestParam(value="url", required = true) String url){
+
+        Job job = new Job(name, url, clientManager);
+       // System.out.println("MooseJobPo " + url);
+
 
         jobMaster.addJob(job);
         jobMaster.runJob(job.getName());
 
         return new ResponseEntity<>(job, HttpStatus.OK);
 
-    }
+    }*/
 
 
 

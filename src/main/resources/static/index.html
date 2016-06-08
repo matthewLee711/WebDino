@@ -18,6 +18,21 @@
 		src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.1.4/Chart.min.js"></script>
 	<!-- graph display -->
 
+	<style>
+#panel, #flip {
+	padding: 5px;
+	text-align: center;
+	background-color: #e5eecc;
+	border: solid 1px #c3c3c3;
+}
+
+#panel {
+	padding: 50px;
+	displey: none;
+}
+</style>
+
+
 </head>
 <body role="document">
 	<!-- Fixed navbar -->
@@ -52,8 +67,9 @@
 		 
 		<!-- Test post request -->
 		<div>
-			<input type="text" id="urlInput" name="urlInput" value="yey">
-			<button type="button" onclick="doTheThing()">Add</button>
+			<input type="text" id="urlInput" name="urlInput" value="www.homedepot.com">
+			<button type="button" onclick="doTheThing();">Add</button>
+			<button type="button" id="checkButton">Checker</button>
 		</div>
 		<div id="input"></div>
 		<div id="ApiResult"></div>
@@ -305,19 +321,6 @@
 		});
 	</script>
 
-	<style>
-#panel, #flip {
-	padding: 5px;
-	text-align: center;
-	background-color: #e5eecc;
-	border: solid 1px #c3c3c3;
-}
-
-#panel {
-	padding: 50px;
-	displey: none;
-}
-</style>
 	<script>
 		var text = document.getElementsByName("URLInput").value;
 		//Serialize form into json
@@ -383,20 +386,42 @@
 			console.log($("#urlInput").val());
 
 			$.ajax({
-				url : "http://localhost:8080/webdino/echo",
+				url : "http://localhost:8080/webdino/job",
 				type : "POST",
 				data : {
-					'urlInput' : $("#urlInput").val()
+					'url' : $("#urlInput").val(),
+					'name' : 'THD'
 				},
 				success : function(result) {
 					var inputResult = $("#input");//create selector for ApiResult class
-					inputResult.html(result.value);
+					inputResult.html(result);
 				},
 				error : function() {
 					$("#ApiResult").html(
 							"<strong>" + "It .... :(" + "</strong>");
 				}
 			});
+								
+		}
+		</script>
+		
+		
+		<script>
+		function checker(){
+			console.log("Moooses!");
+			$.ajax({
+				url : "http://localhost:8080/webdino/job",
+				type : "GET",
+				success : function(result) {
+					var inputResult = $("#input");//create selector for ApiResult class
+					inputResult.html(result);
+				},
+				error : function() {
+					$("#ApiResult").html(
+							"<strong>" + "It .... :(" + "</strong>");
+				}
+			});
+			
 		}
 	</script>
 

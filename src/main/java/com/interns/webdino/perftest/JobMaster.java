@@ -21,13 +21,14 @@ public class JobMaster {
         jobs.remove(name);
     }
 
-    public void runJob(String name){
+    public String runJob(String name){	//void
 
         Job job = jobs.get(name);
 
         if(job != null){
-            job.run();
+            return job.run();//job.run
         }
+        return "";	//delete
     }
 
     public JobStatus getJobStatus(String name){
