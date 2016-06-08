@@ -26,10 +26,23 @@ public class EchoService {
             @RequestParam(name = "value", required = false) String value) {
 
         EchoResponseModel model = new EchoResponseModel(value);
+        System.out.println("Moose");
 
         ResponseEntity<EchoResponseModel> result = ResponseEntity.ok(model);
 
         return result;
     }
 
+    @RequestMapping(method = { RequestMethod.POST })
+    public ResponseEntity<EchoResponseModel> echoPost(
+            HttpServletRequest req,
+            @RequestParam(name = "value", required = false) String value) {
+
+        EchoResponseModel model = new EchoResponseModel(value);
+        System.out.println("MoosePost");
+
+        ResponseEntity<EchoResponseModel> result = ResponseEntity.ok(model);
+
+        return result;
+    }
 }

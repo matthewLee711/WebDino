@@ -29,14 +29,13 @@ public class JobService {
     @Autowired
     HttpClientManager clientManager;
 
-    @RequestMapping(method = {RequestMethod.GET})
-    public ResponseEntity<Job> getJob(
-            HttpServletRequest req,
-            @RequestParam(value="name", required=false) String name){
+    @RequestMapping(method = { RequestMethod.GET })
+    public ResponseEntity<Job> getJob(HttpServletRequest req,
+            @RequestParam(value = "name", required = false) String name) {
 
         Job job = null;
 
-        if(null != name){
+        if (null != name) {
             job = jobMaster.getJob(name);
         }
 
@@ -44,13 +43,13 @@ public class JobService {
 
     }
 
-    @RequestMapping(method = {RequestMethod.POST})
-    public ResponseEntity<Job> startJob(
-            HttpServletRequest req,
-            @RequestParam(value="name", required=true) String name,
-            @RequestParam(value="url", required = true) String url){
+    @RequestMapping(method = { RequestMethod.POST })
+    public ResponseEntity<Job> startJob(HttpServletRequest req,
+            @RequestParam(value = "name", required = true) String name,
+            @RequestParam(value = "url", required = true) String url,
+            @RequestParam(value = "mock", required = false, defaultValue = "false") boolean mock) {
 
-        Job job = new Job(name, url, clientManager);
+        Job job = new Job(name, url, clientManager, mock);
 
         jobMaster.addJob(job);
         jobMaster.runJob(job.getName());
@@ -58,9 +57,5 @@ public class JobService {
         return new ResponseEntity<>(job, HttpStatus.OK);
 
     }
-
-
-
-
 
 }
