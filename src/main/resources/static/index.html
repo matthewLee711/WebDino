@@ -53,7 +53,7 @@
 		<!-- Test post request -->
 		<div>
 			<input type="text" id="urlInput" name="urlInput" value="yey">
-			<button type="button" onclick="doTheThing()">Add</button>
+			<button type="button" onclick="doTheThing(); setInterval(stuff(), 3000);">Add</button>
 		</div>
 		<div id="input"></div>
 		<div id="ApiResult"></div>
@@ -397,6 +397,9 @@
 							"<strong>" + "It .... :(" + "</strong>");
 				}
 			});
+		}
+		function stuff(){
+			alert("bam");
 		}
 	</script>
 
