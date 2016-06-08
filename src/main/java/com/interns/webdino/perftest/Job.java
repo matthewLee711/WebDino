@@ -1,12 +1,7 @@
 package com.interns.webdino.perftest;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.net.URL;
-import java.util.concurrent.TimeUnit;
 
-import org.json.JSONObject;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -14,7 +9,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
- 
+
 /*import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
 import org.xml.sax.Attributes;
@@ -23,7 +18,7 @@ import org.xml.sax.helpers.DefaultHandler;*/
 
 import com.interns.webdino.client.support.HttpClientManager;
 
-public class Job{
+public class Job {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(Job.class);
 
@@ -33,96 +28,86 @@ public class Job{
     private String parsedXml;
     private HttpClientManager clientManager;
     private JobStatus status;
+    private boolean mock;
 
     public String run() {
 
         ResponseEntity<String> resp = null;
 
-        RestTemplate rt = clientManager.getRestTemplate();
+        if(this.mock){
 
-        resp = rt.getForEntity(this.url, String.class);
+            this.rawXml = "<?xml version=\"1.0\" encoding=\"UTF-8\"?><response><statusCode>200</statusCode><statusText>Ok</statusText><data><testId>160608_S6_2GFY</testId><ownerKey>e11c3d6ad20d76b8f158044105a58fefc2871562</ownerKey><xmlUrl>http://www.webpagetest.org/xmlResult/160608_S6_2GFY/</xmlUrl><userUrl>http://www.webpagetest.org/result/160608_S6_2GFY/</userUrl><summaryCSV>http://www.webpagetest.org/result/160608_S6_2GFY/page_data.csv</summaryCSV><detailCSV>http://www.webpagetest.org/result/160608_S6_2GFY/requests.csv</detailCSV><jsonUrl>http://www.webpagetest.org/jsonResult.php?test=160608_S6_2GFY</jsonUrl></data></response>";
+
+        } else {
+
+            RestTemplate rt = clientManager.getRestTemplate();
+            resp = rt.getForEntity(this.url, String.class);
+
+            this.rawXml = resp.getBody();
+        }
 
         this.status = JobStatus.STARTED;
-        this.rawXml = resp.getBody();
+
         try {
-			parseXML();
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-        //LOGGER.info("Got result for job start: \n" + rawXml);
+            parseXML();
+        } catch (Exception e) {
+            LOGGER.error("ParseXML failed", e);
+        }
+
+        LOGGER.debug("Got result for job start: \n" + rawXml);
+
         return parsedXml;
-        
+
     }
 
-    public Job(String name, String url, HttpClientManager clientManager){
+    public Job(String name, String url, HttpClientManager clientManager, boolean mock) {
 
         this.name = name;
-        this.url = "http://www.webpagetest.org/runtest.php?url=" + url + "&runs=1&f=xml&k=A.77d136a242db623122d15fab6a8bc2a7";
+
+        this.url = "http://www.webpagetest.org/runtest.php?url="
+        + url
+        + "&runs=1&f=xml&k=A.77d136a242db623122d15fab6a8bc2a7";
+
         this.clientManager = clientManager;
+        this.mock = mock;
+    }
+
+    public void parseXML() throws Exception {
+        Document doc;
+        try {
+            // load webpage
+            doc = Jsoup.connect(url).get();
+            // System.out.println("load" + doc.toString());
+
+            // extract webpage content
+            Element link = doc.select("xmlurl").first();
+            parsedXml = link.text();
+            System.out.println("Linkn" + parsedXml);
+
+            // Web link to JSON
+
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+
+        /*
+         * try{ SAXParserFactory factory = SAXParserFactory.newInstance();
+         * SAXParser saxParser = factory.newSAXParser(); DefaultHandler handler
+         * = new DefaultHandler(){ public void startElement(String)
+         *
+         *
+         *
+         *
+         * };
+         *
+         *
+         * }catch(Exception e){
+         *
+         * }
+         */
 
     }
-    
-    public void parseXML() throws Exception
-    {
-    	Document doc;
-    	       try {
-    	           // load webpage
-    	           doc = Jsoup.connect(url).get();
-    	          // System.out.println("load" + doc.toString());
-    	 
-    	           // extract webpage content
-    	           Element link = doc.select("xmlurl").first();
-    	           parsedXml = link.text();
-    	            System.out.println("Linkn" + parsedXml);
-    	 
-    	           // Web link to JSON
-    	           
-    	       } catch (IOException e) {
-    	           // TODO Auto-generated catch block
-    	           e.printStackTrace();
-    	       }
-    	
-    	
-    	
-    	/*try{
-    		SAXParserFactory factory = SAXParserFactory.newInstance();
-    	    SAXParser saxParser = factory.newSAXParser();
-    	    DefaultHandler handler = new DefaultHandler(){
-    	    	public void startElement(String)
-    	    	
-    	    	
-    	    	
-    	    	
-    	    };
-
-
-    	}catch(Exception e){
-    		
-    	}*/
-    	
-    	
-    }
-  
-
-	private static String readUrl(String urlString) throws Exception {
-    	        BufferedReader reader = null;
-    	        try {
-    	            URL url = new URL(urlString);
-    	            reader = new BufferedReader(new InputStreamReader(url.openStream()));
-    	            StringBuffer buffer = new StringBuffer();
-    	           int read;
-    	            char[] chars = new char[1024];
-    	            while ((read = reader.read(chars)) != -1)
-    	                buffer.append(chars, 0, read);
-    	
-    	            return buffer.toString();
-    	        } finally {
-    	            if (reader != null)
-    	                reader.close();
-    	        }
-    	    }
-
     public String getName() {
         return name;
     }
@@ -154,13 +139,13 @@ public class Job{
     public void setStatus(JobStatus status) {
         this.status = status;
     }
-    
-    public String getParsedXml() {
-		return parsedXml;
-	}
 
-	public void setParsedXml(String parsedXml) {
-		this.parsedXml = parsedXml;
-	}
+    public String getParsedXml() {
+        return parsedXml;
+    }
+
+    public void setParsedXml(String parsedXml) {
+        this.parsedXml = parsedXml;
+    }
 
 }
