@@ -111,7 +111,7 @@
 					<fork>true</fork>
 					<!-- Enable addResources for command line development. Leave disabled 
 						for Eclipse -->
-					<!-- <addResources>true</addResources> -->
+					<addResources>true</addResources>
 					<arguments>
 						<argument>--app.props.location=./src/test/resources/config.properties</argument>
 					</arguments>

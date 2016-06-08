@@ -19,7 +19,6 @@ import com.interns.webdino.perftest.JobMaster;
 @RestController
 @RequestMapping("/job")
 public class JobService {
-	
 
     @SuppressWarnings("unused")
     private static final Logger LOGGER = LoggerFactory.getLogger(JobService.class);
@@ -30,58 +29,33 @@ public class JobService {
     @Autowired
     HttpClientManager clientManager;
 
-    @RequestMapping(method = {RequestMethod.GET})
-    public String getJob(
-            HttpServletRequest req,
-            @RequestParam(value="name", required=false) String name){
+    @RequestMapping(method = { RequestMethod.GET })
+    public ResponseEntity<Job> getJob(HttpServletRequest req,
+            @RequestParam(value = "name", required = false) String name) {
 
         Job job = null;
-        System.out.println("MooseJobb");
 
-        if(null != name){
+        if (null != name) {
             job = jobMaster.getJob(name);
         }
 
-        return "Pickles";
-        //return new ResponseEntity<>(job, HttpStatus.OK);
+        return new ResponseEntity<>(job, HttpStatus.OK);
 
     }
-    
-    @RequestMapping(method = {RequestMethod.POST})
-    public String startJob(
-            HttpServletRequest req,
-            @RequestParam(value="name", required = true) String name,
-            @RequestParam(value="url", required = true) String url){
 
-        Job job = new Job(name, url, clientManager);
-       // System.out.println("MooseJobPo " + url);
+    @RequestMapping(method = { RequestMethod.POST })
+    public ResponseEntity<Job> startJob(HttpServletRequest req,
+            @RequestParam(value = "name", required = true) String name,
+            @RequestParam(value = "url", required = true) String url,
+            @RequestParam(value = "mock", required = false, defaultValue = "false") boolean mock) {
 
-
-        jobMaster.addJob(job);
-        return jobMaster.runJob(job.getName());
-
-    }
-    
-
-   /* @RequestMapping(method = {RequestMethod.POST})
-    public ResponseEntity<Job> startJob(
-            HttpServletRequest req,
-            @RequestParam(value="name", required = true) String name,
-            @RequestParam(value="url", required = true) String url){
-
-        Job job = new Job(name, url, clientManager);
-       // System.out.println("MooseJobPo " + url);
-
+        Job job = new Job(name, url, clientManager, mock);
 
         jobMaster.addJob(job);
         jobMaster.runJob(job.getName());
 
         return new ResponseEntity<>(job, HttpStatus.OK);
 
-    }*/
-
-
-
-
+    }
 
 }
