@@ -81,12 +81,12 @@ public class Job {
         try {
             // load webpage
             doc = Jsoup.connect(url).get();
-            // System.out.println("load" + doc.toString());
+            //System.out.println("load" + doc.toString());
 
             // extract webpage content
             Element link = doc.select("xmlurl").first();
             parsedXml = link.text();
-            //System.out.println("Linkn" + parsedXml);
+            System.out.println("Linkn" + parsedXml);
 
             // Web link to JSON
 
@@ -94,22 +94,6 @@ public class Job {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
-
-        /*
-         * try{ SAXParserFactory factory = SAXParserFactory.newInstance();
-         * SAXParser saxParser = factory.newSAXParser(); DefaultHandler handler
-         * = new DefaultHandler(){ public void startElement(String)
-         *
-         *
-         *
-         *
-         * };
-         *
-         *
-         * }catch(Exception e){
-         *
-         * }
-         */
 
     }
     public String getName() {
@@ -149,15 +133,16 @@ public class Job {
     	Document doc;
         try {
         	//parsedXml
-        	String xmlurl = "http://www.webpagetest.org/xmlResult/160608_N0_1GNM/";
-            
+        	String xmlurl = parsedXml;
+            //http://www.homedepot.com/p/Husky-16-oz-Fiberglass-Claw-Hammer-N-G16CHD-HN/205386272
+        	//http://www.webpagetest.org/xmlResult/160608_N0_1GNM/
         	//Extract status code and data from parsedXml link  
             doc = Jsoup.connect(xmlurl).get();
             //System.out.println("load" + doc.toString());
             
             //Retrieve status code
             statusCode = doc.getElementsByTag("statuscode").text();
-            System.out.println("pppppp" + statusCode);
+            System.out.println("pppppp: " + statusCode);
             
             //Conditional for status codes and extracting text
             if("200".compareTo(statusCode) == 0) {
@@ -172,10 +157,12 @@ public class Job {
             }
             else if("101".compareTo(statusCode) == 0) {
             	//waiting
+            	System.out.println("In Queue");
             	return "In Queue";
             }
             else if("100".compareTo(statusCode) == 0) {
             	//testing
+            	System.out.println("Testing");
             	return "Testing";
             }
             else {

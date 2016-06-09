@@ -220,7 +220,7 @@
 		var jobList = new Map();
 
 		var simpleTTFB = $("#urlInput").val();
-
+		function stuffy(){}
 		function addJob() {
 
 			var url = $("#urlInput").val();
@@ -236,17 +236,18 @@
 					'mock' : "true"
 				},
 				success : function(result) {
-
+					//Create javascript object appending functionality
 					var job = {
 						name : result.name,
 						ttfb : result.firstByte,
 						loadtime : result.loadTime,
 						statusNum : result.statusCode,
+						runner : stuffy(),
 						intervalRef : null,
 						startInterval : function() {
 							this.intervalRef = setInterval(function() {
 								console.log("running");
-								console.log(job.ttfb);
+								console.log(job.runner);
 								console.log(job.statusNum);
 								
 								//Run status code checker
@@ -257,7 +258,8 @@
 									//$("#simpleDate").text(job.ttfb);
 									$("#simpleUrl").text(job.name);
 									$("#simpleProgress").text("Completed");
-									clearInterval(this.intervalRef);
+									//stopInterval(this.intervalRef);
+									job.stopInterval();
 								} 
 								else if ("101" == job.statusNum) {
 									$("#simpleProgress").text("In Queue");
