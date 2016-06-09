@@ -53,7 +53,9 @@ public class JobService {
 
         jobMaster.addJob(job);
         jobMaster.runJob(job.getName());
-
+        
+        jobMaster.getxmlInfo(job.getName());
+        
         return new ResponseEntity<>(job, HttpStatus.OK);
 
     }

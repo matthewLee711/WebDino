@@ -41,6 +41,23 @@ public class JobMaster {
             return null;
         }
     }
+    //Check xml status -- returns testing, waiting, complete
+    public String getxmlInfo(String name){
+    	
+    	Job job = jobs.get(name);
+    	return job.getParsedXml();
+    }
+    
+    //if test complete, get information
+    public String getfirstByte(String name) {
+    	Job job = jobs.get(name);
+    	return job.getfirstByte();
+    }
+    
+    public String getloadTime(String name) {
+    	Job job = jobs.get(name);
+    	return job.getloadTime();
+    }
 
 
 

@@ -34,6 +34,10 @@
 	background:#9be995;
 
 }
+#simpleProgress{
+	text-align: right;
+	font-size: 30px;
+}
 table{
 	width:100%;
 	text-align: left;
