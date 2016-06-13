@@ -5,6 +5,7 @@ import java.io.IOException;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
@@ -21,7 +22,10 @@ import com.interns.webdino.client.support.HttpClientManager;
 public class Job {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(Job.class);
-
+    
+    public String statusCode;
+    private String firstByte;
+    private String loadTime;
     private String name;
     private String url;
     private String rawXml;
@@ -77,7 +81,7 @@ public class Job {
         try {
             // load webpage
             doc = Jsoup.connect(url).get();
-            // System.out.println("load" + doc.toString());
+            //System.out.println("load" + doc.toString());
 
             // extract webpage content
             Element link = doc.select("xmlurl").first();
@@ -90,22 +94,6 @@ public class Job {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
-
-        /*
-         * try{ SAXParserFactory factory = SAXParserFactory.newInstance();
-         * SAXParser saxParser = factory.newSAXParser(); DefaultHandler handler
-         * = new DefaultHandler(){ public void startElement(String)
-         *
-         *
-         *
-         *
-         * };
-         *
-         *
-         * }catch(Exception e){
-         *
-         * }
-         */
 
     }
     public String getName() {
@@ -139,11 +127,68 @@ public class Job {
     public void setStatus(JobStatus status) {
         this.status = status;
     }
-
+    
+    //EXtract TTFB and loadTime
     public String getParsedXml() {
-        return parsedXml;
-    }
+    	Document doc;
+        try {
+        	//parsedXml
+        	String xmlurl = parsedXml;
+            //http://www.homedepot.com/p/Husky-16-oz-Fiberglass-Claw-Hammer-N-G16CHD-HN/205386272
+        	//http://www.webpagetest.org/xmlResult/160608_N0_1GNM/
+        	//Extract status code and data from parsedXml link  
+            doc = Jsoup.connect(xmlurl).get();
+            //System.out.println("load" + doc.toString());
+            
+            //Retrieve status code
+            statusCode = doc.getElementsByTag("statuscode").text();
+            System.out.println("pppppp: " + statusCode);
+            
+            //Conditional for status codes and extracting text
+            if("200".compareTo(statusCode) == 0) {
+            	Elements ttfbs = doc.getElementsByTag("ttfb");
+            	Elements loadtimes = doc.getElementsByTag("loadtime");
+            	//System.out.println(ttfbs + "and" + loadtimes);
+            	
+            	
+            	for(Element loadtime : loadtimes) { loadTime = loadtime.text(); break; }
+            	for(Element ttfb : ttfbs) { firstByte = ttfb.text(); break; }
+            	
+            }
+            else if("101".compareTo(statusCode) == 0) {
+            	//waiting
+            	System.out.println("In Queue");
+            	return "In Queue";
+            }
+            else if("100".compareTo(statusCode) == 0) {
+            	//testing
+            	System.out.println("Testing");
+            	return "Testing";
+            }
+            else {
+            	System.out.println("Failure");
+            }
+            
+            
 
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+    	
+    	
+    	return "beep";
+    }
+    
+    public String getfirstByte() {
+    	return firstByte;
+    }
+    
+    public String getloadTime() {
+    	return loadTime;
+    }
+    
+    
     public void setParsedXml(String parsedXml) {
         this.parsedXml = parsedXml;
     }
