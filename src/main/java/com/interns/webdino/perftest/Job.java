@@ -153,7 +153,7 @@ public class Job {
             	
             	for(Element loadtime : loadtimes) { loadTime = loadtime.text(); break; }
             	for(Element ttfb : ttfbs) { firstByte = ttfb.text(); break; }
-            	
+            	return firstByte;
             }
             else if("101".compareTo(statusCode) == 0) {
             	//waiting
