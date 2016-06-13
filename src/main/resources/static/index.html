@@ -1,41 +1,40 @@
-<!DOCTYPE html> <!-- var x = jobList.get("www.homedepot.com").stopInterval()
-undefined -->
+<!DOCTYPE html>
 <html>
-    <head>
+<head>
 
-		<link rel="stylesheet" type="text/css" href="./css/index.css">
-		<!-- Latest compiled and minified CSS -->
-		<link rel="stylesheet"
-			href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"
-			integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7"
-			crossorigin="anonymous">
+<link rel="stylesheet" type="text/css" href="./css/index.css">
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"
+	integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7"
+	crossorigin="anonymous">
 
-        <link rel="stylesheet" href="./css/main.css" />
+<link rel="stylesheet" href="./css/main.css" />
 
-		<!-- Calendar -->
-		<link rel="stylesheet"
-			href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+<!-- Calendar -->
+<link rel="stylesheet"
+	href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
 
-		<!-- Charting -->
-		<script type="text/javascript"
-			src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.1.4/Chart.min.js"></script>
+<!-- Charting -->
+<script type="text/javascript"
+	src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.1.4/Chart.min.js"></script>
 
-		<style>
-			#panel, #flip {
-				padding: 5px;
-				text-align: center;
-				background-color: #e5eecc;
-				border: solid 1px #c3c3c3;
-			}
+<style>
+#panel, #flip {
+	padding: 5px;
+	text-align: center;
+	background-color: #e5eecc;
+	border: solid 1px #c3c3c3;
+}
 
-			#panel {
-				padding: 50px;
-				displey: none;
-			}
-		</style>
+#panel {
+	padding: 50px;
+	displey: none;
+}
+</style>
 
 
-	</head>
+</head>
 
 <body role="document">
 
@@ -73,7 +72,7 @@ undefined -->
 		<div class="panel-group">
 
 			<div class="panel panel-info">
-			
+
 				<div class="panel-heading">
 					<h4 class="panel-title">
 						<a data-toggle="collapse" href="#collapse1">Collapsible</a>
@@ -85,7 +84,8 @@ undefined -->
 					<div id="url">
 						URL <input type="radio" name="prefixHTTP" value="HTTP://" checked>
 						HTTP:// <input type="radio" id="prefixHTTPS" value="HTTPS://">
-						HTTPS:// <input type="text" id="urlInput" placeholder="Enter URL Here">
+						HTTPS:// <input type="text" id="urlInput"
+							placeholder="Enter URL Here">
 						<button type="button" id="addButton" class="btn btn-primary">ADD</button>
 					</div>
 					<br>
@@ -103,9 +103,9 @@ undefined -->
 							<td><input type="text" id="startDate" class="date"></td>
 							<td><input type="text" id="endDate" class="date"></td>
 							<td><input type="text" id="hourInterval"
-								placeholder="Hour(s)"> 
-								<input type="text" id="minuteInterval" placeholder="Minute(s)"> 
-								<input type="text" id="secondInterval" placeholder="Second(s)">
+								placeholder="Hour(s)"> <input type="text"
+								id="minuteInterval" placeholder="Minute(s)"> <input
+								type="text" id="secondInterval" placeholder="Second(s)">
 							</td>
 
 						</tr>
@@ -119,7 +119,10 @@ undefined -->
 
 		<div class="panel panel-success" id="resultPanel">
 
-			<div class=panel-body>www.homedepot.com</div>
+			<div class=panel-body>
+				<div id="simpleUrl" class="col col-md-6">Url</div>
+				<div id="simpleProgress" class="col col-md-6">In Queue</div>
+			</div>
 			<div class=panel-footer>
 
 				<table>
@@ -131,9 +134,9 @@ undefined -->
 					</tr>
 
 					<tr>
-						<td>5 Seconds</td>
-						<td>10 Seconds</td>
-						<td>Some Date</td>
+						<td id="simpleTTFB">Time</td>
+						<td id="simpleFullLoad">Time</td>
+						<td id="simpleDate">Some Date</td>
 
 					</tr>
 
@@ -145,7 +148,10 @@ undefined -->
 
 		<div class="panel panel-warning" id="largeResultPanel">
 
-			<div class=panel-body id="resultPanel">www.homedepot.com</div>
+			<div class=panel-body id="resultPanel">
+				<div id="complexUrl" class="col col-md-6">Url</div>
+				<div id="complexProgress" class="col col-md-6">In Queue</div>
+			</div>
 			<div class=panel-footer>
 
 				<table>
@@ -202,13 +208,15 @@ undefined -->
 	</div>
 
 	<!-- jQuery -->
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+	<script
+		src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 
 	<!-- Latest compiled and minified JavaScript -->
 	<script
 		src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"
 		integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS"
 		crossorigin="anonymous">
+		
 	</script>
 
 	<!-- calendar -->
@@ -218,171 +226,101 @@ undefined -->
 
 
 	<script>
-
-	    var CONST_INTERVAL = 5000;
+		//$(document).getElementsById("simpleTTFB")[0].value = "boo";
+		//$("#simpleTTFB").val() = "bam";
+		var CONST_INTERVAL = 5000;
 		var jobList = new Map();
 
-<<<<<<< HEAD
-	<!-- Calendar code -->
-	<script>
-		$(function() {
-			$("#datepicker").datepicker();
-		});
-		$(function() {
-			$("#datepicker2").datepicker();
-		});
-	</script>
-	<script>
-		var data = "";
-		$(document).ready(
-				function() {
-					$("#addButton").click(
-							function() {
-								data = $("#UrlInput").val() + " "
-										+ $("#hourInterval").val() + " "
-										+ $("#minuteInterval").val() + " "
-										+ $("#secondInterval").val();
-								;
-								alert("Value: " + data);
-							});
-				})
-	</script>
+		var simpleTTFB = $("#urlInput").val();
+		function stuffy(){}
+		function addJob() {
 
-	<script>
-		$(document).ready(function() {
-			$("#flip").click(function() {
-				$("#panel").slideToggle("slow", function() {
-					alert("Panel has Moved ");
-				});
-			});
-		});
-	</script>
+			var url = $("#urlInput").val();
 
-	<script>
-		var text = document.getElementsByName("URLInput").value;
-		//Serialize form into json
-		var formData = JSON.stringify($("#myForm").serializeArray());
-
-		var reqData = {
-			protocol : "http",
-			url : "www.homedepot.com",
-			test : text,
-			startTime : "14:15:00 06-01-2016",
-			endTime : "14:15:00 06-01-2016",
-			interval : {
-				hours : 0,
-				minutes : 5,
-				seconds : 0,
-				cron : ""
-			}
-		};
-
-		/*$.ajax({
-			url : "http://localhost:8080/webdino/echo",
-		    type: "POST",
-		    data: {"data" : JSON.stringify(reqData)},
-			success : function(result) {
-
-				var apiResult = $("#ApiResult");//create selector for ApiResult class
-				var stuff = JSON.parse(decodeURIComponent(result.value));//convert into json
-			    apiResult.html(stuff.url);
-			},
-			error : function() {
-				$("#ApiResult").html(
-						"<strong>" + "It FAILED :(" + "</strong>");
-			}
-		});*/
-
-		/*
-		$.ajax({
-			url : "http://localhost:8080/webdino/matthew",
-		    type: "POST",
-		    data: {"data" : JSON.stringify(reqData)},
-			success : function(result) {
-
-				var apiResult = $("#input");//create selector for ApiResult class
-				var stuff = JSON.parse(decodeURIComponent(result.value));//convert into json
-			    apiResult.html(stuff.url);
-			},
-			error : function() {
-				$("#input").html(
-						"<strong>" + "It failed" + "</strong>");
-			}
-		});
-		<<<<<<< HEAD
-				
-		var hiddenBox = $( "#banner-message" );
-		$( "#button-container button" ).on( "click", function( event ) {
-		  hiddenBox.show();
-		});
-		=======
-		 */
-
-		function doTheThing() {
-
-			console.log($("#urlInput").val());
+			console.log("Adding job for URL: " + url);
 
 			$.ajax({
-=======
-		function addJob() {
-			
-			var url = $("#urlInput").val();
-		
-			console.log("Adding job for URL: " + url);
-			
-		    $.ajax({
->>>>>>> 7593ba028a62ba95028396907e59d0c3ef7b5662
-				url : "http://localhost:8080/webdino/job",
-				type : "POST",
+				url : "http://localhost:8080/webdino/job/ttfb",
+				type : "GET",
 				data : {
 					'url' : url,
 					'name' : url,
 					'mock' : "true"
-				    },
+				},
 				success : function(result) {
-					
+					//Create javascript object appending functionality
 					var job = {
-						name: result.name,
-						intervalRef: null,
-						startInterval: function(){
-							this.intervalRef = setInterval(function(){
-								console.log(job.name);//printing the url to console every 5 secs
+						name : result.name,
+						ttfb : result.firstByte,
+						loadtime : result.loadTime,
+						statusNum : result.statusCode,
+						runner : stuffy(),
+						intervalRef : null,
+						startInterval : function() {
+							this.intervalRef = setInterval(function() {
+								console.log("running");
+								console.log(job.runner);
+								console.log(job.statusNum);
+								
+								//Run status code checker
+								if ("200" == job.statusNum) {
+									console.log("complete");
+									$("#simpleTTFB").text(job.ttfb);
+									$("#simpleFullLoad").text(job.loadtime);
+									//$("#simpleDate").text(job.ttfb);
+									$("#simpleUrl").text(job.name);
+									$("#simpleProgress").text("Completed");
+									//stopInterval(this.intervalRef);
+									job.stopInterval();
+								} 
+								else if ("101" == job.statusNum) {
+									$("#simpleProgress").text("In Queue");
+								} 
+								else if ("100" == job.statusNum) {
+									$("#simpleProgress").text("Testing");
+								} 
+								else{
+									console.log(job.statusNum);
+									console.log("Error");
+								}
+
+								console.log(job.name);
 							}, CONST_INTERVAL);
 						},
-						stopInterval: function(){
+						stopInterval : function() {
 							clearInterval(this.intervalRef);
 						}
-                    }
+					}
 					
+					//Begin interval
 					job.startInterval();
-					
-					jobList.set(result.name,job);
+					console.log("stuu" + job.ttfb);
+					jobList.set(result.name, job);
 
 				},
 				error : function() {
 					console.log("Unable to add Job for: " + url);
 				}
 			});
-		
+
 		}
 
-        $(document).ready(function() {
-        	
-            //Calendar code
-            $(function() {
-                $("#startDate").datepicker();
-            });
+		$(document).ready(function() {
 
-            $(function() {
-                $("#endDate").datepicker();
-            });        	
-        	
-            $("#addButton").click(function() {
-            	addJob();
-            });
+			//Calendar code
+			$(function() {
+				$("#startDate").datepicker();
+			});
 
-        });
+			$(function() {
+				$("#endDate").datepicker();
+			});
 
+			$("#addButton").click(function() {
+				addJob();
+			});
+
+		});
 	</script>
 
 </body>
