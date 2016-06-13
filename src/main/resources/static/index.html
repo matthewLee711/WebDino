@@ -228,8 +228,8 @@
 			console.log("Adding job for URL: " + url);
 
 			$.ajax({
-				url : "http://localhost:8080/webdino/job",
-				type : "POST",
+				url : "http://localhost:8080/webdino/job/ttfb",
+				type : "GET",
 				data : {
 					'url' : url,
 					'name' : url,
