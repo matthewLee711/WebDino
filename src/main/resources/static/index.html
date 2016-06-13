@@ -121,7 +121,7 @@
 
 			<div class=panel-body>
 				<div id="simpleUrl" class="col col-md-6">Url</div>
-				<div id="simpleProgress" class="col col-md-6">In Queue</div>
+				<div id="simpleProgress" class="col col-md-6">Status Code</div>
 			</div>
 			<div class=panel-footer>
 
@@ -232,7 +232,27 @@
 		var jobList = new Map();
 
 		var simpleTTFB = $("#urlInput").val();
-		function stuffy(){}
+		function updateStatusCode(){
+			$.ajax({
+				url : "http://localhost:8080/webdino/job/ttfb",
+				type : "GET",
+				data : {
+					'url' : url,
+					'name' : url,
+					'mock' : "true"
+				},
+				success : function(result) {
+					//Create javascript object appending functionality
+					return result;
+
+				},
+				error : function() {
+					console.log("Unable to add Job for: " + url);
+				}
+			});			
+		}
+		
+		
 		function addJob() {
 
 			var url = $("#urlInput").val();
@@ -240,7 +260,7 @@
 			console.log("Adding job for URL: " + url);
 
 			$.ajax({
-				url : "http://localhost:8080/webdino/job/ttfb",
+				url : "http://localhost:8080/webdino/job",
 				type : "GET",
 				data : {
 					'url' : url,
@@ -254,14 +274,14 @@
 						ttfb : result.firstByte,
 						loadtime : result.loadTime,
 						statusNum : result.statusCode,
-						runner : stuffy(),
 						intervalRef : null,
 						startInterval : function() {
 							this.intervalRef = setInterval(function() {
 								console.log("running");
-								console.log(job.runner);
-								console.log(job.statusNum);
-								
+								console.log("Printing job Runner: " + job.runner);
+								console.log("Printing status Number: " + job.statusNum);
+								//console.log("Code: " + updateStatusCode());
+
 								//Run status code checker
 								if ("200" == job.statusNum) {
 									console.log("complete");
@@ -294,7 +314,7 @@
 					
 					//Begin interval
 					job.startInterval();
-					console.log("stuu" + job.ttfb);
+					console.log("stuu " + job.ttfb);
 					jobList.set(result.name, job);
 
 				},

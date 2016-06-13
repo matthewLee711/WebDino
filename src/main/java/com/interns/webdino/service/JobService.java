@@ -55,6 +55,7 @@ public class JobService {
         if (null != name) {
             job = jobMaster.getJob(name);
         }
+        System.out.println("job");
         if(job != null){
         	result = job.getParsedXml();
         }
