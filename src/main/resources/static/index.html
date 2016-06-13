@@ -179,7 +179,19 @@ undefined -->
 
 					</tr>
 
-				</table>
+				</table>	<style>
+#panel, #flip {
+	padding: 5px;
+	text-align: center;
+	background-color: #e5eecc;
+	border: solid 1px #c3c3c3;
+}
+
+#panel {
+	padding: 50px;
+	displey: none;
+}
+</style>
 
 
 
@@ -210,6 +222,108 @@ undefined -->
 	    var CONST_INTERVAL = 5000;
 		var jobList = new Map();
 
+<<<<<<< HEAD
+	<!-- Calendar code -->
+	<script>
+		$(function() {
+			$("#datepicker").datepicker();
+		});
+		$(function() {
+			$("#datepicker2").datepicker();
+		});
+	</script>
+	<script>
+		var data = "";
+		$(document).ready(
+				function() {
+					$("#addButton").click(
+							function() {
+								data = $("#UrlInput").val() + " "
+										+ $("#hourInterval").val() + " "
+										+ $("#minuteInterval").val() + " "
+										+ $("#secondInterval").val();
+								;
+								alert("Value: " + data);
+							});
+				})
+	</script>
+
+	<script>
+		$(document).ready(function() {
+			$("#flip").click(function() {
+				$("#panel").slideToggle("slow", function() {
+					alert("Panel has Moved ");
+				});
+			});
+		});
+	</script>
+
+	<script>
+		var text = document.getElementsByName("URLInput").value;
+		//Serialize form into json
+		var formData = JSON.stringify($("#myForm").serializeArray());
+
+		var reqData = {
+			protocol : "http",
+			url : "www.homedepot.com",
+			test : text,
+			startTime : "14:15:00 06-01-2016",
+			endTime : "14:15:00 06-01-2016",
+			interval : {
+				hours : 0,
+				minutes : 5,
+				seconds : 0,
+				cron : ""
+			}
+		};
+
+		/*$.ajax({
+			url : "http://localhost:8080/webdino/echo",
+		    type: "POST",
+		    data: {"data" : JSON.stringify(reqData)},
+			success : function(result) {
+
+				var apiResult = $("#ApiResult");//create selector for ApiResult class
+				var stuff = JSON.parse(decodeURIComponent(result.value));//convert into json
+			    apiResult.html(stuff.url);
+			},
+			error : function() {
+				$("#ApiResult").html(
+						"<strong>" + "It FAILED :(" + "</strong>");
+			}
+		});*/
+
+		/*
+		$.ajax({
+			url : "http://localhost:8080/webdino/matthew",
+		    type: "POST",
+		    data: {"data" : JSON.stringify(reqData)},
+			success : function(result) {
+
+				var apiResult = $("#input");//create selector for ApiResult class
+				var stuff = JSON.parse(decodeURIComponent(result.value));//convert into json
+			    apiResult.html(stuff.url);
+			},
+			error : function() {
+				$("#input").html(
+						"<strong>" + "It failed" + "</strong>");
+			}
+		});
+		<<<<<<< HEAD
+				
+		var hiddenBox = $( "#banner-message" );
+		$( "#button-container button" ).on( "click", function( event ) {
+		  hiddenBox.show();
+		});
+		=======
+		 */
+
+		function doTheThing() {
+
+			console.log($("#urlInput").val());
+
+			$.ajax({
+=======
 		function addJob() {
 			
 			var url = $("#urlInput").val();
@@ -217,6 +331,7 @@ undefined -->
 			console.log("Adding job for URL: " + url);
 			
 		    $.ajax({
+>>>>>>> 7593ba028a62ba95028396907e59d0c3ef7b5662
 				url : "http://localhost:8080/webdino/job",
 				type : "POST",
 				data : {
