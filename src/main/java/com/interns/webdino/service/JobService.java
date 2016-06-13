@@ -43,19 +43,24 @@ public class JobService {
 
     }
     
+    
     @RequestMapping(path="/ttfb", method = { RequestMethod.GET })
     public ResponseEntity<String> getTTFB(HttpServletRequest req,
             @RequestParam(value = "name", required = false) String name) {
+
         Job job = null;
         String result = null;
         
+
         if (null != name) {
             job = jobMaster.getJob(name);
         }
         if(job != null){
-            result = job.getParsedXml();
+        	result = job.getParsedXml();
         }
+
         return new ResponseEntity<>(result, HttpStatus.OK);
+
     }
 
     @RequestMapping(method = { RequestMethod.POST })

@@ -24,9 +24,9 @@ public class Job {
     private static final Logger LOGGER = LoggerFactory.getLogger(Job.class);
     
     public String statusCode;
-    private String firstByte;
-    private String loadTime;
-    private String name;
+    public String firstByte;
+    public String loadTime;
+    public String name;
     private String url;
     private String rawXml;
     private String parsedXml;
@@ -153,7 +153,7 @@ public class Job {
             	
             	for(Element loadtime : loadtimes) { loadTime = loadtime.text(); break; }
             	for(Element ttfb : ttfbs) { firstByte = ttfb.text(); break; }
-            	
+            	return firstByte;
             }
             else if("101".compareTo(statusCode) == 0) {
             	//waiting
