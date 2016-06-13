@@ -1,4 +1,5 @@
-<!DOCTYPE html>
+<!DOCTYPE html> <!-- var x = jobList.get("www.homedepot.com").stopInterval()
+undefined -->
 <html>
     <head>
 
@@ -230,7 +231,7 @@
 						intervalRef: null,
 						startInterval: function(){
 							this.intervalRef = setInterval(function(){
-								console.log(job.name);
+								console.log(job.name);//printing the url to console every 5 secs
 							}, CONST_INTERVAL);
 						},
 						stopInterval: function(){
