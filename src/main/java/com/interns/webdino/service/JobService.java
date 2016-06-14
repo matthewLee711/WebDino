@@ -34,7 +34,7 @@ public class JobService {
             @RequestParam(value = "name", required = false) String name) {
 
         Job job = null;
-
+        System.out.println("pppppp: " + name);
         if (null != name) {
             job = jobMaster.getJob(name);
         }
@@ -50,7 +50,7 @@ public class JobService {
 
         Job job = null;
         String result = null;
-        
+        System.out.println("ggggg: " + name);
 
         if (null != name) {
             job = jobMaster.getJob(name);
@@ -68,10 +68,10 @@ public class JobService {
             @RequestParam(value = "name", required = true) String name,
             @RequestParam(value = "url", required = true) String url,
             @RequestParam(value = "mock", required = false, defaultValue = "false") boolean mock) {
-
+    	System.out.println(name + " " + url + " " + mock);
         Job job = new Job(name, url, clientManager, mock);
 
-        jobMaster.addJob(job);
+        jobMaster.addJob(job); System.out.print("added " + job.getName());
         jobMaster.runJob(job.getName());
         
         jobMaster.getxmlInfo(job.getName());
