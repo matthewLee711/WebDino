@@ -247,7 +247,7 @@
 
 			$.ajax({
 				url : "http://localhost:8080/webdino/job/",
-				type : "GET",
+				type : "POST",
 				data : {
 					'url' : url,
 					'name' : url,
@@ -260,27 +260,43 @@
 						ttfb : result.firstByte,
 						loadtime : result.loadTime,
 						statusNum : result.statusCode,
-						runner : updateStatusCode(),
 						intervalRef : null,
 						startInterval : function() {
 							this.intervalRef = setInterval(function() {
 								console.log("running");
 								//console.log(job.runner);
 								console.log(job.statusNum);
-								console.log("status: "+ job.runner);
+								//console.log("status: "+ job.runner);
+								$.ajax({
+                						url : "http://localhost:8080/webdino/job/ttfb",
+                						type : "GET",
+                						data : {
+                   							'url' : url,
+                    						'name' : url,
+                    						'mock' : "true"
+                						},
+                						success : function(result) {
+                    						//Create javascript object appending functionality
+                    						console.log("result: " + result);
+                    						console.log("statusNum: " + job.statusNum);
+                    						
+                    						if("200" == result){
+                    							console.log("complete");
+            									$("#simpleTTFB").text(job.ttfb);
+            									$("#simpleFullLoad").text(job.loadtime);
+            									//$("#simpleDate").text(job.ttfb);
+            									$("#simpleUrl").text(job.name);
+            									$("#simpleProgress").text("Completed");
+                    							job.stopInterval();
+                    						}
+                    						//return result;
+                						},
+               							error : function() {
+                    						console.log("Unable to add Job for: " + url);
+                						}
+            					});
 								
-								//Run status code checker
-								if ("200" == job.statusNum) {
-									console.log("complete");
-									$("#simpleTTFB").text(job.ttfb);
-									$("#simpleFullLoad").text(job.loadtime);
-									//$("#simpleDate").text(job.ttfb);
-									$("#simpleUrl").text(job.name);
-									$("#simpleProgress").text("Completed");
-									//stopInterval(this.intervalRef);
-									job.stopInterval();
-								} 
-								else if ("101" == job.statusNum) {
+								if ("101" == job.statusNum) {
 									$("#simpleProgress").text("In Queue");
 								} 
 								else if ("100" == job.statusNum) {
