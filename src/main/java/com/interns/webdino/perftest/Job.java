@@ -152,14 +152,16 @@ public class Job {
             	
             	for(Element loadtime : loadtimes) { loadTime = loadtime.text(); break; }
             	for(Element ttfb : ttfbs) { firstByte = ttfb.text(); break; }
+            	System.out.println("Inner loadTime: " + loadTime);
+            	System.out.println("Inner loadByte: " + firstByte);
             	return "200";
             }
-            else if("101".compareTo(statusCode) == 0) {
+            else if("100".compareTo(statusCode) == 0) {
             	//waiting
             	System.out.println("In Queue");
             	return "In Queue";
             }
-            else if("100".compareTo(statusCode) == 0) {
+            else if("101".compareTo(statusCode) == 0) {
             	//testing
             	System.out.println("Testing");
             	return "Testing";

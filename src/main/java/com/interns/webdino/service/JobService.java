@@ -64,6 +64,26 @@ public class JobService {
 
     }
 
+    @RequestMapping(path="/output", method = { RequestMethod.GET })
+    public ResponseEntity<Job> getOutput(HttpServletRequest req,
+            @RequestParam(value = "name", required = false) String name) {
+
+        Job job = null;
+        String result = null;
+        System.out.println("get Output: " + name);
+
+        if (null != name) {
+            job = jobMaster.getJob(name);
+        }
+        System.out.println("job printing");
+        if(job != null){
+        	result = job.getParsedXml();
+        	System.out.println("Got Parsed");
+        }
+
+        return new ResponseEntity<>(job, HttpStatus.OK);
+    }
+    
     @RequestMapping(method = { RequestMethod.POST })
     public ResponseEntity<Job> startJob(HttpServletRequest req,
             @RequestParam(value = "name", required = true) String name,
