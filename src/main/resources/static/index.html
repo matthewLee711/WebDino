@@ -121,7 +121,7 @@
 
 			<div class=panel-body>
 				<div id="simpleUrl" class="col col-md-6">Url</div>
-				<div id="simpleProgress" class="col col-md-6">Status Code</div>
+				<div id="simpleProgress" class="col col-md-6">In Queue</div>
 			</div>
 			<div class=panel-footer>
 
@@ -233,26 +233,24 @@
 
 		var simpleTTFB = $("#urlInput").val();
 		function updateStatusCode(){
-			$.ajax({
-				url : "http://localhost:8080/webdino/job/ttfb",
-				type : "GET",
-				data : {
-					'url' : url,
-					'name' : url,
-					'mock' : "true"
-				},
-				success : function(result) {
-					//Create javascript object appending functionality
-					return result;
-
-				},
-				error : function() {
-					console.log("Unable to add Job for: " + url);
-				}
-			});			
-		}
-		
-		
+            $.ajax({
+                url : "http://localhost:8080/webdino/job/ttfb",
+                type : "GET",
+                data : {
+                    'url' : url,
+                    'name' : url,
+                    'mock' : "true"
+                },
+                success : function(result) {
+                    //Create javascript object appending functionality
+                    console.log("result: " + result);
+                    return result;
+                },
+                error : function() {
+                    console.log("Unable to add Job for: " + url);
+                }
+            });         
+        }
 		function addJob() {
 
 			var url = $("#urlInput").val();
@@ -260,8 +258,8 @@
 			console.log("Adding job for URL: " + url);
 
 			$.ajax({
-				url : "http://localhost:8080/webdino/job",
-				type : "GET",
+				url : "http://localhost:8080/webdino/job/",
+				type : "POST",
 				data : {
 					'url' : url,
 					'name' : url,
@@ -274,14 +272,15 @@
 						ttfb : result.firstByte,
 						loadtime : result.loadTime,
 						statusNum : result.statusCode,
+						runner : updateStatusCode(),
 						intervalRef : null,
 						startInterval : function() {
 							this.intervalRef = setInterval(function() {
 								console.log("running");
-								console.log("Printing job Runner: " + job.runner);
-								console.log("Printing status Number: " + job.statusNum);
-								//console.log("Code: " + updateStatusCode());
-
+								//console.log(job.runner);
+								console.log(job.statusNum);
+								console.log("status: "+ job.runner);
+								
 								//Run status code checker
 								if ("200" == job.statusNum) {
 									console.log("complete");
@@ -305,6 +304,7 @@
 								}
 
 								console.log(job.name);
+								console.log("-----------------");
 							}, CONST_INTERVAL);
 						},
 						stopInterval : function() {

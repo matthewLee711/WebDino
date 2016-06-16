@@ -24,9 +24,9 @@ public class Job {
     private static final Logger LOGGER = LoggerFactory.getLogger(Job.class);
     
     public String statusCode;
-    private String firstByte;
-    private String loadTime;
-    private String name;
+    public String firstByte;
+    public String loadTime;
+    public String name;
     private String url;
     private String rawXml;
     private String parsedXml;
