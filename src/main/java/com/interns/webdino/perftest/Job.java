@@ -159,12 +159,12 @@ public class Job {
             else if("100".compareTo(statusCode) == 0) {
             	//waiting
             	System.out.println("In Queue");
-            	return "In Queue";
+            	return "100";
             }
             else if("101".compareTo(statusCode) == 0) {
             	//testing
             	System.out.println("Testing");
-            	return "Testing";
+            	return "101";
             }
             else {
             	System.out.println("Failure");

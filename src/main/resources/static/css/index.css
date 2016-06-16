@@ -25,7 +25,8 @@
 	font-size:30px;
 }
 #resultPanel{
-	font-size:30px;
+	font-size:22px;
+	height: 388px;
 }
 #largeResultPanel{
 	font-size:22px;
@@ -45,6 +46,7 @@ table{
 	width:100%;
 	text-align: left;
 }
+
 .date{
 	width: 80%;
 }
