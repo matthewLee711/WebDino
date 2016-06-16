@@ -58,7 +58,6 @@ public class Job {
             LOGGER.error("ParseXML failed", e);
         }
 
-        LOGGER.info("Got result for job start: \n" + rawXml);
 
         return parsedXml;
 
@@ -153,7 +152,7 @@ public class Job {
             	
             	for(Element loadtime : loadtimes) { loadTime = loadtime.text(); break; }
             	for(Element ttfb : ttfbs) { firstByte = ttfb.text(); break; }
-            	//return firstByte;
+            	return "200";
             }
             else if("101".compareTo(statusCode) == 0) {
             	//waiting
