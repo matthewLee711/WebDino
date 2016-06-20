@@ -154,6 +154,11 @@ public class Job {
             	for(Element ttfb : ttfbs) { firstByte = ttfb.text(); break; }
             	System.out.println("Inner loadTime: " + loadTime);
             	System.out.println("Inner loadByte: " + firstByte);
+            	
+            	//Add completed Job to array
+            	//alert jobmaster job is complete
+            	
+            	
             	return "200";
             }
             else if("100".compareTo(statusCode) == 0) {
