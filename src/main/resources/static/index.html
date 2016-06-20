@@ -11,6 +11,8 @@
 
 <link rel="stylesheet" href="./css/main.css" />
 
+
+
 <!-- Calendar -->
 <link rel="stylesheet"
 	href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
@@ -18,6 +20,13 @@
 <!-- Charting -->
 <script type="text/javascript"
 	src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.1.4/Chart.min.js"></script>
+
+
+<link
+	href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css"
+	rel="stylesheet"
+	integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1"
+	crossorigin="anonymous">
 
 <style>
 #panel, #flip {
@@ -61,15 +70,19 @@
 		</div>
 	</nav>
 
-	<div class="container" role="main">
-
-		<div class="jumbotron">
+	<div class="fullContainer" role="main">
+		<h1>
+			<img src="CuteDino.png" style="width: 133px;">Welcome to
+			WebDino!
+			<!-- <button type="button" id="addButtonTop" class="btn btn-primary">ADD</button> -->
+		</h1>
+		<!-- 		<div class="jumbotron">
 			<h1>
 				Welcome to WebDino! <img src="CuteDino.png" style="width: 133px;">
 			</h1>
-		</div>
+		</div> -->
 
-		<div class="panel-group">
+		<!-- <div class="panel-group">
 
 			<div class="panel panel-info">
 
@@ -115,9 +128,10 @@
 
 				</div>
 			</div>
-		</div>
+		</div> -->
 
-		<div class="panel panel-success" id="resultPanel">
+
+		<!-- <div class="panel panel-success" id="resultPanel">
 
 			<div class=panel-body>
 				<div id="simpleUrl" class="col col-md-6">Url</div>
@@ -144,9 +158,9 @@
 			</div>
 
 		</div>
+ -->
 
-
-		<div class="panel panel-warning" id="largeResultPanel">
+		<!-- <div class="panel panel-warning" id="largeResultPanel">
 
 			<div class=panel-body id="resultPanel">
 				<div id="complexUrl" class="col col-md-6">Url</div>
@@ -160,7 +174,10 @@
 						<th>Average Time to Full Load:</th>
 						<th>Time to First Byte:</th>
 						<th>Time to Full Load:</th>
-					</tr>
+					</tr>URL <input type="radio" name="prefixHTTP" value="HTTP://" checked>
+						HTTP:// <input type="radio" id="prefixHTTPS" value="HTTPS://">
+						HTTPS:// <input type="text" id="urlInput"
+							placeholder="Enter URL Here">
 
 					<tr>
 						<td>5 Seconds</td>
@@ -186,14 +203,302 @@
 					</tr>
 
 				</table>
+				<style>
+#panel, #flip {
+	padding: 5px;
+	text-align: center;
+	background-color: #e5eecc;
+	border: solid 1px #c3c3c3;
+}
+
+#panel {
+	padding: 50px;
+	displey: none;
+}
+</style>
 
 
 
 			</div>
 
+		</div> -->
+
+		<div class="panel panel-success col col-md-4" id="resultPanel">
+
+			<div class=panel-body>
+				<i class="fa fa-cog col col-md-1" aria-hidden="true"
+					btn-lg" data-toggle="modal" data-target="#myModal"></i>
+				<div id="simpleUrl" class="col col-md-5">Url:</div>
+				<div id="simpleProgress" class="col col-md-5">In Queue</div>
+				<i class="fa fa-times-circle-o col col-md-1" aria-hidden="true"></i>
+
+			</div>
+			<div class=panel-footer>
+
+				<table>
+					<tr>
+						<th>First Byte:</th>
+						<th>Full Load:</th>
+					</tr>
+
+					<tr>
+						<td id="simpleTTFB">Time</td>
+						<td id="simpleFullLoad">Time</td>
+
+					</tr>
+
+				</table>
+			</div>
+
+		</div>
+		<div class="panel panel-success col col-md-4" id="resultPanel">
+
+			<div class=panel-body>
+				<i class="fa fa-cog col col-md-1" aria-hidden="true"
+					btn-lg" data-toggle="modal" data-target="#myModal"></i>
+				<div id="simpleUrl" class="col col-md-5">Url:</div>
+				<div id="simpleProgress" class="col col-md-5">In Queue</div>
+				<i class="fa fa-times-circle-o col col-md-1" aria-hidden="true"></i>
+
+			</div>
+			<div class=panel-footer>
+
+				<table>
+					<tr>
+						<th>First Byte:</th>
+						<th>Full Load:</th>
+					</tr>
+
+					<tr>
+						<td id="simpleTTFB">Time</td>
+						<td id="simpleFullLoad">Time</td>
+
+					</tr>
+
+				</table>
+			</div>
+
+		</div>
+		<div class="panel panel-success col col-md-4" id="resultPanel">
+
+			<div class=panel-body>
+				<i class="fa fa-cog col col-md-1" aria-hidden="true"
+					btn-lg" data-toggle="modal" data-target="#myModal"></i>
+				<div id="simpleUrl" class="col col-md-5">Url:</div>
+				<div id="simpleProgress" class="col col-md-5">In Queue</div>
+				<i class="fa fa-times-circle-o col col-md-1" aria-hidden="true"></i>
+
+			</div>
+			<div class=panel-footer>
+
+				<table>
+					<tr>
+						<th>First Byte:</th>
+						<th>Full Load:</th>
+					</tr>
+
+					<tr>
+						<td id="simpleTTFB">Time</td>
+						<td id="simpleFullLoad">Time</td>
+
+					</tr>
+
+				</table>
+			</div>
+
+		</div>
+		<div class="panel panel-success col col-md-4" id="resultPanel">
+
+			<div class=panel-body>
+				<i class="fa fa-cog col col-md-1" aria-hidden="true"
+					btn-lg" data-toggle="modal" data-target="#myModal"></i>
+				<div id="simpleUrl" class="col col-md-5">Url:</div>
+				<div id="simpleProgress" class="col col-md-5">In Queue</div>
+				<i class="fa fa-times-circle-o col col-md-1" aria-hidden="true"></i>
+
+			</div>
+			<div class=panel-footer>
+
+				<table>
+					<tr>
+						<th>First Byte:</th>
+						<th>Full Load:</th>
+					</tr>
+
+					<tr>
+						<td id="simpleTTFB">Time</td>
+						<td id="simpleFullLoad">Time</td>
+
+					</tr>
+
+				</table>
+			</div>
+
+		</div>
+		<div class="panel panel-success col col-md-4" id="resultPanel">
+
+			<div class=panel-body>
+				<i class="fa fa-cog col col-md-1" aria-hidden="true"
+					btn-lg" data-toggle="modal" data-target="#myModal"></i>
+				<div id="simpleUrl" class="col col-md-5">Url:</div>
+				<div id="simpleProgress" class="col col-md-5">In Queue</div>
+				<i class="fa fa-times-circle-o col col-md-1" aria-hidden="true"></i>
+
+			</div>
+			<div class=panel-footer>
+
+				<table>
+					<tr>
+						<th>First Byte:</th>
+						<th>Full Load:</th>
+					</tr>
+
+					<tr>
+						<td id="simpleTTFB">Time</td>
+						<td id="simpleFullLoad">Time</td>
+
+					</tr>
+
+				</table>
+			</div>
+
+		</div>
+		<div class="panel panel-success col col-md-4" id="resultPanel">
+
+			<div class=panel-body>
+				<i class="fa fa-cog col col-md-1" aria-hidden="true"
+					btn-lg" data-toggle="modal" data-target="#myModal"></i>
+				<div id="simpleUrl" class="col col-md-5">Url:</div>
+				<div id="simpleProgress" class="col col-md-5">In Queue</div>
+				<i class="fa fa-times-circle-o col col-md-1" aria-hidden="true"></i>
+
+			</div>
+			<div class=panel-footer>
+
+				<table>
+					<tr>
+						<th>First Byte:</th>
+						<th>Full Load:</th>
+					</tr>
+
+					<tr>
+						<td id="simpleTTFB">Time</td>
+						<td id="simpleFullLoad">Time</td>
+
+					</tr>
+
+				</table>
+			</div>
+
 		</div>
 
+
+	<!-- Modal -->
+	<div class="modal fade" id="myModal" tabindex="-1" role="dialog"
+		aria-labelledby="myModalLabel">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					<h4 class="modal-title" id="myModalLabel">Web Page Tester</h4>
+				</div>
+				<div class="modal-body">
+					<div id="url"> URL: <input type="text" id="urlInput" placeholder="Enter URL Here"> </div>
+					<p>Interval:</p>
+					
+						<input type="radio" name="prefixHTTP" value="HTTP://" checked>15 Min 
+						<input type="radio" id="prefixHTTPS" value="HTTPS://">30 Min 
+						<input type="radio" id="prefixHTTPS" value="HTTPS://">60 Min 
+						<input type="radio" id="prefixHTTPS" value="HTTPS://">90 Min 
+
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+					<button type="button" id="addButton" class="btn btn-primary">ADD</button>
+				</div>
+			</div>
+		</div>
 	</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 	<!-- jQuery -->
 	<script
@@ -220,34 +525,10 @@
 		var jobList = new Map();
 
 		var simpleTTFB = $("#urlInput").val();
-		function updateStatusCode(){
-            $.ajax({
-                url : "http://localhost:8080/webdino/job/ttfb",
-                type : "GET",
-                data : {
-                    'url' : url,
-                    'name' : url,
-                    'mock' : "true"
-                },
-                success : function(result) {
-                    //Create javascript object appending functionality
-                    console.log("result: " + result);
-                    return result;
-                },
-                error : function() {
-                    console.log("Unable to add Job for: " + url);
-                }
-            });         
-        }
-		function addJob() {
-
-			var url = $("#urlInput").val();
-
-			console.log("Adding job for URL: " + url);
-
+		function updateStatusCode() {
 			$.ajax({
-				url : "http://localhost:8080/webdino/job/",
-				type : "POST",
+				url : "http://localhost:8080/webdino/job/ttfb",
+				type : "GET",
 				data : {
 					'url' : url,
 					'name' : url,
@@ -255,77 +536,123 @@
 				},
 				success : function(result) {
 					//Create javascript object appending functionality
-					var job = {
-						name : result.name,
-						ttfb : result.firstByte,
-						loadtime : result.loadTime,
-						statusNum : result.statusCode,
-						intervalRef : null,
-						startInterval : function() {
-							this.intervalRef = setInterval(function() {
-								console.log("running");
-								//console.log(job.runner);
-								console.log(job.statusNum);
-								//console.log("status: "+ job.runner);
-								$.ajax({
-                						url : "http://localhost:8080/webdino/job/ttfb",
-                						type : "GET",
-                						data : {
-                   							'url' : url,
-                    						'name' : url,
-                    						'mock' : "true"
-                						},
-                						success : function(result) {
-                    						//Create javascript object appending functionality
-                    						console.log("result: " + result);
-                    						console.log("statusNum: " + job.statusNum);
-                    						
-                    						if("200" == result){
-                    							console.log("complete");
-            									$("#simpleTTFB").text(job.ttfb);
-            									$("#simpleFullLoad").text(job.loadtime);
-            									//$("#simpleDate").text(job.ttfb);
-            									$("#simpleUrl").text(job.name);
-            									$("#simpleProgress").text("Completed");
-                    							job.stopInterval();
-                    						}
-                    						//return result;
-                						},
-               							error : function() {
-                    						console.log("Unable to add Job for: " + url);
-                						}
-            					});
-								
-								if ("101" == job.statusNum) {
-									$("#simpleProgress").text("In Queue");
-								} 
-								else if ("100" == job.statusNum) {
-									$("#simpleProgress").text("Testing");
-								} 
-								else{
-									console.log(job.statusNum);
-									console.log("Error");
-								}
-
-								console.log(job.name);
-								console.log("-----------------");
-							}, CONST_INTERVAL);
-						},
-						stopInterval : function() {
-							clearInterval(this.intervalRef);
-						}
-					}
-					
-					//Begin interval
-					job.startInterval();
-					console.log("stuu" + job.ttfb);
-					jobList.set(result.name, job);
-
+					console.log("result: " + result);
+					return result;
 				},
 				error : function() {
 					console.log("Unable to add Job for: " + url);
 				}
 			});
+		}
+		function addJob() {
+
+			var url = $("#urlInput").val();
+
+			console.log("Adding job for URL: " + url);
+
+			$
+					.ajax({
+						url : "http://localhost:8080/webdino/job/",
+						type : "POST",
+						data : {
+							'url' : url,
+							'name' : url,
+							'mock' : "true"
+						},
+						success : function(result) {
+							//Create javascript object appending functionality
+							var job = {
+								name : result.name,
+								ttfb : result.firstByte,
+								loadtime : result.loadTime,
+								statusNum : result.statusCode,
+								intervalRef : null,
+								startInterval : function() {
+									this.intervalRef = setInterval(
+											function() {
+												console.log("running");
+												//console.log(job.runner);
+												console.log(job.statusNum);
+												//console.log("status: "+ job.runner);
+												$
+														.ajax({
+															url : "http://localhost:8080/webdino/job/ttfb",
+															type : "GET",
+															data : {
+																'url' : url,
+																'name' : url,
+																'mock' : "true"
+															},
+															success : function(
+																	result) {
+																//Create javascript object appending functionality
+
+																console.log("result: " + result);
+																console.log("statusNum: "+ job.statusNum);
+
+																if ("200" == result) {
+																	$.ajax({
+																		url : "http://localhost:8080/webdino/job/output",
+																		type : "GET",
+																		data : {
+																		'url' : url,
+																		'name' : url,
+																		'mock' : "true"
+																		},
+																		success : function(result) {
+																		var answer = {
+																			name : result.name,
+																			ttfb : result.firstByte,
+																			loadtime : result.loadTime,
+																			statusNum : result.statusCode
+																		}
+																					console.log("complete "+ answer.ttfb+ "!");
+																					$("#simpleTTFB").text(answer.ttfb+ "ms");
+																					$("#simpleFullLoad").text(answer.loadtime+ "ms");
+																					//$("#simpleDate").text(job.ttfb);
+																					$("#simpleUrl").text(answer.name);
+																					$("#simpleProgress").text("Completed");
+																					job.stopInterval();
+																				},
+																				error : function() {
+																					console.log("Unable to get final informations for: " url);
+																				}
+																			});
+																}
+																if ("101" == result) {
+																	$("#simpleProgress").text("Testing");
+																} else if ("100" == result) {
+																	$("#simpleProgress").text("In Queue");
+																} else {
+																	console.log(job.statusNum);
+																	console.log("Error");
+																}
+																//return result;
+															},
+															error : function() {
+																console.log("Unable to add Job for: "+ url);
+															}
+														});
+
+												console.log(job.name);
+												console.log("-----------------");
+											}, CONST_INTERVAL);
+								},
+								stopInterval : function() {
+									clearInterval(this.intervalRef);
+								}
+							}
+
+							//Begin interval
+							job.startInterval();
+							console.log("stuu " + job.ttfb);
+							jobList.set(result.name, job);
+
+						},
+						error : function() {
+							console.log("Unable to add Job for: " + url);
+						}
+					});
 
 		}
 
@@ -341,6 +668,7 @@
 			});
 
 			$("#addButton").click(function() {
+				console.log("Add Button");
 				addJob();
 			});
 
