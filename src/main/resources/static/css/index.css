@@ -1,12 +1,3 @@
-#hourInterval{
-	width:30%;
-}
-#minuteInterval{
-	width:30%;
-}
-#secondInterval{
-	width:30%;
-}
 #UrlInput{
 	width:40%;
 }
@@ -15,6 +6,7 @@
 }
 #addButton{
 	font-size:30px;
+	background-color:green;
 }
 #tableHeading
 {
@@ -26,13 +18,13 @@
 }
 #resultPanel{
 	font-size:22px;
-	height: 388px;
+	height: 430px;
 }
 #largeResultPanel{
 	font-size:22px;
 }
 .panel-body{
-	background:#9be995;
+	background:#f7b220;
 
 }
 #simpleProgress{
@@ -46,7 +38,10 @@ table{
 	width:100%;
 	text-align: left;
 }
-
+.fa:hover{
+	cursor:pointer;
+	color:gray;
+}
 .date{
 	width: 80%;
 }

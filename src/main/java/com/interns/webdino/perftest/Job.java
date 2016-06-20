@@ -1,6 +1,8 @@
 package com.interns.webdino.perftest;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import org.json.simple.JSONArray;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -33,6 +35,14 @@ public class Job {
     private HttpClientManager clientManager;
     private JobStatus status;
     private boolean mock;
+    
+    public int firstAverage=0, fullAverage=0;
+   public ArrayList<Integer> firstByteAverage = new ArrayList<Integer>();
+    public ArrayList<Integer> fullLoadAverage = new ArrayList<Integer>();
+    
+    JSONArray firstByteAverageJson = new JSONArray();
+    JSONArray fullLoadAverageJson = new JSONArray();
+
 
     public String run() {
 
@@ -154,6 +164,14 @@ public class Job {
             	for(Element ttfb : ttfbs) { firstByte = ttfb.text(); break; }
             	System.out.println("Inner loadTime: " + loadTime);
             	System.out.println("Inner loadByte: " + firstByte);
+            	firstByteAverage.add(Integer.parseInt(firstByte));
+            	fullLoadAverage.add(Integer.parseInt(loadTime));
+            	firstByteAverageJson.add(new Integer(Integer.parseInt(firstByte)));
+            	fullLoadAverageJson.add(new Integer(Integer.parseInt(loadTime)));
+
+            	System.out.println("Lol");
+            	average();
+            	
             	return "200";
             }
             else if("100".compareTo(statusCode) == 0) {
@@ -179,6 +197,23 @@ public class Job {
     	
     	
     	return "beep";
+    }
+    
+    public void average()
+    {	
+    	firstAverage=0; fullAverage=0;
+    	for(int add:firstByteAverage)
+    	{
+    		firstAverage+=add;
+    	}
+    	firstAverage = firstAverage/firstByteAverage.size();
+    	
+    	for(int add:fullLoadAverage)
+    	{
+    		fullAverage+=add;
+    	}
+    	fullAverage = fullAverage/fullLoadAverage.size();
+    	System.out.println("Averages: " + firstAverage + " " + fullAverage);
     }
     
     public String getfirstByte() {
