@@ -90,14 +90,17 @@ public class JobService {
             @RequestParam(value = "url", required = true) String url,
             @RequestParam(value = "mock", required = false, defaultValue = "false") boolean mock) {
     	System.out.println(name + " " + url + " " + mock);
-        Job job = new Job(name, url, clientManager, mock);
-
-        jobMaster.addJob(job); System.out.print("added " + job.getName());
-        jobMaster.runJob(job.getName());
+    	if(jobMaster.getJob(name)==null)
+    	{
+    		 Job job = new Job(name, url, clientManager, mock);
+    	     jobMaster.addJob(job); 
+    	     System.out.print("added " + job.getName());
+    	}
+        jobMaster.runJob(jobMaster.getJob(name).getName());
         
-        jobMaster.getxmlInfo(job.getName());
+        jobMaster.getxmlInfo(jobMaster.getJob(name).getName());
         
-        return new ResponseEntity<>(job, HttpStatus.OK);
+        return new ResponseEntity<>(jobMaster.getJob(name), HttpStatus.OK);
 
     }
 
