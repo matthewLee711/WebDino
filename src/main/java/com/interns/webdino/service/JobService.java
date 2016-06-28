@@ -57,7 +57,7 @@ public class JobService {
         }
         System.out.println("job");
         if(job != null){
-        	result = job.getParsedXml();
+        	result = job.getParsedXml(false);/////////////////////////////////////////
         }
 
         return new ResponseEntity<>(result, HttpStatus.OK);
@@ -77,8 +77,8 @@ public class JobService {
         }
         System.out.println("job printing");
         if(job != null){
-        	result = job.getParsedXml();
-        	System.out.println("Got Parsed");
+        	result = job.getParsedXml(true);/////////////////////////////////////////////////////
+        	System.out.println("Got Parsed Result: " + result);
         }
 
         return new ResponseEntity<>(job, HttpStatus.OK);
@@ -98,7 +98,7 @@ public class JobService {
     	}
         jobMaster.runJob(jobMaster.getJob(name).getName());
         
-        jobMaster.getxmlInfo(jobMaster.getJob(name).getName());
+        jobMaster.getxmlInfo(jobMaster.getJob(name).getName());////////////////////////////////////////////////
         
         return new ResponseEntity<>(jobMaster.getJob(name), HttpStatus.OK);
 

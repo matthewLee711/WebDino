@@ -222,21 +222,27 @@
 			</div>
 
 		</div> -->
-
+	<div class="row">
 		<div class="panel panel-success col col-md-4" id="resultPanel">
 
 			<div class=panel-body>
-				<i class="fa fa-cog col col-md-1" aria-hidden="true"
-					btn-lg" data-toggle="modal" data-target="#myModal1"></i>
+			<div class="row">
+				<div class="col col-md-1">
+					<i class="fa fa-cog" aria-hidden="true"
+					 	btn-lg" data-toggle="modal" data-target="#myModal1"></i>
+				</div>
 					<div class="col col-md-6">
-					<font color="#000000 "><marquee direction="left" loop="40" width="100%">
-						<div id="simpleUrl1" ></div>
-					</marquee></font>
+						<font color="#000000 "> 
+							<div id="simpleUrl1" title=""></div>
+						</font>
 					</div>
-				
-				<div id="simpleProgress1" class="col col-md-4">Not Testing</div>
-				<i class="fa fa-times-circle-o col col-md-1" aria-hidden="true"></i>
-
+				<div class="col col-md-4">
+					<div id="simpleProgress1" >Not Testing</div>
+				</div>
+				<div class="col col-md-1">
+					<i class="fa fa-times-circle-o" aria-hidden="true"></i>
+				</div>
+			</div>
 			</div>
 			<div class=panel-footer>  <!-- style="display: none; -->
 
@@ -251,10 +257,10 @@
 						<td id="simpleFullLoad1"></td>
 					</tr>
 				</table>
-			<!-- 	<div style="width:400px;height:100px;">
+				<div>
 				<canvas id="chart" height="450" width="600"></canvas>
 				
-				</div> -->
+				</div>
 			</div>
 		
 		</div>
@@ -318,6 +324,8 @@
 			</div>
 
 		</div>
+		</div>
+		<div class="row">
 		<div class="panel panel-success col col-md-4" id="resultPanel">
 
 			<div class=panel-body>
@@ -408,7 +416,7 @@
 			</div>
 
 		</div>
-		
+		</div>
 		
 		
 		
@@ -665,7 +673,7 @@
 
 
 
-<!-- 	<script>
+ 	<script>
 	var data = {
 		    labels: ["January", "February", "March", "April", "May", "June", "July"],
 		    datasets: [{
@@ -699,7 +707,7 @@
 	    }
 	}); 		
 	</script>
- -->
+
 
 
 	<!-- jQuery -->
@@ -752,7 +760,8 @@
 
 			var url = $("#urlInput1").val();
 			console.log("Adding job for URL: " + url);
-			$("#simpleUrl1").text(url);
+			$("#simpleUrl1").text("THD/" + url.substring(27,48));
+			document.getElementById("simpleUrl1").setAttribute("title",url);
 			$("#simpleProgress1").text("Starting Test!");
 			//for(var x=0; x<3; x++){
 			$.ajax({
@@ -787,8 +796,7 @@
 																'name' : url,
 																'mock' : "true"
 															},
-															success : function(
-																	result) {
+															success : function(result) {
 																//Create javascript object appending functionality
 
 																console.log("result: " + result);
@@ -804,37 +812,41 @@
 																		'mock' : "true"
 																		},
 																		success : function(result) {
-																		var answer = {
-																			name : result.name,
-																			ttfb : result.firstByte,
-																			loadtime : result.loadTime,
-																			ttfbAverage : result.firstAverage,
-																			fullAverage : result.fullAverage,
-																			statusNum : result.statusCode,
-																			firstByteArr : result.firstByteAverageJson,
-																			fullLoadArr : result.fullLoadAverageJson
-																		}
-																					console.log("complete "+ answer.ttfb+ "!");
-																					$("#simpleTTFB1").text("First Byte: "+ answer.ttfb+ "ms");
-																					$("#simpleFullLoad1").text("Full Load: " + answer.loadtime+ "ms");
-																					$("#simpleTTFB1Avg").text("Average First Byte: "+ answer.ttfbAverage+ "ms");
-																					$("#simpleFullLoad1Avg").text("Average Full Load: " + answer.fullAverage+ "ms");
-																					//$("#simpleDate").text(job.ttfb);
-																					$("#simpleUrl1").text(answer.name);
-																					$("#simpleProgress1").text("Completed");
-																					if(numberOfRuns<20)
-																					{
-																						console.log("=====================================================================Beginning loop again: " + numberOfRuns);
-																						job.continueInterval();		
-																					}
-																					else
-																						job.stopInterval();
+																			
+																			var answer = {
+																				name : result.name,
+																				ttfb : result.firstByte,
+																				loadtime : result.loadTime,
+																				ttfbAverage : result.firstAverage,
+																				fullAverage : result.fullAverage,
+																				statusNum : result.statusCode,
+																				firstByteArr : result.firstByteAverageJson,
+																				fullLoadArr : result.fullLoadAverageJson
+																			};
+																			
+																			console.log("complete "+ answer.ttfb+ "!");
+																			
+																			$("#simpleTTFB1").text("First Byte: "+ answer.ttfb+ "ms");
+																			$("#simpleFullLoad1").text("Full Load: " + answer.loadtime+ "ms");
+																			$("#simpleTTFB1Avg").text("Average First Byte: "+ answer.ttfbAverage+ "ms");
+																			$("#simpleFullLoad1Avg").text("Average Full Load: " + answer.fullAverage+ "ms");
+																			//$("#simpleDate").text(job.ttfb);
+																			$("#simpleUrl1").text(answer.name);
+																			$("#simpleProgress1").text("Completed");
+																			console.log("Array: " + result.firstByteArr);
+																			
+																			if(numberOfRuns<3){
+																				console.log("=====================================================================Beginning loop again: " + numberOfRuns);
+																				job.continueInterval();		
+																			} else {
+																				job.stopInterval();
+																			}
 																					
-																				},
-																				error : function() {
-																					console.log("Unable to get final informations for: " + url);
-																				}
-																			});
+																		},
+																		error : function() {
+																			console.log("Unable to get final informations for: " + url);
+																		}
+																	});
 																}
 																if ("101" == result) {
 																	$("#simpleProgress1").text("Testing");
@@ -868,6 +880,24 @@
 									if(document.getElementById("time15.1").checked)
 									{
 										console.log("15 checked");	
+										console.log("Waiting");
+										setTimeout(addJob1, 60000);
+									}
+									else if(document.getElementById("time30.1").checked)
+									{
+										console.log("30 checked");	
+										console.log("Waiting");
+										setTimeout(addJob1, 60000);
+									}
+									else if(document.getElementById("time60.1").checked)
+									{
+										console.log("60 checked");	
+										console.log("Waiting");
+										setTimeout(addJob1, 60000);
+									}
+									else if(document.getElementById("time90.1").checked)
+									{
+										console.log("90 checked");	
 										console.log("Waiting");
 										setTimeout(addJob1, 60000);
 									}

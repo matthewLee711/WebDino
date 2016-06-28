@@ -37,11 +37,11 @@ public class Job {
     private boolean mock;
     
     public int firstAverage=0, fullAverage=0;
-   public ArrayList<Integer> firstByteAverage = new ArrayList<Integer>();
+    public ArrayList<Integer> firstByteAverage = new ArrayList<Integer>();
     public ArrayList<Integer> fullLoadAverage = new ArrayList<Integer>();
     
-    JSONArray firstByteAverageJson = new JSONArray();
-    JSONArray fullLoadAverageJson = new JSONArray();
+    public JSONArray firstByteAverageJson = new JSONArray();
+    public JSONArray fullLoadAverageJson = new JSONArray();
 
 
     public String run() {
@@ -138,7 +138,7 @@ public class Job {
     }
     
     //EXtract TTFB and loadTime
-    public String getParsedXml() {
+    public String getParsedXml(boolean average) {
     	Document doc;
         try {
         	//parsedXml
@@ -151,10 +151,12 @@ public class Job {
             
             //Retrieve status code
             statusCode = doc.getElementsByTag("statuscode").text();
-            System.out.println("pppppp: " + statusCode);
+            System.out.println("Inside getParsed: " + statusCode);
             
             //Conditional for status codes and extracting text
-            if("200".compareTo(statusCode) == 0) {
+            
+
+            if("200".compareTo(statusCode) == 0 && average) {
             	Elements ttfbs = doc.getElementsByTag("ttfb");
             	Elements loadtimes = doc.getElementsByTag("loadtime");
             	//System.out.println(ttfbs + "and" + loadtimes);
@@ -169,7 +171,7 @@ public class Job {
             	firstByteAverageJson.add(new Integer(Integer.parseInt(firstByte)));
             	fullLoadAverageJson.add(new Integer(Integer.parseInt(loadTime)));
 
-            	System.out.println("Lol");
+            	System.out.println("Lol: " + firstByteAverageJson);
             	average();
             	
             	return "200";
@@ -183,6 +185,10 @@ public class Job {
             	//testing
             	System.out.println("Testing");
             	return "101";
+            }
+            else if("200".compareTo(statusCode) == 0 )
+            {
+            	return "200";
             }
             else {
             	System.out.println("Failure");
