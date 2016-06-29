@@ -257,9 +257,8 @@
 						<td id="simpleFullLoad1"></td>
 					</tr>
 				</table>
-				<div>
-				<canvas id="chart" height="450" width="600"></canvas>
-				
+				<div id="dataChart">
+					<canvas id="chart"></canvas>
 				</div>
 			</div>
 		
@@ -442,6 +441,8 @@
 				</div>
 				<div class="modal-body">
 					<div id="url"> URL: <input type="text" id="urlInput1" placeholder="Enter URL Here"> </div>
+					<div id="url"> Name: <input type="text" id="nameInput1" placeholder="Enter Name Here"> </div>
+					
 					<p>Interval:</p>
 						<input type="radio" id="time15.1" name="prefixHTTPS" value= "15" checked>15 Min 
 						<input type="radio" id="time30.1" name="prefixHTTPS" value= "30">30 Min 
@@ -674,7 +675,7 @@
 
 
  	<script>
-	var data = {
+	/* var data = {
 		    labels: ["January", "February", "March", "April", "May", "June", "July"],
 		    datasets: [{
 		        label: "My First dataset",
@@ -705,7 +706,7 @@
 	            }]
 	        }
 	    }
-	}); 		
+	}); 	 */	
 	</script>
 
 
@@ -759,8 +760,10 @@
 		function addJob1() {
 
 			var url = $("#urlInput1").val();
+			var name = $("#nameInput1").val();
 			console.log("Adding job for URL: " + url);
-			$("#simpleUrl1").text("THD/" + url.substring(27,48));
+			//$("#simpleUrl1").text("THD/" + url.substring(27,48));
+			$("#simpleUrl1").text(name);
 			document.getElementById("simpleUrl1").setAttribute("title",url);
 			$("#simpleProgress1").text("Starting Test!");
 			//for(var x=0; x<3; x++){
@@ -769,7 +772,7 @@
 						type : "POST",
 						data : {
 							'url' : url,
-							'name' : url,
+							'name' : name,
 							'mock' : "true"
 						},
 						success : function(result) {
@@ -793,7 +796,7 @@
 															type : "GET",
 															data : {
 																'url' : url,
-																'name' : url,
+																'name' : name,
 																'mock' : "true"
 															},
 															success : function(result) {
@@ -808,7 +811,7 @@
 																		type : "GET",
 																		data : {
 																		'url' : url,
-																		'name' : url,
+																		'name' : name,
 																		'mock' : "true"
 																		},
 																		success : function(result) {
@@ -824,18 +827,51 @@
 																				fullLoadArr : result.fullLoadAverageJson
 																			};
 																			
-																			console.log("complete "+ answer.ttfb+ "!");
+																			var data = {
+																				    labels: ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"],
+																				    datasets: [{
+																				        label: "My First dataset",
+																				        fillColor: "rgba(220,220,220,0.5)",
+																				        strokeColor: "rgba(220,220,220,0.8)",
+																				        highlightFill: "rgba(220,220,220,0.75)",
+																				        highlightStroke: "rgba(220,220,220,1)",
+																				        data: answer.firstByteArr
+																				    }, {
+																				        label: "My Second dataset",
+																				        fillColor: "rgba(151,187,205,0.5)",
+																				        strokeColor: "rgba(151,187,205,0.8)",
+																				        highlightFill: "rgba(151,187,205,0.75)",
+																				        highlightStroke: "rgba(151,187,205,1)",
+																				        data: answer.fullLoadArr
+																				    }]
+																				};
+																			var ctx = document.getElementById("chart");
+																			var myChart = new Chart(ctx, {
+																			    type: 'line',
+																			    data:data,
+																			    options: {
+																			        scales: {
+																			            yAxes: [{
+																			                ticks: {
+																			                    beginAtZero:true
+																			                }
+																			            }]
+																			        }
+																			    }
+																			}); 	
 																			
-																			$("#simpleTTFB1").text("First Byte: "+ answer.ttfb+ "ms");
+																			console.log("complete "+ answer.ttfb + "!");
+																			
+																			$("#simpleTTFB1").text("First Byte: " + answer.ttfb+ "ms");
 																			$("#simpleFullLoad1").text("Full Load: " + answer.loadtime+ "ms");
-																			$("#simpleTTFB1Avg").text("Average First Byte: "+ answer.ttfbAverage+ "ms");
+																			$("#simpleTTFB1Avg").text("Average First Byte: " + answer.ttfbAverage+ "ms");
 																			$("#simpleFullLoad1Avg").text("Average Full Load: " + answer.fullAverage+ "ms");
 																			//$("#simpleDate").text(job.ttfb);
 																			$("#simpleUrl1").text(answer.name);
 																			$("#simpleProgress1").text("Completed");
-																			console.log("Array: " + result.firstByteArr);
+																			console.log("Array: " + answer.firstByteArr);
 																			
-																			if(numberOfRuns<3){
+																			if(numberOfRuns<20){
 																				console.log("=====================================================================Beginning loop again: " + numberOfRuns);
 																				job.continueInterval();		
 																			} else {
