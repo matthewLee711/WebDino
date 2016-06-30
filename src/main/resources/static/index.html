@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html>
 <head>
-
 <link rel="stylesheet" type="text/css" href="./css/index.css">
 <!-- Latest compiled and minified CSS -->
 <link rel="stylesheet"
@@ -37,7 +36,7 @@
 }
 
 #panel {
-	padding: 50px;
+	/* padding: 50px; */
 	displey: none;
 }
 </style>
@@ -46,9 +45,8 @@
 </head>
 
 <body role="document">
-
 	<!-- Fixed navbar -->
-	<nav class="navbar navbar-inverse navbar-fixed-top">
+	<!-- <nav class="navbar navbar-inverse navbar-fixed-top">
 		<div class="container">
 			<div class="navbar-header">
 				<button type="button" class="navbar-toggle collapsed"
@@ -66,14 +64,13 @@
 					<li><a href="#about">About</a></li>
 				</ul>
 			</div>
-			<!--/.nav-collapse -->
+			/.nav-collapse
 		</div>
 	</nav>
 
-	<div class="fullContainer" role="main">
+ -->	<div class="fullContainer" role="main">
 		<h1 id="welcome">
-			<img src="CuteDino.png" style="width: 133px;">Welcome to
-			WebDino!
+			<img src="dino.png" style="width: 133px;">WebDino
 			<!-- <button type="button" id="addButtonTop" class="btn btn-primary">ADD</button> -->
 		</h1>
 		<!-- 		<div class="jumbotron">
@@ -226,23 +223,23 @@
 		<div class="panel panel-success col col-md-4" id="resultPanel">
 
 			<div class=panel-body>
-			<div class="row">
-				<div class="col col-md-1">
-					<i class="fa fa-cog" aria-hidden="true"
-					 	btn-lg" data-toggle="modal" data-target="#myModal1"></i>
-				</div>
-					<div class="col col-md-6">
-						<font color="#000000 "> 
-							<div id="simpleUrl1" title=""></div>
-						</font>
+				<div class="row">
+					<div class="col col-md-1">
+						<i class="fa fa-cog" aria-hidden="true"
+						 	btn-lg" data-toggle="modal" data-target="#myModal1"></i>
 					</div>
-				<div class="col col-md-4">
-					<div id="simpleProgress1" >Not Testing</div>
+						<div class="col col-md-6">
+							<font color="#000000 "> 
+								<div id="simpleUrl1" title=""></div>
+							</font>
+						</div>
+					<div class="col col-md-4">
+						<div id="simpleProgress1" >Not Testing</div>
+					</div>
+					<div class="col col-md-1">
+						<i class="fa fa-times-circle-o" aria-hidden="true"></i>
+					</div>
 				</div>
-				<div class="col col-md-1">
-					<i class="fa fa-times-circle-o" aria-hidden="true"></i>
-				</div>
-			</div>
 			</div>
 			<div class=panel-footer>  <!-- style="display: none; -->
 
@@ -252,10 +249,10 @@
 						<td id="simpleFullLoad1Avg"></td>
 						
 					</tr>
-					<tr>
-						<td id="simpleTTFB1"></td>
-						<td id="simpleFullLoad1"></td>
-					</tr>
+						<tr>
+							<td id="simpleTTFB1"></td>
+							<td id="simpleFullLoad1"></td>
+						</tr>
 				</table>
 				<div id="dataChart">
 					<canvas id="chart"></canvas>
@@ -828,16 +825,16 @@
 																			};
 																			
 																			var data = {
-																				    labels: ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"],
+																				    labels: ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10" ,"11", "12", "13", "14", "15"],
 																				    datasets: [{
-																				        label: "My First dataset",
+																				        label: "Time To First Byte",
 																				        fillColor: "rgba(220,220,220,0.5)",
 																				        strokeColor: "rgba(220,220,220,0.8)",
 																				        highlightFill: "rgba(220,220,220,0.75)",
 																				        highlightStroke: "rgba(220,220,220,1)",
 																				        data: answer.firstByteArr
 																				    }, {
-																				        label: "My Second dataset",
+																				        label: "Time To Full Load",
 																				        fillColor: "rgba(151,187,205,0.5)",
 																				        strokeColor: "rgba(151,187,205,0.8)",
 																				        highlightFill: "rgba(151,187,205,0.75)",

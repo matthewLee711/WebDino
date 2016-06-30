@@ -170,11 +170,6 @@ public class Job {
             	
             	firstByteAverage.add(Integer.parseInt(firstByte));
             	fullLoadAverage.add(Integer.parseInt(loadTime));
-            	if(firstByteAverageJson.size()>10||fullLoadAverageJson.size()>10)
-            	{
-            		firstByteAverageJson.remove(0);
-            		fullLoadAverageJson.remove(0);
-            	}
             	if(new Integer(Integer.parseInt(loadTime))<25000)
             	{
             		firstByteAverageJson.add(new Integer(Integer.parseInt(firstByte)));
@@ -184,6 +179,12 @@ public class Job {
             	{
             		firstByteAverageJson.add(0);
             		fullLoadAverageJson.add(0);
+            	}
+            	if(firstByteAverageJson.size()>15||fullLoadAverageJson.size()>15)
+            	{
+            		firstByteAverageJson.remove(0);
+            		fullLoadAverageJson.remove(0);
+            		System.out.println("Removed Ellement");
             	}
             		
             	System.out.println("Lol: " + firstByteAverageJson);
