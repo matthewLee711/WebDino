@@ -1,5 +1,7 @@
 package com.interns.webdino.service;
 
+import java.io.IOException;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.slf4j.Logger;
@@ -88,7 +90,8 @@ public class JobService {
     public ResponseEntity<Job> startJob(HttpServletRequest req,
             @RequestParam(value = "name", required = true) String name,
             @RequestParam(value = "url", required = true) String url,
-            @RequestParam(value = "mock", required = false, defaultValue = "false") boolean mock) {
+            @RequestParam(value = "mock", required = false, defaultValue = "false") boolean mock) throws ClassNotFoundException, IOException {
+///////    	//jobMaster.load();
     	System.out.println(name + " " + url + " " + mock);
     	if(jobMaster.getJob(name)==null)
     	{

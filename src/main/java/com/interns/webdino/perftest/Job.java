@@ -76,10 +76,11 @@ public class Job {
     public Job(String name, String url, HttpClientManager clientManager, boolean mock) {
 
         this.name = name;
-
+        //A.77d136a242db623122d15fab6a8bc2a7
+        //A.9be00fc39e0fe97ae0165d9b0ad614cc
         this.url = "http://www.webpagetest.org/runtest.php?url="
         + url
-        + "&runs=1&f=xml&k=A.77d136a242db623122d15fab6a8bc2a7";
+        + "&runs=1&f=xml&k=A.9be00fc39e0fe97ae0165d9b0ad614cc";
 
         this.clientManager = clientManager;
         this.mock = mock;
@@ -166,11 +167,26 @@ public class Job {
             	for(Element ttfb : ttfbs) { firstByte = ttfb.text(); break; }
             	System.out.println("Inner loadTime: " + loadTime);
             	System.out.println("Inner loadByte: " + firstByte);
+            	
             	firstByteAverage.add(Integer.parseInt(firstByte));
             	fullLoadAverage.add(Integer.parseInt(loadTime));
-            	firstByteAverageJson.add(new Integer(Integer.parseInt(firstByte)));
-            	fullLoadAverageJson.add(new Integer(Integer.parseInt(loadTime)));
-
+            	if(new Integer(Integer.parseInt(loadTime))<25000)
+            	{
+            		firstByteAverageJson.add(new Integer(Integer.parseInt(firstByte)));
+            		fullLoadAverageJson.add(new Integer(Integer.parseInt(loadTime)));
+            	}
+            	else
+            	{
+            		firstByteAverageJson.add(0);
+            		fullLoadAverageJson.add(0);
+            	}
+            	if(firstByteAverageJson.size()>15||fullLoadAverageJson.size()>15)
+            	{
+            		firstByteAverageJson.remove(0);
+            		fullLoadAverageJson.remove(0);
+            		System.out.println("Removed Ellement");
+            	}
+            		
             	System.out.println("Lol: " + firstByteAverageJson);
             	average();
             	
@@ -216,7 +232,10 @@ public class Job {
     	
     	for(int add:fullLoadAverage)
     	{
-    		fullAverage+=add;
+    		if(add<25000)
+    		{
+    			fullAverage+=add;
+    		}
     	}
     	fullAverage = fullAverage/fullLoadAverage.size();
     	System.out.println("Averages: " + firstAverage + " " + fullAverage);
