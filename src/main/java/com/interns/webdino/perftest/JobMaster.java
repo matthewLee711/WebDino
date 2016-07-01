@@ -60,7 +60,7 @@ public class JobMaster {
     public String getxmlInfo(String name){
     	
     	Job job = jobs.get(name);
-    	return job.getParsedXml();
+    	return job.getParsedXml(false);/////////////////////////////////////////////////
     }
     
     //if test complete, get information

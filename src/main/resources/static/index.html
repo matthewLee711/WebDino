@@ -222,16 +222,27 @@
 			</div>
 
 		</div> -->
-		<!-- PANNEL 1 -->
+	<div class="row">
 		<div class="panel panel-success col col-md-4" id="resultPanel">
 
 			<div class=panel-body>
-				<i class="fa fa-cog col col-md-1" aria-hidden="true"
-					btn-lg" data-toggle="modal" data-target="#myModal1"></i>
-				<div id="simpleUrl1" class="col col-md-6">Url:</div>
-				<div id="simpleProgress1" class="col col-md-4">Not Testing</div>
-				<i class="fa fa-times-circle-o col col-md-1" aria-hidden="true"></i>
-
+			<div class="row">
+				<div class="col col-md-1">
+					<i class="fa fa-cog" aria-hidden="true"
+					 	btn-lg" data-toggle="modal" data-target="#myModal1"></i>
+				</div>
+					<div class="col col-md-6">
+						<font color="#000000 "> 
+							<div id="simpleUrl1" title=""></div>
+						</font>
+					</div>
+				<div class="col col-md-4">
+					<div id="simpleProgress1" >Not Testing</div>
+				</div>
+				<div class="col col-md-1">
+					<i class="fa fa-times-circle-o" aria-hidden="true"></i>
+				</div>
+			</div>
 			</div>
 			<div class=panel-footer>  <!-- style="display: none; -->
 
@@ -246,10 +257,10 @@
 						<td id="simpleFullLoad1"></td>
 					</tr>
 				</table>
-			<!-- 	<div style="width:400px;height:100px;">
+				<div>
 				<canvas id="chart" height="450" width="600"></canvas>
 				
-				</div> -->
+				</div>
 			</div>
 		
 		</div>
@@ -259,7 +270,11 @@
 			<div class=panel-body>
 				<i class="fa fa-cog col col-md-1" aria-hidden="true"
 					btn-lg" data-toggle="modal" data-target="#myModal2"></i>
-				<div id="simpleUrl2" class="col col-md-6">Url:</div>
+				<div class="col col-md-6">
+					<font color="#000000 "><marquee direction="left" loop="40" width="100%">
+						<div id="simpleUrl2" ></div>
+					</marquee></font>
+					</div>
 				<div id="simpleProgress2" class="col col-md-4">Not Testing</div>
 				<i class="fa fa-times-circle-o col col-md-1" aria-hidden="true"></i>
 
@@ -286,7 +301,11 @@
 			<div class=panel-body>
 				<i class="fa fa-cog col col-md-1" aria-hidden="true"
 					btn-lg" data-toggle="modal" data-target="#myModal3"></i>
-				<div id="simpleUrl3" class="col col-md-6">Url:</div>
+				<div class="col col-md-6">
+					<font color="#000000 "><marquee direction="left" loop="40" width="100%">
+						<div id="simpleUrl3" ></div>
+					</marquee></font>
+					</div>
 				<div id="simpleProgress3" class="col col-md-4">Not Testing</div>
 				<i class="fa fa-times-circle-o col col-md-1" aria-hidden="true"></i>
 
@@ -307,13 +326,18 @@
 			</div>
 
 		</div>
-		<!-- PANNEL 4 -->
+		</div>
+		<div class="row">
 		<div class="panel panel-success col col-md-4" id="resultPanel">
 
 			<div class=panel-body>
 				<i class="fa fa-cog col col-md-1" aria-hidden="true"
 					btn-lg" data-toggle="modal" data-target="#myModal4"></i>
-				<div id="simpleUrl4" class="col col-md-6">Url:</div>
+				<div class="col col-md-6">
+					<font color="#000000 "><marquee direction="left" loop="40" width="100%">
+						<div id="simpleUrl4" ></div>
+					</marquee></font>
+					</div>
 				<div id="simpleProgress4" class="col col-md-4">Not Testing</div>
 				<i class="fa fa-times-circle-o col col-md-1" aria-hidden="true"></i>
 
@@ -340,7 +364,11 @@
 			<div class=panel-body>
 				<i class="fa fa-cog col col-md-1" aria-hidden="true"
 					btn-lg" data-toggle="modal" data-target="#myModal5"></i>
-				<div id="simpleUrl5" class="col col-md-6">Url:</div>
+				<div class="col col-md-6">
+					<font color="#000000 "><marquee direction="left" loop="40" width="100%">
+						<div id="simpleUrl5" ></div>
+					</marquee></font>
+					</div>
 				<div id="simpleProgress5" class="col col-md-4">Not Testing</div>
 				<i class="fa fa-times-circle-o col col-md-1" aria-hidden="true"></i>
 
@@ -367,7 +395,11 @@
 			<div class=panel-body>
 				<i class="fa fa-cog col col-md-1" aria-hidden="true"
 					btn-lg" data-toggle="modal" data-target="#myModal6"></i>
-				<div id="simpleUrl6" class="col col-md-6">Url:</div>
+				<div class="col col-md-6">
+					<font color="#000000 "><marquee direction="left" loop="40" width="100%">
+						<div id="simpleUrl6" ></div>
+					</marquee></font>
+					</div>
 				<div id="simpleProgress6" class="col col-md-4">Not Testing</div>
 				<i class="fa fa-times-circle-o col col-md-1" aria-hidden="true"></i>
 
@@ -388,7 +420,7 @@
 			</div>
 
 		</div>
-		
+		</div>
 		
 		
 		
@@ -415,10 +447,10 @@
 				<div class="modal-body">
 					<div id="url"> URL: <input type="text" id="urlInput1" placeholder="Enter URL Here"> </div>
 					<p>Interval:</p>
-						<input type="radio" name="prefixHTTPS" value= "15" checked>15 Min 
-						<input type="radio" name="prefixHTTPS" value= "30">30 Min 
-						<input type="radio" name="prefixHTTPS" value= "60">60 Min 
-						<input type="radio" name="prefixHTTPS" value= "90">90 Min 
+						<input type="radio" id="time15.1" name="prefixHTTPS" value= "15" checked>15 Min 
+						<input type="radio" id="time30.1" name="prefixHTTPS" value= "30">30 Min 
+						<input type="radio" id="time60.1" name="prefixHTTPS" value= "60">60 Min 
+						<input type="radio" id="time90.1" name="prefixHTTPS" value= "90">90 Min 
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -645,7 +677,7 @@
 
 
 
-<!-- 	<script>
+ 	<script>
 	var data = {
 		    labels: ["January", "February", "March", "April", "May", "June", "July"],
 		    datasets: [{
@@ -679,7 +711,7 @@
 	    }
 	}); 		
 	</script>
- -->
+
 
 
 	<!-- jQuery -->
@@ -726,12 +758,14 @@
 				}
 			});
 		}
+		var numberOfRuns = 0;
+
 		function addJob1() {
 
 			var url = $("#urlInput1").val();
-			
 			console.log("Adding job for URL: " + url);
-			$("#simpleUrl1").text(url);
+			$("#simpleUrl1").text("THD/" + url.substring(27,48));
+			document.getElementById("simpleUrl1").setAttribute("title",url);
 			$("#simpleProgress1").text("Starting Test!");
 			//for(var x=0; x<3; x++){
 			$.ajax({
@@ -766,8 +800,7 @@
 																'name' : url,
 																'mock' : "true"
 															},
-															success : function(
-																	result) {
+															success : function(result) {
 																//Create javascript object appending functionality
 
 																console.log("result: " + result);
@@ -783,30 +816,41 @@
 																		'mock' : "true"
 																		},
 																		success : function(result) {
-																		var answer = {
-																			name : result.name,
-																			ttfb : result.firstByte,
-																			loadtime : result.loadTime,
-																			ttfbAverage : result.firstAverage,
-																			fullAverage : result.fullAverage,
-																			statusNum : result.statusCode,
-																			firstByteArr : result.firstByteAverageJson,
-																			fullLoadArr : result.fullLoadAverageJson
+																			
+																			var answer = {
+																				name : result.name,
+																				ttfb : result.firstByte,
+																				loadtime : result.loadTime,
+																				ttfbAverage : result.firstAverage,
+																				fullAverage : result.fullAverage,
+																				statusNum : result.statusCode,
+																				firstByteArr : result.firstByteAverageJson,
+																				fullLoadArr : result.fullLoadAverageJson
+																			};
+																			
+																			console.log("complete "+ answer.ttfb+ "!");
+																			
+																			$("#simpleTTFB1").text("First Byte: "+ answer.ttfb+ "ms");
+																			$("#simpleFullLoad1").text("Full Load: " + answer.loadtime+ "ms");
+																			$("#simpleTTFB1Avg").text("Average First Byte: "+ answer.ttfbAverage+ "ms");
+																			$("#simpleFullLoad1Avg").text("Average Full Load: " + answer.fullAverage+ "ms");
+																			//$("#simpleDate").text(job.ttfb);
+																			$("#simpleUrl1").text(answer.name);
+																			$("#simpleProgress1").text("Completed");
+																			console.log("Array: " + result.firstByteArr);
+																			
+																			if(numberOfRuns<3){
+																				console.log("=====================================================================Beginning loop again: " + numberOfRuns);
+																				job.continueInterval();		
+																			} else {
+																				job.stopInterval();
+																			}
+																					
+																		},
+																		error : function() {
+																			console.log("Unable to get final informations for: " + url);
 																		}
-																					console.log("complete "+ answer.ttfb+ "!");
-																					$("#simpleTTFB1").text("First Byte: "+ answer.ttfb+ "ms");
-																					$("#simpleFullLoad1").text("Full Load: " + answer.loadtime+ "ms");
-																					$("#simpleTTFB1Avg").text("Average First Byte: "+ answer.ttfbAverage+ "ms");
-																					$("#simpleFullLoad1Avg").text("Average Full Load: " + answer.fullAverage+ "ms");
-																					//$("#simpleDate").text(job.ttfb);
-																					$("#simpleUrl1").text(answer.name);
-																					$("#simpleProgress1").text("Completed");
-																					job.stopInterval();
-																				},
-																				error : function() {
-																					console.log("Unable to get final informations for: " + url);
-																				}
-																			});
+																	});
 																}
 																if ("101" == result) {
 																	$("#simpleProgress1").text("Testing");
@@ -824,11 +868,48 @@
 														});
 
 												console.log(job.name);
-												console.log("-----------------");
+												console.log("-------_---------- " + numberOfRuns);
 											}, CONST_INTERVAL);
 								},
 								stopInterval : function() {
+									console.log("Moose");
+
 									clearInterval(this.intervalRef);
+								},
+								continueInterval : function() {
+									console.log("Repeating the function");
+									numberOfRuns=numberOfRuns+1;
+									clearInterval(this.intervalRef);
+									//console.log("Checked: " + $("#time15.1").checked);
+									if(document.getElementById("time15.1").checked)
+									{
+										console.log("15 checked");	
+										console.log("Waiting");
+										setTimeout(addJob1, 60000);
+									}
+									else if(document.getElementById("time30.1").checked)
+									{
+										console.log("30 checked");	
+										console.log("Waiting");
+										setTimeout(addJob1, 60000);
+									}
+									else if(document.getElementById("time60.1").checked)
+									{
+										console.log("60 checked");	
+										console.log("Waiting");
+										setTimeout(addJob1, 60000);
+									}
+									else if(document.getElementById("time90.1").checked)
+									{
+										console.log("90 checked");	
+										console.log("Waiting");
+										setTimeout(addJob1, 60000);
+									}
+									else{
+									console.log("Waiting 2nd");
+									setTimeout(addJob1, 5000);
+									}
+									//addJob1();
 								}
 							}
 
@@ -836,15 +917,17 @@
 							job.startInterval();
 							console.log("stuu " + job.ttfb);
 							jobList.set(result.name, job);
-
 						},
 						error : function() {
 							console.log("Unable to add Job for: " + url);
 						}
+						
+						//System.out.println("1-----------------__________________-------------------");
 					});
+			//System.out.println("2-----------------__________________-------------------");
 			/* setTimeout(function(){console.log("Goat7Banana")}, 30000);
 			} */
-			
+			console.log("Moose");
 		}
 		
 		function addJob2() {
