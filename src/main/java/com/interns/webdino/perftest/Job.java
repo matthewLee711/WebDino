@@ -21,9 +21,14 @@ import org.xml.sax.helpers.DefaultHandler;*/
 
 import com.interns.webdino.client.support.HttpClientManager;
 
-public class Job {
+public class Job{
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(Job.class);
+    /**
+	 * 
+	 */
+	//private static final long serialVersionUID = -4388859193052577178L;
+
+	private static final Logger LOGGER = LoggerFactory.getLogger(Job.class);
     
     public String statusCode;
     public String firstByte;
