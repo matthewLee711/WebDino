@@ -48,6 +48,7 @@ public class Job{
     public JSONArray firstByteAverageJson = new JSONArray();
     public JSONArray fullLoadAverageJson = new JSONArray();
 
+    int keyCounter =0;
 
     public String run() {
 
@@ -79,14 +80,24 @@ public class Job{
     }
 
     public Job(String name, String url, HttpClientManager clientManager, boolean mock) {
-
+    	
         this.name = name;
         //A.77d136a242db623122d15fab6a8bc2a7
         //A.9be00fc39e0fe97ae0165d9b0ad614cc
-        this.url = "http://www.webpagetest.org/runtest.php?url="
-        + url
-        + "&runs=1&f=xml&k=A.9be00fc39e0fe97ae0165d9b0ad614cc";
-
+        System.out.println("Key: " + keyCounter%2);
+        if(keyCounter%2==0)
+        {
+	        this.url = "http://www.webpagetest.org/runtest.php?url="
+	        			+ url
+	        			+ "&runs=1&f=xml&k=A.9be00fc39e0fe97ae0165d9b0ad614cc";
+        }
+        else
+        {
+        	 this.url = "http://www.webpagetest.org/runtest.php?url="
+        		        + url
+        		        + "&runs=1&f=xml&k=A.77d136a242db623122d15fab6a8bc2a7";
+        }
+        keyCounter++;
         this.clientManager = clientManager;
         this.mock = mock;
     }
