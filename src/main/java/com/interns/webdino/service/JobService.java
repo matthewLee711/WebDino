@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.interns.webdino.client.support.HttpClientManager;
+import com.interns.webdino.data.MongoDataHelper;
 import com.interns.webdino.perftest.Job;
 import com.interns.webdino.perftest.JobMaster;
 
@@ -27,7 +28,10 @@ public class JobService {
 
     @Autowired
     JobMaster jobMaster;
-
+    
+    @Autowired
+    MongoDataHelper db;
+    
     @Autowired
     HttpClientManager clientManager;
 
@@ -86,13 +90,18 @@ public class JobService {
         return new ResponseEntity<>(job, HttpStatus.OK);
     }
     
+    
     @RequestMapping(method = { RequestMethod.POST })
     public ResponseEntity<Job> startJob(HttpServletRequest req,
             @RequestParam(value = "name", required = true) String name,
             @RequestParam(value = "url", required = true) String url,
             @RequestParam(value = "mock", required = false, defaultValue = "false") boolean mock) throws ClassNotFoundException, IOException {
-///////    	//jobMaster.load();
     	System.out.println(name + " " + url + " " + mock);
+       /* jobMaster.save();
+        System.out.println("Saved");
+    	jobMaster.load();
+        System.out.println("Loaded");*/
+
     	if(jobMaster.getJob(name)==null)
     	{
     		 Job job = new Job(name, url, clientManager, mock);
@@ -101,8 +110,9 @@ public class JobService {
     	}
         jobMaster.runJob(jobMaster.getJob(name).getName());
         
+        db.addDocument(1, jobMaster.getJob(name));
         jobMaster.getxmlInfo(jobMaster.getJob(name).getName());////////////////////////////////////////////////
-        
+       // jobMaster.save();
         return new ResponseEntity<>(jobMaster.getJob(name), HttpStatus.OK);
 
     }

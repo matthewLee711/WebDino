@@ -10,6 +10,8 @@ import java.util.HashMap;
 
 import org.springframework.stereotype.Component;
 
+
+
 @Component
 public class JobMaster {
 
@@ -29,19 +31,19 @@ public class JobMaster {
     
     public void load() throws IOException, ClassNotFoundException{
   
-		FileInputStream fileInputStream = new FileInputStream("dataBase1");
-		ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
-		jobs = (HashMap<String, Job>) objectInputStream.readObject();
-		objectInputStream.close();
-		fileInputStream.close();
+		FileInputStream fis = new FileInputStream("dataBase1.ser");
+		ObjectInputStream ois = new ObjectInputStream(fis);
+		jobs = (HashMap) ois.readObject();
+		ois.close();
+		fis.close();
     }
     
     public void save() throws IOException{
-    	FileOutputStream fileOutputStream = new FileOutputStream("dataBase1");
-		ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream);
-		objectOutputStream.writeObject(jobs);
-		objectOutputStream.close();
-		fileOutputStream.close();
+    	FileOutputStream fos = new FileOutputStream("dataBase1.ser");
+		ObjectOutputStream oos = new ObjectOutputStream(fos);
+		oos.writeObject(jobs);
+		oos.close();
+		fos.close();
     }
 
     public String runJob(String name){	//void
