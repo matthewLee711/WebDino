@@ -85,7 +85,7 @@ public class Job{
         //A.77d136a242db623122d15fab6a8bc2a7
         //A.9be00fc39e0fe97ae0165d9b0ad614cc
         System.out.println("Key: " + keyCounter%2);
-        if(keyCounter%2==0)
+        if(keyCounter%2==1)
         {
 	        this.url = "http://www.webpagetest.org/runtest.php?url="
 	        			+ url
