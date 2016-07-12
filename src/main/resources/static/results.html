@@ -1,0 +1,76 @@
+<html>
+	<head>
+		<link rel="stylesheet" type="text/css" href="./css/index.css">
+		<!-- Latest compiled and minified CSS -->
+		<link rel="stylesheet"
+			href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"
+			integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7"
+			crossorigin="anonymous">
+		<link
+			href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css"
+			rel="stylesheet"
+			integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1"
+			crossorigin="anonymous">
+		
+	</head>
+	<body>
+		<button class="btn btn-primary" id="loader">click me</button>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+		<script
+		src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+
+		<!-- Latest compiled and minified JavaScript -->
+		<script
+			src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"
+			integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS"
+			crossorigin="anonymous">
+		
+		
+		<!-- load in mongodb -->
+	 	<script type="text/javascript">
+			function load() {
+				console.log("eyy2");
+				$.ajax({
+					url : "http://localhost:8080/webdino/data?",
+					type : "GET",
+					data : {
+						'url' : url,
+						'name' : url,
+						'mock' : "true"
+					},
+					success : function(result) {
+						//Create javascript object appending functionality
+						console.log("IT WORKS: " + result);
+						return result;
+					},
+					error : function() {
+						console.log("Unable to load database");
+					}
+				});
+			} 		
+			
+			$(document).ready(function() {
+				
+				//Calendar code
+				$(function() {
+					$("#loader").click(function) {
+						console.log("eyy1");
+						load();
+					}
+				});
+			});
+		</script>
+		
+		
+		
+	</body>
+	
+</html>
