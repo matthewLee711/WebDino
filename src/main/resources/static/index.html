@@ -229,6 +229,10 @@
 			</div>
 
 		</div> -->
+		
+	
+		
+		
 	<div class="row">
 		<div class="panel panel-success col col-md-4" id="resultPanel">
 			<div class=panel-body>
@@ -237,17 +241,21 @@
 						<i class="fa fa-cog" aria-hidden="true"
 						 	btn-lg" data-toggle="modal" data-target="#myModal1"></i>
 					</div>
-						<div class="col col-md-6">
+						<div class="col col-md-5">
 							<font color="#000000 "> 
 								<div id="simpleUrl1" title=""></div>
 							</font>
 						</div>
+					
+					
 					<div class="col col-md-4">
 						<div id="simpleProgress1" >Not Testing1</div>
 					</div>
-					<div class="col col-md-1">
-						<i class="fa fa-times-circle-o" aria-hidden="true" id="close1"></i>
+					<div class="col col-md-2">
+						<!-- <i class="fa fa-times-circle-o" aria-hidden="true" id="close1"></i> -->
+						<i class="fa fa-spinner fa-spin fa-lg fa-fw"  id=spinner1 aria-hidden=true  style= "display:none"></i>
 					</div>
+					
 				</div>
 			</div>
 			<div class=panel-footer>  <!-- style="display: none; -->
@@ -712,30 +720,34 @@
 
 
 
+	<div>
+		
+	</div>
 
 
 
-
- 	<script>
-	/* var data = {
-		    labels: ["January", "February", "March", "April", "May", "June", "July"],
+ 	<!-- <script>
+ 	var data = {
+		    labels: ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10" ,"11", "12", "13", "14", "15"],
 		    datasets: [{
-		        label: "My First dataset",
-		        fillColor: "rgba(220,220,220,0.5)",
-		        strokeColor: "rgba(220,220,220,0.8)",
-		        highlightFill: "rgba(220,220,220,0.75)",
-		        highlightStroke: "rgba(220,220,220,1)",
-		        data: [65, 59, 80, 81, 56, 55, 40]
+		        label: "Time To First Byte(ms)",
+		        fillColor: "rgba(0,107,0,1)",
+		        strokeColor: "rgba(0,107,0,1)",
+		        highlightFill: "rgba(0,107,0,1))",
+		        highlightStroke: "rgba(0,107,0,1)",
+		        backgroundColor: "rgba(254,108,20,.9)",
+		        data: [10,5,16,20,14,16]
 		    }, {
-		        label: "My Second dataset",
-		        fillColor: "rgba(151,187,205,0.5)",
-		        strokeColor: "rgba(151,187,205,0.8)",
-		        highlightFill: "rgba(151,187,205,0.75)",
-		        highlightStroke: "rgba(151,187,205,1)",
-		        data: [28, 48, 40, 19, 86, 27, 90]
+		        label: "Time To Full Load(ms)",
+		        fillColor: "rgba(0,107,0,1)",
+		        strokeColor: "rgba(0,107,0,1)",
+		        highlightFill: "rgba(0,107,0,1))",
+		        highlightStroke: "rgba(0,107,0,1)",
+		        backgroundColor: "rgba(254,108,20,.65)",
+		        data: [100, 78, 120,55,90,76]
 		    }]
 		};
-	var ctx = document.getElementById("chart");
+	var ctx = document.getElementById("chart1");
 	var myChart = new Chart(ctx, {
 	    type: 'line',
 	    data:data,
@@ -748,10 +760,30 @@
 	            }]
 	        }
 	    }
-	}); 	 */	
-	</script>
+	}); 	 
+	</script> -->
 
-
+	<!-- <script>
+	
+	var data = {
+		    labels: ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10" ,"11", "12", "13", "14", "15"],
+		    datasets: [{
+		        label: "Time To First Byte",
+		        fillColor: "rgba(240,107,24,0.5)",
+		        strokeColor: "rgba(220,220,220,0.8)",
+		        highlightFill: "rgba(220,220,220,0.75)",
+		        highlightStroke: "rgba(220,220,220,1)",
+		        data: [28, 48, 40, 19, 86, 27, 90]
+		    }, {
+		        label: "Time To Full Load",
+		        fillColor: "rgba(151,187,205,0.5)",
+		        strokeColor: "rgba(151,187,205,0.8)",
+		        highlightFill: "rgba(151,187,205,0.75)",
+		        highlightStroke: "rgba(151,187,205,1)",
+		        data: [65, 59, 80, 81, 56, 55, 40]
+		    }]
+		};
+	</script> -->
 
 	<!-- jQuery -->
 	<script
@@ -769,7 +801,14 @@
 	<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
 	<!-- charting -->
 	<script src="https://www.gstatic.com/charts/loader.js"></script>
-
+	
+	
+	<script>
+		//document.getElementById("spinner1").style.visibility = "collapse";
+	</script>
+	
+	
+	
 
 	<script>
 		//$(document).getElementsById("simpleTTFB")[0].value = "boo";
@@ -800,14 +839,17 @@
 		var numberOfRuns1 = 0;
 
 		function addJob1() {
+	
+			var temp = document.getElementById("spinner1").style.display = "block";
 
+			
 			var url = $("#urlInput1").val();
 			var name = $("#nameInput1").val();
 			console.log("Adding job for URL: " + url);
 			//$("#simpleUrl1").text("THD/" + url.substring(27,48));
 			$("#simpleUrl1").text(name);
-			document.getElementById("simpleUrl1").setAttribute("title",url);
-			$("#simpleProgress1").text("Starting Test!");
+			//document.getElementById("simpleUrl1").setAttribute("title",url);
+			$("#simpleProgress1").text("Starting");
 			//for(var x=0; x<3; x++){
 			$.ajax({
 						url : "http://localhost:8080/webdino/job/",
@@ -872,18 +914,20 @@
 																			var data = {
 																				    labels: ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10" ,"11", "12", "13", "14", "15"],
 																				    datasets: [{
-																				        label: "Time To First Byte",
-																				        fillColor: "rgba(220,220,220,0.5)",
-																				        strokeColor: "rgba(220,220,220,0.8)",
-																				        highlightFill: "rgba(220,220,220,0.75)",
-																				        highlightStroke: "rgba(220,220,220,1)",
+																				        label: "Time To First Byte(ms)",
+																				        fillColor: "rgba(0,107,0,1)",
+																				        strokeColor: "rgba(0,107,0,1)",
+																				        highlightFill: "rgba(0,107,0,1))",
+																				        highlightStroke: "rgba(0,107,0,1)",
+																				        backgroundColor: "rgba(254,108,20,.9)",
 																				        data: answer.firstByteArr
 																				    }, {
-																				        label: "Time To Full Load",
-																				        fillColor: "rgba(151,187,205,0.5)",
-																				        strokeColor: "rgba(151,187,205,0.8)",
-																				        highlightFill: "rgba(151,187,205,0.75)",
-																				        highlightStroke: "rgba(151,187,205,1)",
+																				        label: "Time To Full Load(ms)",
+																				        fillColor: "rgba(0,107,0,1)",
+																				        strokeColor: "rgba(0,107,0,1)",
+																				        highlightFill: "rgba(0,107,0,1))",
+																				        highlightStroke: "rgba(0,107,0,1)",
+																				        backgroundColor: "rgba(254,108,20,.65)",
 																				        data: answer.fullLoadArr
 																				    }]
 																				};
@@ -912,7 +956,7 @@
 																			$("#simpleUrl1").text(answer.name);
 																			$("#simpleProgress1").text("Completed");
 																			console.log("Array: " + answer.firstByteArr);
-																			
+																			var temp = document.getElementById("spinner1").style.display = "none";
 																			if(numberOfRuns1<20){
 																				console.log("=====================================================================Beginning loop again: " + numberOfRuns1);
 																				job.continueInterval();		
@@ -930,6 +974,8 @@
 																	$("#simpleProgress1").text("Testing");
 																} else if ("100" == result) {
 																	$("#simpleProgress1").text("In Queue");
+																	document.getElementById("simpleProgress1").style.display="block";
+
 																} else {
 																	console.log(job.statusNum);
 																	console.log("Error");
@@ -1079,18 +1125,20 @@
 																			var data = {
 																				    labels: ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10" ,"11", "12", "13", "14", "15"],
 																				    datasets: [{
-																				        label: "Time To First Byte",
-																				        fillColor: "rgba(220,220,220,0.5)",
-																				        strokeColor: "rgba(220,220,220,0.8)",
-																				        highlightFill: "rgba(220,220,220,0.75)",
-																				        highlightStroke: "rgba(220,220,220,1)",
+																				        label: "Time To First Byte(ms)",
+																				        fillColor: "rgba(0,107,0,1)",
+																				        strokeColor: "rgba(0,107,0,1)",
+																				        highlightFill: "rgba(0,107,0,1))",
+																				        highlightStroke: "rgba(0,107,0,1)",
+																				        backgroundColor: "rgba(254,108,20,.9)",
 																				        data: answer.firstByteArr
 																				    }, {
-																				        label: "Time To Full Load",
-																				        fillColor: "rgba(151,187,205,0.5)",
-																				        strokeColor: "rgba(151,187,205,0.8)",
-																				        highlightFill: "rgba(151,187,205,0.75)",
-																				        highlightStroke: "rgba(151,187,205,1)",
+																				        label: "Time To Full Load(ms)",
+																				        fillColor: "rgba(0,107,0,1)",
+																				        strokeColor: "rgba(0,107,0,1)",
+																				        highlightFill: "rgba(0,107,0,1))",
+																				        highlightStroke: "rgba(0,107,0,1)",
+																				        backgroundColor: "rgba(254,108,20,.65)",
 																				        data: answer.fullLoadArr
 																				    }]
 																				};
@@ -1286,18 +1334,20 @@
 																			var data = {
 																				    labels: ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10" ,"11", "12", "13", "14", "15"],
 																				    datasets: [{
-																				        label: "Time To First Byte",
-																				        fillColor: "rgba(220,220,220,0.5)",
-																				        strokeColor: "rgba(220,220,220,0.8)",
-																				        highlightFill: "rgba(220,220,220,0.75)",
-																				        highlightStroke: "rgba(220,220,220,1)",
+																				        label: "Time To First Byte(ms)",
+																				        fillColor: "rgba(0,107,0,1)",
+																				        strokeColor: "rgba(0,107,0,1)",
+																				        highlightFill: "rgba(0,107,0,1))",
+																				        highlightStroke: "rgba(0,107,0,1)",
+																				        backgroundColor: "rgba(254,108,20,.9)",
 																				        data: answer.firstByteArr
 																				    }, {
-																				        label: "Time To Full Load",
-																				        fillColor: "rgba(151,187,205,0.5)",
-																				        strokeColor: "rgba(151,187,205,0.8)",
-																				        highlightFill: "rgba(151,187,205,0.75)",
-																				        highlightStroke: "rgba(151,187,205,1)",
+																				        label: "Time To Full Load(ms)",
+																				        fillColor: "rgba(0,107,0,1)",
+																				        strokeColor: "rgba(0,107,0,1)",
+																				        highlightFill: "rgba(0,107,0,1))",
+																				        highlightStroke: "rgba(0,107,0,1)",
+																				        backgroundColor: "rgba(254,108,20,.65)",
 																				        data: answer.fullLoadArr
 																				    }]
 																				};
@@ -1493,18 +1543,20 @@
 																			var data = {
 																				    labels: ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10" ,"11", "12", "13", "14", "15"],
 																				    datasets: [{
-																				        label: "Time To First Byte",
-																				        fillColor: "rgba(220,220,220,0.5)",
-																				        strokeColor: "rgba(220,220,220,0.8)",
-																				        highlightFill: "rgba(220,220,220,0.75)",
-																				        highlightStroke: "rgba(220,220,220,1)",
+																				        label: "Time To First Byte(ms)",
+																				        fillColor: "rgba(0,107,0,1)",
+																				        strokeColor: "rgba(0,107,0,1)",
+																				        highlightFill: "rgba(0,107,0,1))",
+																				        highlightStroke: "rgba(0,107,0,1)",
+																				        backgroundColor: "rgba(254,108,20,.9)",
 																				        data: answer.firstByteArr
 																				    }, {
-																				        label: "Time To Full Load",
-																				        fillColor: "rgba(151,187,205,0.5)",
-																				        strokeColor: "rgba(151,187,205,0.8)",
-																				        highlightFill: "rgba(151,187,205,0.75)",
-																				        highlightStroke: "rgba(151,187,205,1)",
+																				        label: "Time To Full Load(ms)",
+																				        fillColor: "rgba(0,107,0,1)",
+																				        strokeColor: "rgba(0,107,0,1)",
+																				        highlightFill: "rgba(0,107,0,1))",
+																				        highlightStroke: "rgba(0,107,0,1)",
+																				        backgroundColor: "rgba(254,108,20,.65)",
 																				        data: answer.fullLoadArr
 																				    }]
 																				};
@@ -1700,18 +1752,20 @@
 																			var data = {
 																				    labels: ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10" ,"11", "12", "13", "14", "15"],
 																				    datasets: [{
-																				        label: "Time To First Byte",
-																				        fillColor: "rgba(220,220,220,0.5)",
-																				        strokeColor: "rgba(220,220,220,0.8)",
-																				        highlightFill: "rgba(220,220,220,0.75)",
-																				        highlightStroke: "rgba(220,220,220,1)",
+																				        label: "Time To First Byte(ms)",
+																				        fillColor: "rgba(0,107,0,1)",
+																				        strokeColor: "rgba(0,107,0,1)",
+																				        highlightFill: "rgba(0,107,0,1))",
+																				        highlightStroke: "rgba(0,107,0,1)",
+																				        backgroundColor: "rgba(254,108,20,.9)",
 																				        data: answer.firstByteArr
 																				    }, {
-																				        label: "Time To Full Load",
-																				        fillColor: "rgba(151,187,205,0.5)",
-																				        strokeColor: "rgba(151,187,205,0.8)",
-																				        highlightFill: "rgba(151,187,205,0.75)",
-																				        highlightStroke: "rgba(151,187,205,1)",
+																				        label: "Time To Full Load(ms)",
+																				        fillColor: "rgba(0,107,0,1)",
+																				        strokeColor: "rgba(0,107,0,1)",
+																				        highlightFill: "rgba(0,107,0,1))",
+																				        highlightStroke: "rgba(0,107,0,1)",
+																				        backgroundColor: "rgba(254,108,20,.65)",
 																				        data: answer.fullLoadArr
 																				    }]
 																				};
@@ -1907,18 +1961,20 @@
 																			var data = {
 																				    labels: ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10" ,"11", "12", "13", "14", "15"],
 																				    datasets: [{
-																				        label: "Time To First Byte",
-																				        fillColor: "rgba(220,220,220,0.5)",
-																				        strokeColor: "rgba(220,220,220,0.8)",
-																				        highlightFill: "rgba(220,220,220,0.75)",
-																				        highlightStroke: "rgba(220,220,220,1)",
+																				        label: "Time To First Byte(ms)",
+																				        fillColor: "rgba(0,107,0,1)",
+																				        strokeColor: "rgba(0,107,0,1)",
+																				        highlightFill: "rgba(0,107,0,1))",
+																				        highlightStroke: "rgba(0,107,0,1)",
+																				        backgroundColor: "rgba(254,108,20,.9)",
 																				        data: answer.firstByteArr
 																				    }, {
-																				        label: "Time To Full Load",
-																				        fillColor: "rgba(151,187,205,0.5)",
-																				        strokeColor: "rgba(151,187,205,0.8)",
-																				        highlightFill: "rgba(151,187,205,0.75)",
-																				        highlightStroke: "rgba(151,187,205,1)",
+																				        label: "Time To Full Load(ms)",
+																				        fillColor: "rgba(0,107,0,1)",
+																				        strokeColor: "rgba(0,107,0,1)",
+																				        highlightFill: "rgba(0,107,0,1))",
+																				        highlightStroke: "rgba(0,107,0,1)",
+																				        backgroundColor: "rgba(254,108,20,.65)",
 																				        data: answer.fullLoadArr
 																				    }]
 																				};

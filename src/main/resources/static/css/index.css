@@ -34,12 +34,15 @@
 #dataChart{
 	height: 300px;
 	width: 580px;
-	background:#F78E05;
-	
+	/* background:#F78E05; */
 }
 #collapse1{
 	padding: 20px;
 }
+
+.fa{
+	font-size:12px;
+} 
 table{
 	width:100%;
 	text-align: left;
