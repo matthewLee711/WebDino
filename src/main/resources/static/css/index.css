@@ -1,12 +1,16 @@
 #UrlInput{
 	width:40%;
 }
+#urlTitle{
+	font-size:32px;
+	color:#ff6633;
+}
 #url{
-	font-size: 35px;
+	font-size: 26px;
 }
 #addButton{
 	font-size:30px;
-	background-color:green;
+	background-color:#ff6633;
 }
 #tableHeading
 {
@@ -19,12 +23,15 @@
 #resultPanel{
 	font-size:22px;
 	height: 430px;
+	border: none;
+    box-shadow: none;
 }
 #largeResultPanel{
 	font-size:22px;
+	
 }
 .panel-body{
-	background:#f7b220;
+	background:#ff6633;
 
 }
 #simpleProgress{
@@ -34,12 +41,15 @@
 #dataChart{
 	height: 300px;
 	width: 580px;
-	background:#F78E05;
-	
+	/* background:#F78E05; */
 }
 #collapse1{
 	padding: 20px;
 }
+
+.fa{
+	font-size:12px;
+} 
 table{
 	width:100%;
 	text-align: left;
@@ -50,4 +60,9 @@ table{
 }
 .date{
 	width: 80%;
+}
+#radio-toolbar{
+	font-size:15px;
+	position:relative;
+	margin-top:9px;
 }
