@@ -63,7 +63,7 @@ public class JobService {
         }
         System.out.println("job");
         if(job != null){
-        	result = job.getParsedXml(false);/////////////////////////////////////////
+        	result = job.getParsedXml(false,jobMaster.getJob(name).getFake());/////////////////////////////////////////
         }
 
         return new ResponseEntity<>(result, HttpStatus.OK);
@@ -83,7 +83,7 @@ public class JobService {
         }
         System.out.println("job printing");
         if(job != null){
-        	result = job.getParsedXml(true);/////////////////////////////////////////////////////
+        	result = job.getParsedXml(true, jobMaster.getJob(name).getFake());/////////////////////////////////////////////////////
         	System.out.println("Got Parsed Result: " + result);
         }
 
@@ -96,22 +96,28 @@ public class JobService {
             @RequestParam(value = "name", required = true) String name,
             @RequestParam(value = "url", required = true) String url,
             @RequestParam(value = "mock", required = false, defaultValue = "false") boolean mock) throws ClassNotFoundException, IOException {
-    	System.out.println(name + " " + url + " " + mock);
+    	
+    	boolean isFake = "fakedata".compareTo(url.toLowerCase())==0;
+    	System.out.println("Hello");
+    	System.out.println("Opener " + name + " " + url + " " + mock + " if " + isFake + " kl " + "fakedata".compareTo(url.toLowerCase()));
        /* jobMaster.save();
         System.out.println("Saved");
     	jobMaster.load();
         System.out.println("Loaded");*/
 
+    	
     	if(jobMaster.getJob(name)==null)
     	{
-    		 Job job = new Job(name, url, clientManager, mock);
+    		 Job job = new Job(name, url, clientManager, mock, isFake);
     	     jobMaster.addJob(job); 
     	     System.out.print("added " + job.getName());
     	}
-        jobMaster.runJob(jobMaster.getJob(name).getName());
+    	if(!isFake){
+    		jobMaster.runJob(jobMaster.getJob(name).getName());
+    	}
         
         db.addDocument(1, jobMaster.getJob(name));
-        jobMaster.getxmlInfo(jobMaster.getJob(name).getName());////////////////////////////////////////////////
+        jobMaster.getxmlInfo(jobMaster.getJob(name).getName(), isFake);////////////////////////////////////////////////
        // jobMaster.save();
         return new ResponseEntity<>(jobMaster.getJob(name), HttpStatus.OK);
 

@@ -527,6 +527,9 @@
 					<button type="button" id="addButton1" class="btn btn-success" data-dismiss="modal">ADD</button>
 				</div>
 			</div>
+			<!-- <script>
+				$("#urlInput1").autofocus();
+			</script> -->
 		</div>
 	</div>
 	
@@ -1020,6 +1023,7 @@
 																			
 																			var answer = {
 																				name : result.name,
+																				fake : result.fake,
 																				ttfb : result.firstByte,
 																				loadtime : result.loadTime,
 																				ttfbAverage : result.firstAverage,
@@ -1075,7 +1079,8 @@
 																			$("#simpleProgress1").text("Completed");
 																			console.log("Array: " + answer.firstByteArr);
 																			var temp = document.getElementById("spinner1").style.display = "none";
-																			if(numberOfRuns1<20){
+																		
+																			if(numberOfRuns1<20&&!answer.fake){
 																				console.log("=====================================================================Beginning loop again: " + numberOfRuns1);
 																				job.continueInterval();		
 																			} else {
@@ -1234,6 +1239,7 @@
 																			var answer = {
 																				name : result.name,
 																				ttfb : result.firstByte,
+																				fake : result.fake,
 																				loadtime : result.loadTime,
 																				ttfbAverage : result.firstAverage,
 																				fullAverage : result.fullAverage,
@@ -1289,7 +1295,7 @@
 																			console.log("Array: " + answer.firstByteArr);
 																			var temp = document.getElementById("spinner2").style.display = "none";
 
-																			if(numberOfRuns2<20){
+																			if(numberOfRuns2<20&&!answer.fake){
 																				console.log("=====================================================================Beginning loop again: " + numberOfRuns2);
 																				job.continueInterval();		
 																			} else {
@@ -1449,6 +1455,7 @@
 																				name : result.name,
 																				ttfb : result.firstByte,
 																				loadtime : result.loadTime,
+																				fake : result.fake,
 																				ttfbAverage : result.firstAverage,
 																				fullAverage : result.fullAverage,
 																				statusNum : result.statusCode,
@@ -1503,7 +1510,7 @@
 																			console.log("Array: " + answer.firstByteArr);
 																			var temp = document.getElementById("spinner3").style.display = "none";
 
-																			if(numberOfRuns3<20){
+																			if(numberOfRuns3<20&&!answer.fake){
 																				console.log("=====================================================================Beginning loop again: " + numberOfRuns3);
 																				job.continueInterval();		
 																			} else {
@@ -1663,6 +1670,7 @@
 																				name : result.name,
 																				ttfb : result.firstByte,
 																				loadtime : result.loadTime,
+																				fake : result.fake,
 																				ttfbAverage : result.firstAverage,
 																				fullAverage : result.fullAverage,
 																				statusNum : result.statusCode,
@@ -1717,7 +1725,7 @@
 																			console.log("Array: " + answer.firstByteArr);
 																			var temp = document.getElementById("spinner4").style.display = "none";
 
-																			if(numberOfRuns4<20){
+																			if(numberOfRuns4<20&&!answer.fake){
 																				console.log("=====================================================================Beginning loop again: " + numberOfRuns4);
 																				job.continueInterval();		
 																			} else {
@@ -1877,6 +1885,7 @@
 																				name : result.name,
 																				ttfb : result.firstByte,
 																				loadtime : result.loadTime,
+																				fake : result.fake,
 																				ttfbAverage : result.firstAverage,
 																				fullAverage : result.fullAverage,
 																				statusNum : result.statusCode,
@@ -1931,7 +1940,7 @@
 																			console.log("Array: " + answer.firstByteArr);
 																			var temp = document.getElementById("spinner5").style.display = "none";
 
-																			if(numberOfRuns5<20){
+																			if(numberOfRuns5<20&&!answer.fake){
 																				console.log("=====================================================================Beginning loop again: " + numberOfRuns5);
 																				job.continueInterval();		
 																			} else {
@@ -2092,6 +2101,7 @@
 																				name : result.name,
 																				ttfb : result.firstByte,
 																				loadtime : result.loadTime,
+																				fake : result.fake,
 																				ttfbAverage : result.firstAverage,
 																				fullAverage : result.fullAverage,
 																				statusNum : result.statusCode,
@@ -2146,7 +2156,7 @@
 																			console.log("Array: " + answer.firstByteArr);
 																			var temp = document.getElementById("spinner6").style.display = "none";
 
-																			if(numberOfRuns6<20){
+																			if(numberOfRuns6<20&&!answer.fake){
 																				console.log("=====================================================================Beginning loop again: " + numberOfRuns6);
 																				job.continueInterval();		
 																			} else {

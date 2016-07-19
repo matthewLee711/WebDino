@@ -40,6 +40,7 @@ public class Job{
     private HttpClientManager clientManager;
     private JobStatus status;
     private boolean mock;
+    private boolean fake;
     
     public int firstAverage=0, fullAverage=0;
     public ArrayList<Integer> firstByteAverage = new ArrayList<Integer>();
@@ -67,25 +68,45 @@ public class Job{
         }
 
         this.status = JobStatus.STARTED;
-
-        try {
-            parseXML();
-        } catch (Exception e) {
-            LOGGER.error("ParseXML failed", e);
+        
+        if(!fake)
+        {
+	        try {
+	            parseXML();
+	        } catch (Exception e) {
+	            LOGGER.error("ParseXML failed", e);
+	        }
         }
-
 
         return parsedXml;
 
     }
 
-    public Job(String name, String url, HttpClientManager clientManager, boolean mock) {
+    public Job(String name, String url, HttpClientManager clientManager, boolean mock, boolean fake) {
     	
         this.name = name;
+        this.fake = fake;
         //A.77d136a242db623122d15fab6a8bc2a7
         //A.9be00fc39e0fe97ae0165d9b0ad614cc
         //A.78f7cf06c141dbdbf9e2bbd9d6a7c041
         System.out.println("Key: " + keyCounter%6 + "-----------------------------------------------------");
+        
+        if(fake)
+        {
+        	int[] temp = {231,303,200,156,235,354,312,199,243,256,322,232,388,234,251};
+        	int[] temp1 = {6000,4254,7564,4555,5555,5452,5656,3894,4478,3456,8328,6554,3222,3533,6764};
+        	
+        	for(int x=0; x<temp.length;x++)
+        	{
+        		firstByteAverage.add(temp[x]);
+        		fullLoadAverage.add(temp1[x]);
+	        	firstByteAverageJson.add(temp[x]);
+	    		fullLoadAverageJson.add(temp1[x]);
+        	}
+        	System.out.println("Added Data");
+        }
+        
+        
         if(keyCounter%6==0)
         {
 	        this.url = "http://www.webpagetest.org/runtest.php?url="
@@ -132,7 +153,7 @@ public class Job{
         Document doc;
         try {
             // load webpage
-        	System.out.println("Inside ParseXML");
+        	System.out.println("Inside ParseXML " + url);
             doc = Jsoup.connect(url).get();
             System.out.println("load" + doc.toString());
 
@@ -148,6 +169,10 @@ public class Job{
             e.printStackTrace();
         }
 
+    }
+    
+    public boolean getFake(){
+    	return fake;
     }
     public String getName() {
         return name;
@@ -180,10 +205,16 @@ public class Job{
     public void setStatus(JobStatus status) {
         this.status = status;
     }
-    
+        
     //EXtract TTFB and loadTime
-    public String getParsedXml(boolean average) {
+    public String getParsedXml(boolean average, boolean fake){
     	Document doc;
+    	System.out.println("Inside Parse");
+    	if(fake)
+    	{
+    		average();
+    		return "200";
+    	}
         try {
         	//parsedXml
         	String xmlurl = parsedXml;
