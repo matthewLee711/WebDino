@@ -500,7 +500,7 @@
 							<div id="url"> URL:</div>
 						</div>
 						<div class="col col-md-9">
-							<input type="text" id="urlInput1" placeholder="Enter URL Here"> 
+							<input type="text" id="urlInput1" placeholder="Enter URL Here" autofocus> 
 						</div>
 					</div>
 					<div class="row" id=url>
@@ -514,7 +514,7 @@
 					<div class="row">
 						<div class="col col-md-3" id="url">Interval:	</div>
 						<div class="radio-tolbar col col-md-9" id=radio-toolbar>
-							<input type="radio" id="time15.1" name="prefixHTTPS" value= "15" checked> <label for="time15.1">15 Min</label> 
+							<input type="radio" id="time15.1" name="prefixHTTPS" value= "15">   <label for="time15.1">15 Min</label> 
 							<input type="radio" id="time30.1" name="prefixHTTPS" value= "30">	<label for="time30.1">30 Min</label>
 							<input type="radio" id="time60.1" name="prefixHTTPS" value= "60">	<label for="time60.1">60 Min</label>
 							<input type="radio" id="time90.1" name="prefixHTTPS" value= "90">	<label for="time90.1">90 Min</label>
@@ -528,7 +528,7 @@
 				</div>
 			</div>
 			<!-- <script>
-				$("#urlInput1").autofocus();
+				document.getElementByID("urlInput1").focus();
 			</script> -->
 		</div>
 	</div>

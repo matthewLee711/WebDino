@@ -95,7 +95,8 @@ public class Job{
         {
         	int[] temp = {231,303,200,156,235,354,312,199,243,256,322,232,388,234,251};
         	int[] temp1 = {6000,4254,7564,4555,5555,5452,5656,3894,4478,3456,8328,6554,3222,3533,6764};
-        	
+        	firstByte = "251";
+        	loadTime= "6764";
         	for(int x=0; x<temp.length;x++)
         	{
         		firstByteAverage.add(temp[x]);
