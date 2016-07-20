@@ -33,6 +33,11 @@ public class Job{
     public String statusCode;
     public String firstByte;
     public String loadTime;
+    public int minTtfb;
+    public int maxTtfb;
+    public int minTtfl;
+    public int maxTtfl;
+    
     public String name;
     private String url;
     private String rawXml;
@@ -299,9 +304,15 @@ public class Job{
     public void average()
     {	
     	firstAverage=0; fullAverage=0;
+    	int minFirst=99999, maxFirst=0;
+    	int minFull=99999, maxFull=0;
     	for(int add:firstByteAverage)
     	{
     		firstAverage+=add;
+    		if(add<minFirst)
+    			minFirst=add;
+    		if(add>maxFirst)
+    			maxFirst=add;
     	}
     	firstAverage = firstAverage/firstByteAverage.size();
     	
@@ -311,9 +322,22 @@ public class Job{
     		{
     			fullAverage+=add;
     		}
+    		if(add<minFull)
+    			minFull=add;
+    		if(add>maxFull)
+    			maxFull=add;
     	}
+    	
+    	minTtfb=minFirst;
+    	maxTtfb=maxFirst;
+    	minTtfl=minFull;
+    	maxTtfl=maxFull;
+    	
+    	System.out.println("Job Min: " + minTtfb);
+    	
     	fullAverage = fullAverage/fullLoadAverage.size();
     	System.out.println("Averages: " + firstAverage + " " + fullAverage);
+    	
     }
     
     public String getfirstByte() {

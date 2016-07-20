@@ -261,16 +261,32 @@
 			<div class=panel-footer>  <!-- style="display: none; -->
 				<table>
 					<tr>
-						<td id="simpleTTFB1Avg"></td>
-						<td id="simpleFullLoad1Avg"></td>
-					</tr>
+						<!-- <td id="simpleTTFB1Avg"></td>
+						<td id="simpleFullLoad1Avg"></td> -->
+						<td>
+							<tr>
+								<div id="numChartA">
+						<!-- <canvas id="chart1"></canvas> -->
+									<canvas id = "chartTopTTFB1"></canvas>
+								</div>
+								<div id="simpleTTFB1Avg"></div>
+							</tr>
+							<tr>
+								<div id="numChartB">
+						<!-- <canvas id="chart1"></canvas> -->
+									<canvas id = "chartTopTTFL1"></canvas>
+								</div>
+							</tr>
+						</td>
+					<!-- </tr>
 						<tr>
 							<td id="simpleTTFB1"></td>
 							<td id="simpleFullLoad1"></td>
-						</tr>
+						</tr> -->
 				</table>
 				<div id="dataChart">
 					<canvas id="chart1"></canvas>
+					
 				</div>
 			</div>
 		</div>
@@ -500,7 +516,7 @@
 							<div id="url"> URL:</div>
 						</div>
 						<div class="col col-md-9">
-							<input type="text" id="urlInput1" placeholder="Enter URL Here" autofocus> 
+							<input type="text" id="urlInput1" placeholder="Enter URL Here" autofocus>
 						</div>
 					</div>
 					<div class="row" id=url>
@@ -995,120 +1011,219 @@
 												//console.log(job.runner);
 												console.log(job.statusNum);
 												//console.log("status: "+ job.runner);
-												$
-														.ajax({
-															url : "http://localhost:8080/webdino/job/ttfb",
-															type : "GET",
-															data : {
-																'url' : url,
-																'name' : name,
-																'mock' : "true"
-															},
-															success : function(result) {
-																//Create javascript object appending functionality
+												$.ajax({
+														url : "http://localhost:8080/webdino/job/ttfb",
+														type : "GET",
+														data : {
+															'url' : url,
+															'name' : name,
+															'mock' : "true"
+														},
+														success : function(result) {
+															//Create javascript object appending functionality
 
-																console.log("result: " + result);
-																console.log("statusNum: "+ job.statusNum);
+															console.log("result: " + result);
+															console.log("statusNum: "+ job.statusNum);
 
-																if ("200" == result) {
-																	$.ajax({
-																		url : "http://localhost:8080/webdino/job/output",
-																		type : "GET",
-																		data : {
-																		'url' : url,
-																		'name' : name,
-																		'mock' : "true"
-																		},
-																		success : function(result) {
-																			
-																			var answer = {
-																				name : result.name,
-																				fake : result.fake,
-																				ttfb : result.firstByte,
-																				loadtime : result.loadTime,
-																				ttfbAverage : result.firstAverage,
-																				fullAverage : result.fullAverage,
-																				statusNum : result.statusCode,
-																				firstByteArr : result.firstByteAverageJson,
-																				fullLoadArr : result.fullLoadAverageJson
-																			};
-																			
-																			var data = {
-																				    labels: ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10" ,"11", "12", "13", "14", "15"],
-																				    datasets: [{
-																				        label: "Time To First Byte(ms)",
-																				        fillColor: "rgba(0,107,0,1)",
-																				        strokeColor: "rgba(0,107,0,1)",
-																				        highlightFill: "rgba(0,107,0,1))",
-																				        highlightStroke: "rgba(0,107,0,1)",
-																				        backgroundColor: "rgba(254,108,20,.9)",
-																				        data: answer.firstByteArr
-																				    }, {
-																				        label: "Time To Full Load(ms)",
-																				        fillColor: "rgba(0,107,0,1)",
-																				        strokeColor: "rgba(0,107,0,1)",
-																				        highlightFill: "rgba(0,107,0,1))",
-																				        highlightStroke: "rgba(0,107,0,1)",
-																				        backgroundColor: "rgba(254,108,20,.65)",
-																				        data: answer.fullLoadArr
-																				    }]
-																				};
-																			var ctx = document.getElementById("chart1");
-																			var myChart = new Chart(ctx, {
-																			    type: 'line',
-																			    data:data,
-																			    options: {
-																			        scales: {
-																			            yAxes: [{
-																			                ticks: {
-																			                    beginAtZero:true
-																			                }
-																			            }]
-																			        }
-																			    }
-																			}); 	
-																			
-																			console.log("complete "+ answer.ttfb + "!");
-																			
-																			$("#simpleTTFB1").text("First Byte: " + answer.ttfb+ "ms");
-																			$("#simpleFullLoad1").text("Full Load: " + answer.loadtime+ "ms");
-																			$("#simpleTTFB1Avg").text("Average First Byte: " + answer.ttfbAverage+ "ms");
-																			$("#simpleFullLoad1Avg").text("Average Full Load: " + answer.fullAverage+ "ms");
-																			//$("#simpleDate").text(job.ttfb);
-																			$("#simpleUrl1").text(answer.name);
-																			$("#simpleProgress1").text("Completed");
-																			console.log("Array: " + answer.firstByteArr);
-																			var temp = document.getElementById("spinner1").style.display = "none";
+															if ("200" == result) {
+																$.ajax({
+																	url : "http://localhost:8080/webdino/job/output",
+																	type : "GET",
+																	data : {
+																	'url' : url,
+																	'name' : name,
+																	'mock' : "true"
+																	},
+																	success : function(result) {
 																		
-																			if(numberOfRuns1<20&&!answer.fake){
-																				console.log("=====================================================================Beginning loop again: " + numberOfRuns1);
-																				job.continueInterval();		
-																			} else {
-																				job.stopInterval();
-																			}
-																					
-																		},
-																		error : function() {
-																			console.log("Unable to get final informations for: " + url);
-																		}
-																	});
-																}
-																if ("101" == result) {
-																	$("#simpleProgress1").text("Testing");
-																} else if ("100" == result) {
-																	$("#simpleProgress1").text("In Queue");
-																	document.getElementById("simpleProgress1").style.display="block";
+																		var answer = {
+																			name : result.name,
+																			fake : result.fake,
+																			ttfb : result.firstByte,
+																			loadtime : result.loadTime,
+																			minTtfb : result.minTtfb,
+																			maxTtfb : result.maxTtfb,
+																			minTtfl : result.minTtfl,
+																			maxTtfl : result.maxTtfl,
+																			ttfbAverage : result.firstAverage,
+																			fullAverage : result.fullAverage,
+																			statusNum : result.statusCode,
+																			firstByteArr : result.firstByteAverageJson,
+																			fullLoadArr : result.fullLoadAverageJson
+																		};
+																	 	console.log("min: "+ answer.minTtfb + " average " + answer.ttfbAverage + " max " + answer.maxTtfb);
+																		 var data = {
+																			    labels: ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10" ,"11", "12", "13", "14", "15"],
+																			    datasets: [{
+																			        label: "Time To First Byte(ms)",
+																			        fillColor: "rgba(0,107,0,1)",
+																			        strokeColor: "rgba(0,107,0,1)",
+																			        highlightFill: "rgba(0,107,0,1))",
+																			        highlightStroke: "rgba(0,107,0,1)",
+																			        backgroundColor: "rgba(254,108,20,.9)",
+																			        data: answer.firstByteArr
+																			    }, {
+																			        label: "Time To Full Load(ms)",
+																			        fillColor: "rgba(0,107,0,1)",
+																			        strokeColor: "rgba(0,107,0,1)",
+																			        highlightFill: "rgba(0,107,0,1))",
+																			        highlightStroke: "rgba(0,107,0,1)",
+																			        backgroundColor: "rgba(254,108,20,.65)",
+																			        data: answer.fullLoadArr
+																			    }]
+																			};
+																		var ctx = document.getElementById("chart1");
+																		var myChart = new Chart(ctx, {
+																		    type: 'line',
+																		    data:data,
+																		    options: {
+																		        scales: {
+																		            yAxes: [{
+																		                ticks: {
+																		                    beginAtZero:true
+																		                }
+																		            }]
+																		        }
+																		    }
+																		});  
+																		 
+																		var dataTopTTFB = {
+																			    labels: ["1"],
+																			    datasets: [{
+																			        label: "Minimum Time",
+																			        fillColor: "rgba(0,107,0,1)",
+																			        strokeColor: "rgba(0,107,0,1)",
+																			        highlightFill: "rgba(0,107,0,1))",
+																			        highlightStroke: "rgba(0,107,0,1)",
+																			        backgroundColor: "rgba(254,108,20,.9)",
+																			        data: [answer.minTtfb]
+																			    }, {
+																			        label: "Most Recent TTFB",
+																			        fillColor: "rgba(0,107,0,1)",
+																			        strokeColor: "rgba(0,107,0,1)",
+																			        highlightFill: "rgba(0,107,0,1))",
+																			        highlightStroke: "rgba(0,107,0,1)",
+																			        backgroundColor: "rgba(54,108,20,.65)",
+																			        data: [answer.ttfb-answer.minTtfb]
+																			    }, {
+																			        label: "Maximum Time",
+																			        fillColor: "rgba(0,107,0,1)",
+																			        strokeColor: "rgba(0,107,0,1)",
+																			        highlightFill: "rgba(0,107,0,1))",
+																			        highlightStroke: "rgba(0,107,0,1)",
+																			        backgroundColor: "rgba(254,108,220,.35)",
+																			        data: [answer.maxTtfb-answer.ttfb]
+																			    }]
+																			};
+																		var ctx = document.getElementById("chartTopTTFB1");
+																		var myChart = new Chart(ctx, {
+																		    type: 'horizontalBar',
+																		    data:dataTopTTFB,
+																	        options: {
+																		    	maintainAspectRatio: false,
+																		        responsive: true,
+																		      
 
-																} else {
-																	console.log(job.statusNum);
-																	console.log("Error");
-																}
-																//return result;
-															},
-															error : function() {
-																console.log("Unable to add Job for: "+ url);
+																		    	scales: {
+																		    	     xAxes: [{
+																		    	          stacked: true,
+																				
+
+																		    	     }],
+																		    	     yAxes: [{
+																		    	          stacked: true,
+																					      
+
+																		    	          /* suggestedMin : answer.minTtfb,
+																		    	          suggestedMax : answer.maxTtfb */
+																		    	     }]
+																		    	}
+																		    }
+																		}); 
+																		
+																		var dataTopTTFL = {
+																			    labels: ["2"],
+																			    datasets: [{
+								
+																			        fillColor: "rgba(0,107,0,1)",
+																			        strokeColor: "rgba(0,107,0,1)",
+																			        highlightFill: "rgba(0,107,0,1))",
+																			        highlightStroke: "rgba(0,107,0,1)",
+																			        backgroundColor: "rgba(254,108,20,.9)",
+																			        data: [78]
+																			    }, {
+																			        
+																			        fillColor: "rgba(0,107,0,1)",
+																			        strokeColor: "rgba(0,107,0,1)",
+																			        highlightFill: "rgba(0,107,0,1))",
+																			        highlightStroke: "rgba(0,107,0,1)",
+																			        backgroundColor: "rgba(254,108,20,.65)",
+																			        data: [48]
+																			    }]
+																			};
+																		var ctx = document.getElementById("chartTopTTFL1");
+																		var myChart = new Chart(ctx, {
+																		    type: 'horizontalBar',
+																		    data:dataTopTTFL,
+																		    options: {
+																		    	maintainAspectRatio: false,
+																		        responsive: true,
+																		        legend:{
+																		        	display: false
+																		        },
+																		    	scales: {
+																		    	     xAxes: [{
+																		    	          stacked: true,
+																		    	     }],
+																		    	     yAxes: [{
+																		    	          stacked: true
+																		    	     }]
+																		    	}
+																		    }
+																		}); 
+																		
+																		
+																		console.log("complete "+ answer.ttfb + "!");
+																		
+																		$("#simpleTTFB1").text("First Byte: " + answer.ttfb+ "ms");
+																		$("#simpleFullLoad1").text("Full Load: " + answer.loadtime+ "ms");
+																		$("#simpleTTFB1Avg").text("Average First Byte: " + answer.ttfbAverage+ "ms");
+																		$("#simpleFullLoad1Avg").text("Average Full Load: " + answer.fullAverage+ "ms");
+																		//$("#simpleDate").text(job.ttfb);
+																		$("#simpleUrl1").text(answer.name);
+																		$("#simpleProgress1").text("Completed");
+																		console.log("Array: " + answer.firstByteArr);
+																		var temp = document.getElementById("spinner1").style.display = "none";
+																	
+																		if(numberOfRuns1<20&&!answer.fake){
+																			console.log("=====================================================================Beginning loop again: " + numberOfRuns1);
+																			job.continueInterval();		
+																		} else {
+																			job.stopInterval();
+																		}
+																				
+																	},
+																	error : function() {
+																		console.log("Unable to get final informations for: " + url);
+																	}
+																});
 															}
-														});
+															if ("101" == result) {
+																$("#simpleProgress1").text("Testing");
+															} else if ("100" == result) {
+																$("#simpleProgress1").text("In Queue");
+																document.getElementById("simpleProgress1").style.display="block";
+
+															} else {
+																console.log(job.statusNum);
+																console.log("Error");
+															}
+															//return result;
+														},
+														error : function() {
+															console.log("Unable to add Job for: "+ url);
+														}
+													});
 
 												console.log(job.name);
 												console.log("-------_---------- " + numberOfRuns1);
