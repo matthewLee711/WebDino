@@ -91,4 +91,15 @@ table{
         width: 100% !important;
         max-width: 800px;
         height: auto !important;
-    }
+}
+.avgA{
+	position: relative;
+	bottom: 60px;
+	left: 460px;
+}
+.avgB {
+	position: relative;
+	bottom: 50px;
+	left: 460px;
+}
+   

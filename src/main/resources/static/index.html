@@ -268,13 +268,15 @@
 								<div id="numChartA">
 						<!-- <canvas id="chart1"></canvas> -->
 									<canvas id = "chartTopTTFB1"></canvas>
+									<div class="avgA" id="simpleTTFB1Avg"></div>
 								</div>
-								<div id="simpleTTFB1Avg"></div>
+								<!-- <div id="simpleTTFB1Avg"></div> -->
 							</tr>
 							<tr>
 								<div id="numChartB">
 						<!-- <canvas id="chart1"></canvas> -->
 									<canvas id = "chartTopTTFL1"></canvas>
+									<div class="avgB" id="simpleFullLoad1Avg"></div>
 								</div>
 							</tr>
 						</td>
@@ -316,14 +318,19 @@
 			</div>
 			<div class=panel-footer>  <!-- style="display: none; -->
 				<table>
-					<tr>
-						<td id="simpleTTFB2Avg"></td>
-						<td id="simpleFullLoad2Avg"></td>
-					</tr>
-						<tr>
-							<td id="simpleTTFB2"></td>
-							<td id="simpleFullLoad2"></td>
-						</tr>
+					<div id="numChartA">
+						<!-- <canvas id="chart1"></canvas> -->
+									<canvas id = "chartTopTTFB2"></canvas>
+									<div class="avgA" id="simpleTTFB2Avg"></div>
+								</div>
+								<!-- <div id="simpleTTFB1Avg"></div> -->
+							</tr>
+							<tr>
+								<div id="numChartB">
+						<!-- <canvas id="chart1"></canvas> -->
+									<canvas id = "chartTopTTFL2"></canvas>
+									<div class="avgB" id="simpleFullLoad2Avg"></div>
+								</div>
 				</table>
 				<div id="dataChart">
 					<canvas id="chart2"></canvas>
@@ -356,12 +363,19 @@
 			<div class=panel-footer>  <!-- style="display: none; -->
 				<table>
 					<tr>
-						<td id="simpleTTFB3Avg"></td>
-						<td id="simpleFullLoad3Avg"></td>
-					</tr>
+						<div id="numChartA">
+						<!-- <canvas id="chart1"></canvas> -->
+							<canvas id = "chartTopTTFB3"></canvas>
+							<div class="avgA" id="simpleTTFB3Avg"></div>
+						</div>
+								<!-- <div id="simpleTTFB1Avg"></div> -->
+						</tr>
 						<tr>
-							<td id="simpleTTFB3"></td>
-							<td id="simpleFullLoad3"></td>
+							<div id="numChartB">
+						<!-- <canvas id="chart1"></canvas> -->
+								<canvas id = "chartTopTTFL3"></canvas>
+								<div class="avgB" id="simpleFullLoad3Avg"></div>
+							</div>
 						</tr>
 				</table>
 				<div id="dataChart">
@@ -395,13 +409,20 @@
 			<div class=panel-footer>  <!-- style="display: none; -->
 				<table>
 					<tr>
-						<td id="simpleTTFB4Avg"></td>
-						<td id="simpleFullLoad4Avg"></td>
+						<div id="numChartA">
+						<!-- <canvas id="chart1"></canvas> -->
+							<canvas id = "chartTopTTFB4"></canvas>
+							<div class="avgA" id="simpleTTFB4Avg"></div>
+						</div>
+								<!-- <div id="simpleTTFB1Avg"></div> -->
 					</tr>
-						<tr>
-							<td id="simpleTTFB4"></td>
-							<td id="simpleFullLoad4"></td>
-						</tr>
+					<tr>
+						<div id="numChartB">
+						<!-- <canvas id="chart1"></canvas> -->
+							<canvas id = "chartTopTTFL4"></canvas>
+							<div class="avgB" id="simpleFullLoad4Avg"></div>
+						</div>
+					</tr>
 				</table>
 				<div id="dataChart">
 					<canvas id="chart4"></canvas>
@@ -434,13 +455,20 @@
 			<div class=panel-footer>  <!-- style="display: none; -->
 				<table>
 					<tr>
-						<td id="simpleTTFB5Avg"></td>
-						<td id="simpleFullLoad5Avg"></td>
+						<div id="numChartA">
+						<!-- <canvas id="chart1"></canvas> -->
+							<canvas id = "chartTopTTFB5"></canvas>
+							<div class="avgA" id="simpleTTFB5Avg"></div>
+						</div>
+								<!-- <div id="simpleTTFB1Avg"></div> -->
 					</tr>
-						<tr>
-							<td id="simpleTTFB5"></td>
-							<td id="simpleFullLoad5"></td>
-						</tr>
+					<tr>
+						<div id="numChartB">
+						<!-- <canvas id="chart1"></canvas> -->
+							<canvas id = "chartTopTTFL5"></canvas>
+							<div class="avgB" id="simpleFullLoad5Avg"></div>
+						</div>
+					</tr>
 				</table>
 				<div id="dataChart">
 					<canvas id="chart5"></canvas>
@@ -473,13 +501,20 @@
 			<div class=panel-footer>  <!-- style="display: none; -->
 				<table>
 					<tr>
-						<td id="simpleTTFB6Avg"></td>
-						<td id="simpleFullLoad6Avg"></td>
+						<div id="numChartA">
+						<!-- <canvas id="chart1"></canvas> -->
+							<canvas id = "chartTopTTFB6"></canvas>
+							<div class="avgA" id="simpleTTFB6Avg"></div>
+						</div>
+								<!-- <div id="simpleTTFB1Avg"></div> -->
 					</tr>
-						<tr>
-							<td id="simpleTTFB6"></td>
-							<td id="simpleFullLoad6"></td>
-						</tr>
+					<tr>
+						<div id="numChartB">
+						<!-- <canvas id="chart1"></canvas> -->
+							<canvas id = "chartTopTTFL6"></canvas>
+							<div class="avgB" id="simpleFullLoad6Avg"></div>
+						</div>
+					</tr>
 				</table>
 				<div id="dataChart">
 					<canvas id="chart6"></canvas>
@@ -1088,7 +1123,7 @@
 																		});  
 																		 
 																		var dataTopTTFB = {
-																			    labels: ["1"],
+																			    labels: ["TTFB"],
 																			    datasets: [{
 																			        label: "Minimum Time",
 																			        fillColor: "rgba(0,107,0,1)",
@@ -1098,7 +1133,7 @@
 																			        backgroundColor: "rgba(254,108,20,.9)",
 																			        data: [answer.minTtfb]
 																			    }, {
-																			        label: "Most Recent TTFB",
+																			        label: "Most Recent",
 																			        fillColor: "rgba(0,107,0,1)",
 																			        strokeColor: "rgba(0,107,0,1)",
 																			        highlightFill: "rgba(0,107,0,1))",
@@ -1142,23 +1177,31 @@
 																		}); 
 																		
 																		var dataTopTTFL = {
-																			    labels: ["2"],
+																				labels: ["TTFL"],
 																			    datasets: [{
-								
+																			        label: "Minimum Time",
 																			        fillColor: "rgba(0,107,0,1)",
 																			        strokeColor: "rgba(0,107,0,1)",
 																			        highlightFill: "rgba(0,107,0,1))",
 																			        highlightStroke: "rgba(0,107,0,1)",
 																			        backgroundColor: "rgba(254,108,20,.9)",
-																			        data: [78]
+																			        data: [answer.minTtfl]
 																			    }, {
-																			        
+																			        label: "Most Recent",
 																			        fillColor: "rgba(0,107,0,1)",
 																			        strokeColor: "rgba(0,107,0,1)",
 																			        highlightFill: "rgba(0,107,0,1))",
 																			        highlightStroke: "rgba(0,107,0,1)",
-																			        backgroundColor: "rgba(254,108,20,.65)",
-																			        data: [48]
+																			        backgroundColor: "rgba(54,108,20,.65)",
+																			        data: [answer.loadtime-answer.minTtfl]
+																			    }, {
+																			        label: "Maximum Time",
+																			        fillColor: "rgba(0,107,0,1)",
+																			        strokeColor: "rgba(0,107,0,1)",
+																			        highlightFill: "rgba(0,107,0,1))",
+																			        highlightStroke: "rgba(0,107,0,1)",
+																			        backgroundColor: "rgba(254,108,220,.35)",
+																			        data: [answer.maxTtfl-answer.loadtime]
 																			    }]
 																			};
 																		var ctx = document.getElementById("chartTopTTFL1");
@@ -1187,8 +1230,8 @@
 																		
 																		$("#simpleTTFB1").text("First Byte: " + answer.ttfb+ "ms");
 																		$("#simpleFullLoad1").text("Full Load: " + answer.loadtime+ "ms");
-																		$("#simpleTTFB1Avg").text("Average First Byte: " + answer.ttfbAverage+ "ms");
-																		$("#simpleFullLoad1Avg").text("Average Full Load: " + answer.fullAverage+ "ms");
+																		$("#simpleTTFB1Avg").text("Avg: " + answer.ttfbAverage+ "ms");
+																		$("#simpleFullLoad1Avg").text("Avg: " + answer.fullAverage+ "ms");
 																		//$("#simpleDate").text(job.ttfb);
 																		$("#simpleUrl1").text(answer.name);
 																		$("#simpleProgress1").text("Completed");
