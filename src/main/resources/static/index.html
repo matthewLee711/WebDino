@@ -1396,17 +1396,21 @@
 																			
 																			var answer = {
 																				name : result.name,
-																				ttfb : result.firstByte,
 																				fake : result.fake,
+																				ttfb : result.firstByte,
 																				loadtime : result.loadTime,
+																				minTtfb : result.minTtfb,
+																				maxTtfb : result.maxTtfb,
+																				minTtfl : result.minTtfl,
+																				maxTtfl : result.maxTtfl,
 																				ttfbAverage : result.firstAverage,
 																				fullAverage : result.fullAverage,
 																				statusNum : result.statusCode,
 																				firstByteArr : result.firstByteAverageJson,
 																				fullLoadArr : result.fullLoadAverageJson
 																			};
-																			
-																			var data = {
+																		 	console.log("min: "+ answer.minTtfb + " average " + answer.ttfbAverage + " max " + answer.maxTtfb);
+																			 var data = {
 																				    labels: ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10" ,"11", "12", "13", "14", "15"],
 																				    datasets: [{
 																				        label: "Time To First Byte(ms)",
@@ -1439,20 +1443,124 @@
 																			            }]
 																			        }
 																			    }
-																			}); 	
+																			});  
+																			 
+																			var dataTopTTFB = {
+																				    labels: ["TTFB"],
+																				    datasets: [{
+																				        label: "Minimum Time",
+																				        fillColor: "rgba(0,107,0,1)",
+																				        strokeColor: "rgba(0,107,0,1)",
+																				        highlightFill: "rgba(0,107,0,1))",
+																				        highlightStroke: "rgba(0,107,0,1)",
+																				        backgroundColor: "rgba(254,108,20,.9)",
+																				        data: [answer.minTtfb]
+																				    }, {
+																				        label: "Most Recent",
+																				        fillColor: "rgba(0,107,0,1)",
+																				        strokeColor: "rgba(0,107,0,1)",
+																				        highlightFill: "rgba(0,107,0,1))",
+																				        highlightStroke: "rgba(0,107,0,1)",
+																				        backgroundColor: "rgba(54,108,20,.65)",
+																				        data: [answer.ttfb-answer.minTtfb]
+																				    }, {
+																				        label: "Maximum Time",
+																				        fillColor: "rgba(0,107,0,1)",
+																				        strokeColor: "rgba(0,107,0,1)",
+																				        highlightFill: "rgba(0,107,0,1))",
+																				        highlightStroke: "rgba(0,107,0,1)",
+																				        backgroundColor: "rgba(254,108,220,.35)",
+																				        data: [answer.maxTtfb-answer.ttfb]
+																				    }]
+																				};
+																			var ctx = document.getElementById("chartTopTTFB2");
+																			var myChart = new Chart(ctx, {
+																			    type: 'horizontalBar',
+																			    data:dataTopTTFB,
+																		        options: {
+																			    	maintainAspectRatio: false,
+																			        responsive: true,
+																			      
+
+																			    	scales: {
+																			    	     xAxes: [{
+																			    	          stacked: true,
+																					
+
+																			    	     }],
+																			    	     yAxes: [{
+																			    	          stacked: true,
+																						      
+
+																			    	          /* suggestedMin : answer.minTtfb,
+																			    	          suggestedMax : answer.maxTtfb */
+																			    	     }]
+																			    	}
+																			    }
+																			}); 
+																			
+																			var dataTopTTFL = {
+																					labels: ["TTFL"],
+																				    datasets: [{
+																				        label: "Minimum Time",
+																				        fillColor: "rgba(0,107,0,1)",
+																				        strokeColor: "rgba(0,107,0,1)",
+																				        highlightFill: "rgba(0,107,0,1))",
+																				        highlightStroke: "rgba(0,107,0,1)",
+																				        backgroundColor: "rgba(254,108,20,.9)",
+																				        data: [answer.minTtfl]
+																				    }, {
+																				        label: "Most Recent",
+																				        fillColor: "rgba(0,107,0,1)",
+																				        strokeColor: "rgba(0,107,0,1)",
+																				        highlightFill: "rgba(0,107,0,1))",
+																				        highlightStroke: "rgba(0,107,0,1)",
+																				        backgroundColor: "rgba(54,108,20,.65)",
+																				        data: [answer.loadtime-answer.minTtfl]
+																				    }, {
+																				        label: "Maximum Time",
+																				        fillColor: "rgba(0,107,0,1)",
+																				        strokeColor: "rgba(0,107,0,1)",
+																				        highlightFill: "rgba(0,107,0,1))",
+																				        highlightStroke: "rgba(0,107,0,1)",
+																				        backgroundColor: "rgba(254,108,220,.35)",
+																				        data: [answer.maxTtfl-answer.loadtime]
+																				    }]
+																				};
+																			var ctx = document.getElementById("chartTopTTFL2");
+																			var myChart = new Chart(ctx, {
+																			    type: 'horizontalBar',
+																			    data:dataTopTTFL,
+																			    options: {
+																			    	maintainAspectRatio: false,
+																			        responsive: true,
+																			        legend:{
+																			        	display: false
+																			        },
+																			    	scales: {
+																			    	     xAxes: [{
+																			    	          stacked: true,
+																			    	     }],
+																			    	     yAxes: [{
+																			    	          stacked: true
+																			    	     }]
+																			    	}
+																			    }
+																			}); 
+																			
 																			
 																			console.log("complete "+ answer.ttfb + "!");
 																			
 																			$("#simpleTTFB2").text("First Byte: " + answer.ttfb+ "ms");
 																			$("#simpleFullLoad2").text("Full Load: " + answer.loadtime+ "ms");
-																			$("#simpleTTFB2Avg").text("Average First Byte: " + answer.ttfbAverage+ "ms");
-																			$("#simpleFullLoad2Avg").text("Average Full Load: " + answer.fullAverage+ "ms");
+																			$("#simpleTTFB2Avg").text("Avg: " + answer.ttfbAverage+ "ms");
+																			$("#simpleFullLoad2Avg").text("Avg: " + answer.fullAverage+ "ms");
 																			//$("#simpleDate").text(job.ttfb);
 																			$("#simpleUrl2").text(answer.name);
 																			$("#simpleProgress2").text("Completed");
 																			console.log("Array: " + answer.firstByteArr);
 																			var temp = document.getElementById("spinner2").style.display = "none";
-
+																		
 																			if(numberOfRuns2<20&&!answer.fake){
 																				console.log("=====================================================================Beginning loop again: " + numberOfRuns2);
 																				job.continueInterval();		
@@ -1611,17 +1719,21 @@
 																			
 																			var answer = {
 																				name : result.name,
+																				fake : result.fake,
 																				ttfb : result.firstByte,
 																				loadtime : result.loadTime,
-																				fake : result.fake,
+																				minTtfb : result.minTtfb,
+																				maxTtfb : result.maxTtfb,
+																				minTtfl : result.minTtfl,
+																				maxTtfl : result.maxTtfl,
 																				ttfbAverage : result.firstAverage,
 																				fullAverage : result.fullAverage,
 																				statusNum : result.statusCode,
 																				firstByteArr : result.firstByteAverageJson,
 																				fullLoadArr : result.fullLoadAverageJson
 																			};
-																			
-																			var data = {
+																		 	console.log("min: "+ answer.minTtfb + " average " + answer.ttfbAverage + " max " + answer.maxTtfb);
+																			 var data = {
 																				    labels: ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10" ,"11", "12", "13", "14", "15"],
 																				    datasets: [{
 																				        label: "Time To First Byte(ms)",
@@ -1654,20 +1766,124 @@
 																			            }]
 																			        }
 																			    }
-																			}); 	
+																			});  
+																			 
+																			var dataTopTTFB = {
+																				    labels: ["TTFB"],
+																				    datasets: [{
+																				        label: "Minimum Time",
+																				        fillColor: "rgba(0,107,0,1)",
+																				        strokeColor: "rgba(0,107,0,1)",
+																				        highlightFill: "rgba(0,107,0,1))",
+																				        highlightStroke: "rgba(0,107,0,1)",
+																				        backgroundColor: "rgba(254,108,20,.9)",
+																				        data: [answer.minTtfb]
+																				    }, {
+																				        label: "Most Recent",
+																				        fillColor: "rgba(0,107,0,1)",
+																				        strokeColor: "rgba(0,107,0,1)",
+																				        highlightFill: "rgba(0,107,0,1))",
+																				        highlightStroke: "rgba(0,107,0,1)",
+																				        backgroundColor: "rgba(54,108,20,.65)",
+																				        data: [answer.ttfb-answer.minTtfb]
+																				    }, {
+																				        label: "Maximum Time",
+																				        fillColor: "rgba(0,107,0,1)",
+																				        strokeColor: "rgba(0,107,0,1)",
+																				        highlightFill: "rgba(0,107,0,1))",
+																				        highlightStroke: "rgba(0,107,0,1)",
+																				        backgroundColor: "rgba(254,108,220,.35)",
+																				        data: [answer.maxTtfb-answer.ttfb]
+																				    }]
+																				};
+																			var ctx = document.getElementById("chartTopTTFB3");
+																			var myChart = new Chart(ctx, {
+																			    type: 'horizontalBar',
+																			    data:dataTopTTFB,
+																		        options: {
+																			    	maintainAspectRatio: false,
+																			        responsive: true,
+																			      
+
+																			    	scales: {
+																			    	     xAxes: [{
+																			    	          stacked: true,
+																					
+
+																			    	     }],
+																			    	     yAxes: [{
+																			    	          stacked: true,
+																						      
+
+																			    	          /* suggestedMin : answer.minTtfb,
+																			    	          suggestedMax : answer.maxTtfb */
+																			    	     }]
+																			    	}
+																			    }
+																			}); 
+																			
+																			var dataTopTTFL = {
+																					labels: ["TTFL"],
+																				    datasets: [{
+																				        label: "Minimum Time",
+																				        fillColor: "rgba(0,107,0,1)",
+																				        strokeColor: "rgba(0,107,0,1)",
+																				        highlightFill: "rgba(0,107,0,1))",
+																				        highlightStroke: "rgba(0,107,0,1)",
+																				        backgroundColor: "rgba(254,108,20,.9)",
+																				        data: [answer.minTtfl]
+																				    }, {
+																				        label: "Most Recent",
+																				        fillColor: "rgba(0,107,0,1)",
+																				        strokeColor: "rgba(0,107,0,1)",
+																				        highlightFill: "rgba(0,107,0,1))",
+																				        highlightStroke: "rgba(0,107,0,1)",
+																				        backgroundColor: "rgba(54,108,20,.65)",
+																				        data: [answer.loadtime-answer.minTtfl]
+																				    }, {
+																				        label: "Maximum Time",
+																				        fillColor: "rgba(0,107,0,1)",
+																				        strokeColor: "rgba(0,107,0,1)",
+																				        highlightFill: "rgba(0,107,0,1))",
+																				        highlightStroke: "rgba(0,107,0,1)",
+																				        backgroundColor: "rgba(254,108,220,.35)",
+																				        data: [answer.maxTtfl-answer.loadtime]
+																				    }]
+																				};
+																			var ctx = document.getElementById("chartTopTTFL3");
+																			var myChart = new Chart(ctx, {
+																			    type: 'horizontalBar',
+																			    data:dataTopTTFL,
+																			    options: {
+																			    	maintainAspectRatio: false,
+																			        responsive: true,
+																			        legend:{
+																			        	display: false
+																			        },
+																			    	scales: {
+																			    	     xAxes: [{
+																			    	          stacked: true,
+																			    	     }],
+																			    	     yAxes: [{
+																			    	          stacked: true
+																			    	     }]
+																			    	}
+																			    }
+																			}); 
+																			
 																			
 																			console.log("complete "+ answer.ttfb + "!");
 																			
 																			$("#simpleTTFB3").text("First Byte: " + answer.ttfb+ "ms");
 																			$("#simpleFullLoad3").text("Full Load: " + answer.loadtime+ "ms");
-																			$("#simpleTTFB3Avg").text("Average First Byte: " + answer.ttfbAverage+ "ms");
-																			$("#simpleFullLoad3Avg").text("Average Full Load: " + answer.fullAverage+ "ms");
+																			$("#simpleTTFB3Avg").text("Avg: " + answer.ttfbAverage+ "ms");
+																			$("#simpleFullLoad3Avg").text("Avg: " + answer.fullAverage+ "ms");
 																			//$("#simpleDate").text(job.ttfb);
 																			$("#simpleUrl3").text(answer.name);
 																			$("#simpleProgress3").text("Completed");
 																			console.log("Array: " + answer.firstByteArr);
 																			var temp = document.getElementById("spinner3").style.display = "none";
-
+																		
 																			if(numberOfRuns3<20&&!answer.fake){
 																				console.log("=====================================================================Beginning loop again: " + numberOfRuns3);
 																				job.continueInterval();		
@@ -1826,17 +2042,21 @@
 																			
 																			var answer = {
 																				name : result.name,
+																				fake : result.fake,
 																				ttfb : result.firstByte,
 																				loadtime : result.loadTime,
-																				fake : result.fake,
+																				minTtfb : result.minTtfb,
+																				maxTtfb : result.maxTtfb,
+																				minTtfl : result.minTtfl,
+																				maxTtfl : result.maxTtfl,
 																				ttfbAverage : result.firstAverage,
 																				fullAverage : result.fullAverage,
 																				statusNum : result.statusCode,
 																				firstByteArr : result.firstByteAverageJson,
 																				fullLoadArr : result.fullLoadAverageJson
 																			};
-																			
-																			var data = {
+																		 	console.log("min: "+ answer.minTtfb + " average " + answer.ttfbAverage + " max " + answer.maxTtfb);
+																			 var data = {
 																				    labels: ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10" ,"11", "12", "13", "14", "15"],
 																				    datasets: [{
 																				        label: "Time To First Byte(ms)",
@@ -1869,20 +2089,124 @@
 																			            }]
 																			        }
 																			    }
-																			}); 	
+																			});  
+																			 
+																			var dataTopTTFB = {
+																				    labels: ["TTFB"],
+																				    datasets: [{
+																				        label: "Minimum Time",
+																				        fillColor: "rgba(0,107,0,1)",
+																				        strokeColor: "rgba(0,107,0,1)",
+																				        highlightFill: "rgba(0,107,0,1))",
+																				        highlightStroke: "rgba(0,107,0,1)",
+																				        backgroundColor: "rgba(254,108,20,.9)",
+																				        data: [answer.minTtfb]
+																				    }, {
+																				        label: "Most Recent",
+																				        fillColor: "rgba(0,107,0,1)",
+																				        strokeColor: "rgba(0,107,0,1)",
+																				        highlightFill: "rgba(0,107,0,1))",
+																				        highlightStroke: "rgba(0,107,0,1)",
+																				        backgroundColor: "rgba(54,108,20,.65)",
+																				        data: [answer.ttfb-answer.minTtfb]
+																				    }, {
+																				        label: "Maximum Time",
+																				        fillColor: "rgba(0,107,0,1)",
+																				        strokeColor: "rgba(0,107,0,1)",
+																				        highlightFill: "rgba(0,107,0,1))",
+																				        highlightStroke: "rgba(0,107,0,1)",
+																				        backgroundColor: "rgba(254,108,220,.35)",
+																				        data: [answer.maxTtfb-answer.ttfb]
+																				    }]
+																				};
+																			var ctx = document.getElementById("chartTopTTFB4");
+																			var myChart = new Chart(ctx, {
+																			    type: 'horizontalBar',
+																			    data:dataTopTTFB,
+																		        options: {
+																			    	maintainAspectRatio: false,
+																			        responsive: true,
+																			      
+
+																			    	scales: {
+																			    	     xAxes: [{
+																			    	          stacked: true,
+																					
+
+																			    	     }],
+																			    	     yAxes: [{
+																			    	          stacked: true,
+																						      
+
+																			    	          /* suggestedMin : answer.minTtfb,
+																			    	          suggestedMax : answer.maxTtfb */
+																			    	     }]
+																			    	}
+																			    }
+																			}); 
+																			
+																			var dataTopTTFL = {
+																					labels: ["TTFL"],
+																				    datasets: [{
+																				        label: "Minimum Time",
+																				        fillColor: "rgba(0,107,0,1)",
+																				        strokeColor: "rgba(0,107,0,1)",
+																				        highlightFill: "rgba(0,107,0,1))",
+																				        highlightStroke: "rgba(0,107,0,1)",
+																				        backgroundColor: "rgba(254,108,20,.9)",
+																				        data: [answer.minTtfl]
+																				    }, {
+																				        label: "Most Recent",
+																				        fillColor: "rgba(0,107,0,1)",
+																				        strokeColor: "rgba(0,107,0,1)",
+																				        highlightFill: "rgba(0,107,0,1))",
+																				        highlightStroke: "rgba(0,107,0,1)",
+																				        backgroundColor: "rgba(54,108,20,.65)",
+																				        data: [answer.loadtime-answer.minTtfl]
+																				    }, {
+																				        label: "Maximum Time",
+																				        fillColor: "rgba(0,107,0,1)",
+																				        strokeColor: "rgba(0,107,0,1)",
+																				        highlightFill: "rgba(0,107,0,1))",
+																				        highlightStroke: "rgba(0,107,0,1)",
+																				        backgroundColor: "rgba(254,108,220,.35)",
+																				        data: [answer.maxTtfl-answer.loadtime]
+																				    }]
+																				};
+																			var ctx = document.getElementById("chartTopTTFL4");
+																			var myChart = new Chart(ctx, {
+																			    type: 'horizontalBar',
+																			    data:dataTopTTFL,
+																			    options: {
+																			    	maintainAspectRatio: false,
+																			        responsive: true,
+																			        legend:{
+																			        	display: false
+																			        },
+																			    	scales: {
+																			    	     xAxes: [{
+																			    	          stacked: true,
+																			    	     }],
+																			    	     yAxes: [{
+																			    	          stacked: true
+																			    	     }]
+																			    	}
+																			    }
+																			}); 
+																			
 																			
 																			console.log("complete "+ answer.ttfb + "!");
 																			
 																			$("#simpleTTFB4").text("First Byte: " + answer.ttfb+ "ms");
 																			$("#simpleFullLoad4").text("Full Load: " + answer.loadtime+ "ms");
-																			$("#simpleTTFB4Avg").text("Average First Byte: " + answer.ttfbAverage+ "ms");
-																			$("#simpleFullLoad4Avg").text("Average Full Load: " + answer.fullAverage+ "ms");
+																			$("#simpleTTFB4Avg").text("Avg: " + answer.ttfbAverage+ "ms");
+																			$("#simpleFullLoad4Avg").text("Avg: " + answer.fullAverage+ "ms");
 																			//$("#simpleDate").text(job.ttfb);
 																			$("#simpleUrl4").text(answer.name);
 																			$("#simpleProgress4").text("Completed");
 																			console.log("Array: " + answer.firstByteArr);
 																			var temp = document.getElementById("spinner4").style.display = "none";
-
+																		
 																			if(numberOfRuns4<20&&!answer.fake){
 																				console.log("=====================================================================Beginning loop again: " + numberOfRuns4);
 																				job.continueInterval();		
@@ -2041,17 +2365,21 @@
 																			
 																			var answer = {
 																				name : result.name,
+																				fake : result.fake,
 																				ttfb : result.firstByte,
 																				loadtime : result.loadTime,
-																				fake : result.fake,
+																				minTtfb : result.minTtfb,
+																				maxTtfb : result.maxTtfb,
+																				minTtfl : result.minTtfl,
+																				maxTtfl : result.maxTtfl,
 																				ttfbAverage : result.firstAverage,
 																				fullAverage : result.fullAverage,
 																				statusNum : result.statusCode,
 																				firstByteArr : result.firstByteAverageJson,
 																				fullLoadArr : result.fullLoadAverageJson
 																			};
-																			
-																			var data = {
+																		 	console.log("min: "+ answer.minTtfb + " average " + answer.ttfbAverage + " max " + answer.maxTtfb);
+																			 var data = {
 																				    labels: ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10" ,"11", "12", "13", "14", "15"],
 																				    datasets: [{
 																				        label: "Time To First Byte(ms)",
@@ -2084,20 +2412,124 @@
 																			            }]
 																			        }
 																			    }
-																			}); 	
+																			});  
+																			 
+																			var dataTopTTFB = {
+																				    labels: ["TTFB"],
+																				    datasets: [{
+																				        label: "Minimum Time",
+																				        fillColor: "rgba(0,107,0,1)",
+																				        strokeColor: "rgba(0,107,0,1)",
+																				        highlightFill: "rgba(0,107,0,1))",
+																				        highlightStroke: "rgba(0,107,0,1)",
+																				        backgroundColor: "rgba(254,108,20,.9)",
+																				        data: [answer.minTtfb]
+																				    }, {
+																				        label: "Most Recent",
+																				        fillColor: "rgba(0,107,0,1)",
+																				        strokeColor: "rgba(0,107,0,1)",
+																				        highlightFill: "rgba(0,107,0,1))",
+																				        highlightStroke: "rgba(0,107,0,1)",
+																				        backgroundColor: "rgba(54,108,20,.65)",
+																				        data: [answer.ttfb-answer.minTtfb]
+																				    }, {
+																				        label: "Maximum Time",
+																				        fillColor: "rgba(0,107,0,1)",
+																				        strokeColor: "rgba(0,107,0,1)",
+																				        highlightFill: "rgba(0,107,0,1))",
+																				        highlightStroke: "rgba(0,107,0,1)",
+																				        backgroundColor: "rgba(254,108,220,.35)",
+																				        data: [answer.maxTtfb-answer.ttfb]
+																				    }]
+																				};
+																			var ctx = document.getElementById("chartTopTTFB5");
+																			var myChart = new Chart(ctx, {
+																			    type: 'horizontalBar',
+																			    data:dataTopTTFB,
+																		        options: {
+																			    	maintainAspectRatio: false,
+																			        responsive: true,
+																			      
+
+																			    	scales: {
+																			    	     xAxes: [{
+																			    	          stacked: true,
+																					
+
+																			    	     }],
+																			    	     yAxes: [{
+																			    	          stacked: true,
+																						      
+
+																			    	          /* suggestedMin : answer.minTtfb,
+																			    	          suggestedMax : answer.maxTtfb */
+																			    	     }]
+																			    	}
+																			    }
+																			}); 
+																			
+																			var dataTopTTFL = {
+																					labels: ["TTFL"],
+																				    datasets: [{
+																				        label: "Minimum Time",
+																				        fillColor: "rgba(0,107,0,1)",
+																				        strokeColor: "rgba(0,107,0,1)",
+																				        highlightFill: "rgba(0,107,0,1))",
+																				        highlightStroke: "rgba(0,107,0,1)",
+																				        backgroundColor: "rgba(254,108,20,.9)",
+																				        data: [answer.minTtfl]
+																				    }, {
+																				        label: "Most Recent",
+																				        fillColor: "rgba(0,107,0,1)",
+																				        strokeColor: "rgba(0,107,0,1)",
+																				        highlightFill: "rgba(0,107,0,1))",
+																				        highlightStroke: "rgba(0,107,0,1)",
+																				        backgroundColor: "rgba(54,108,20,.65)",
+																				        data: [answer.loadtime-answer.minTtfl]
+																				    }, {
+																				        label: "Maximum Time",
+																				        fillColor: "rgba(0,107,0,1)",
+																				        strokeColor: "rgba(0,107,0,1)",
+																				        highlightFill: "rgba(0,107,0,1))",
+																				        highlightStroke: "rgba(0,107,0,1)",
+																				        backgroundColor: "rgba(254,108,220,.35)",
+																				        data: [answer.maxTtfl-answer.loadtime]
+																				    }]
+																				};
+																			var ctx = document.getElementById("chartTopTTFL5");
+																			var myChart = new Chart(ctx, {
+																			    type: 'horizontalBar',
+																			    data:dataTopTTFL,
+																			    options: {
+																			    	maintainAspectRatio: false,
+																			        responsive: true,
+																			        legend:{
+																			        	display: false
+																			        },
+																			    	scales: {
+																			    	     xAxes: [{
+																			    	          stacked: true,
+																			    	     }],
+																			    	     yAxes: [{
+																			    	          stacked: true
+																			    	     }]
+																			    	}
+																			    }
+																			}); 
+																			
 																			
 																			console.log("complete "+ answer.ttfb + "!");
 																			
 																			$("#simpleTTFB5").text("First Byte: " + answer.ttfb+ "ms");
 																			$("#simpleFullLoad5").text("Full Load: " + answer.loadtime+ "ms");
-																			$("#simpleTTFB5Avg").text("Average First Byte: " + answer.ttfbAverage+ "ms");
-																			$("#simpleFullLoad5Avg").text("Average Full Load: " + answer.fullAverage+ "ms");
+																			$("#simpleTTFB5Avg").text("Avg: " + answer.ttfbAverage+ "ms");
+																			$("#simpleFullLoad5Avg").text("Avg: " + answer.fullAverage+ "ms");
 																			//$("#simpleDate").text(job.ttfb);
 																			$("#simpleUrl5").text(answer.name);
 																			$("#simpleProgress5").text("Completed");
 																			console.log("Array: " + answer.firstByteArr);
 																			var temp = document.getElementById("spinner5").style.display = "none";
-
+																		
 																			if(numberOfRuns5<20&&!answer.fake){
 																				console.log("=====================================================================Beginning loop again: " + numberOfRuns5);
 																				job.continueInterval();		
@@ -2257,17 +2689,21 @@
 																			
 																			var answer = {
 																				name : result.name,
+																				fake : result.fake,
 																				ttfb : result.firstByte,
 																				loadtime : result.loadTime,
-																				fake : result.fake,
+																				minTtfb : result.minTtfb,
+																				maxTtfb : result.maxTtfb,
+																				minTtfl : result.minTtfl,
+																				maxTtfl : result.maxTtfl,
 																				ttfbAverage : result.firstAverage,
 																				fullAverage : result.fullAverage,
 																				statusNum : result.statusCode,
 																				firstByteArr : result.firstByteAverageJson,
 																				fullLoadArr : result.fullLoadAverageJson
 																			};
-																			
-																			var data = {
+																		 	console.log("min: "+ answer.minTtfb + " average " + answer.ttfbAverage + " max " + answer.maxTtfb);
+																			 var data = {
 																				    labels: ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10" ,"11", "12", "13", "14", "15"],
 																				    datasets: [{
 																				        label: "Time To First Byte(ms)",
@@ -2300,20 +2736,124 @@
 																			            }]
 																			        }
 																			    }
-																			}); 	
+																			});  
+																			 
+																			var dataTopTTFB = {
+																				    labels: ["TTFB"],
+																				    datasets: [{
+																				        label: "Minimum Time",
+																				        fillColor: "rgba(0,107,0,1)",
+																				        strokeColor: "rgba(0,107,0,1)",
+																				        highlightFill: "rgba(0,107,0,1))",
+																				        highlightStroke: "rgba(0,107,0,1)",
+																				        backgroundColor: "rgba(254,108,20,.9)",
+																				        data: [answer.minTtfb]
+																				    }, {
+																				        label: "Most Recent",
+																				        fillColor: "rgba(0,107,0,1)",
+																				        strokeColor: "rgba(0,107,0,1)",
+																				        highlightFill: "rgba(0,107,0,1))",
+																				        highlightStroke: "rgba(0,107,0,1)",
+																				        backgroundColor: "rgba(54,108,20,.65)",
+																				        data: [answer.ttfb-answer.minTtfb]
+																				    }, {
+																				        label: "Maximum Time",
+																				        fillColor: "rgba(0,107,0,1)",
+																				        strokeColor: "rgba(0,107,0,1)",
+																				        highlightFill: "rgba(0,107,0,1))",
+																				        highlightStroke: "rgba(0,107,0,1)",
+																				        backgroundColor: "rgba(254,108,220,.35)",
+																				        data: [answer.maxTtfb-answer.ttfb]
+																				    }]
+																				};
+																			var ctx = document.getElementById("chartTopTTFB6");
+																			var myChart = new Chart(ctx, {
+																			    type: 'horizontalBar',
+																			    data:dataTopTTFB,
+																		        options: {
+																			    	maintainAspectRatio: false,
+																			        responsive: true,
+																			      
+
+																			    	scales: {
+																			    	     xAxes: [{
+																			    	          stacked: true,
+																					
+
+																			    	     }],
+																			    	     yAxes: [{
+																			    	          stacked: true,
+																						      
+
+																			    	          /* suggestedMin : answer.minTtfb,
+																			    	          suggestedMax : answer.maxTtfb */
+																			    	     }]
+																			    	}
+																			    }
+																			}); 
+																			
+																			var dataTopTTFL = {
+																					labels: ["TTFL"],
+																				    datasets: [{
+																				        label: "Minimum Time",
+																				        fillColor: "rgba(0,107,0,1)",
+																				        strokeColor: "rgba(0,107,0,1)",
+																				        highlightFill: "rgba(0,107,0,1))",
+																				        highlightStroke: "rgba(0,107,0,1)",
+																				        backgroundColor: "rgba(254,108,20,.9)",
+																				        data: [answer.minTtfl]
+																				    }, {
+																				        label: "Most Recent",
+																				        fillColor: "rgba(0,107,0,1)",
+																				        strokeColor: "rgba(0,107,0,1)",
+																				        highlightFill: "rgba(0,107,0,1))",
+																				        highlightStroke: "rgba(0,107,0,1)",
+																				        backgroundColor: "rgba(54,108,20,.65)",
+																				        data: [answer.loadtime-answer.minTtfl]
+																				    }, {
+																				        label: "Maximum Time",
+																				        fillColor: "rgba(0,107,0,1)",
+																				        strokeColor: "rgba(0,107,0,1)",
+																				        highlightFill: "rgba(0,107,0,1))",
+																				        highlightStroke: "rgba(0,107,0,1)",
+																				        backgroundColor: "rgba(254,108,220,.35)",
+																				        data: [answer.maxTtfl-answer.loadtime]
+																				    }]
+																				};
+																			var ctx = document.getElementById("chartTopTTFL6");
+																			var myChart = new Chart(ctx, {
+																			    type: 'horizontalBar',
+																			    data:dataTopTTFL,
+																			    options: {
+																			    	maintainAspectRatio: false,
+																			        responsive: true,
+																			        legend:{
+																			        	display: false
+																			        },
+																			    	scales: {
+																			    	     xAxes: [{
+																			    	          stacked: true,
+																			    	     }],
+																			    	     yAxes: [{
+																			    	          stacked: true
+																			    	     }]
+																			    	}
+																			    }
+																			}); 
+																			
 																			
 																			console.log("complete "+ answer.ttfb + "!");
 																			
 																			$("#simpleTTFB6").text("First Byte: " + answer.ttfb+ "ms");
 																			$("#simpleFullLoad6").text("Full Load: " + answer.loadtime+ "ms");
-																			$("#simpleTTFB6Avg").text("Average First Byte: " + answer.ttfbAverage+ "ms");
-																			$("#simpleFullLoad6Avg").text("Average Full Load: " + answer.fullAverage+ "ms");
+																			$("#simpleTTFB6Avg").text("Avg: " + answer.ttfbAverage+ "ms");
+																			$("#simpleFullLoad6Avg").text("Avg: " + answer.fullAverage+ "ms");
 																			//$("#simpleDate").text(job.ttfb);
 																			$("#simpleUrl6").text(answer.name);
 																			$("#simpleProgress6").text("Completed");
 																			console.log("Array: " + answer.firstByteArr);
 																			var temp = document.getElementById("spinner6").style.display = "none";
-
+																		
 																			if(numberOfRuns6<20&&!answer.fake){
 																				console.log("=====================================================================Beginning loop again: " + numberOfRuns6);
 																				job.continueInterval();		
