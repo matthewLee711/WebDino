@@ -82,10 +82,11 @@ public class JobMaster {
     
     
     //Check xml status -- returns testing, waiting, complete
-    public String getxmlInfo(String name){
+    public String getxmlInfo(String name, boolean fake){
     	
     	Job job = jobs.get(name);
-    	return job.getParsedXml(false);/////////////////////////////////////////////////
+    	System.out.println("Before?");
+    	return job.getParsedXml(false, fake);/////////////////////////////////////////////////
     }
     
     //if test complete, get information
