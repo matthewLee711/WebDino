@@ -271,6 +271,7 @@
 				</table>
 				<div id="dataChart">
 					<canvas id="chart1"></canvas>
+					
 				</div>
 			</div>
 		</div>
@@ -527,6 +528,9 @@
 					<button type="button" id="addButton1" class="btn btn-success" data-dismiss="modal">ADD</button>
 				</div>
 			</div>
+			<!-- <script>
+				document.getElementByID("urlInput1").focus();
+			</script> -->
 		</div>
 	</div>
 	
@@ -1233,8 +1237,13 @@
 																			
 																			var answer = {
 																				name : result.name,
+																				fake : result.fake,
 																				ttfb : result.firstByte,
 																				loadtime : result.loadTime,
+																				minTtfb : result.minTtfb,
+																				maxTtfb : result.maxTtfb,
+																				minTtfl : result.minTtfl,
+																				maxTtfl : result.maxTtfl,
 																				ttfbAverage : result.firstAverage,
 																				fullAverage : result.fullAverage,
 																				statusNum : result.statusCode,
@@ -1447,8 +1456,13 @@
 																			
 																			var answer = {
 																				name : result.name,
+																				fake : result.fake,
 																				ttfb : result.firstByte,
 																				loadtime : result.loadTime,
+																				minTtfb : result.minTtfb,
+																				maxTtfb : result.maxTtfb,
+																				minTtfl : result.minTtfl,
+																				maxTtfl : result.maxTtfl,
 																				ttfbAverage : result.firstAverage,
 																				fullAverage : result.fullAverage,
 																				statusNum : result.statusCode,
@@ -1661,8 +1675,13 @@
 																			
 																			var answer = {
 																				name : result.name,
+																				fake : result.fake,
 																				ttfb : result.firstByte,
 																				loadtime : result.loadTime,
+																				minTtfb : result.minTtfb,
+																				maxTtfb : result.maxTtfb,
+																				minTtfl : result.minTtfl,
+																				maxTtfl : result.maxTtfl,
 																				ttfbAverage : result.firstAverage,
 																				fullAverage : result.fullAverage,
 																				statusNum : result.statusCode,
@@ -1875,8 +1894,13 @@
 																			
 																			var answer = {
 																				name : result.name,
+																				fake : result.fake,
 																				ttfb : result.firstByte,
 																				loadtime : result.loadTime,
+																				minTtfb : result.minTtfb,
+																				maxTtfb : result.maxTtfb,
+																				minTtfl : result.minTtfl,
+																				maxTtfl : result.maxTtfl,
 																				ttfbAverage : result.firstAverage,
 																				fullAverage : result.fullAverage,
 																				statusNum : result.statusCode,
@@ -2090,8 +2114,13 @@
 																			
 																			var answer = {
 																				name : result.name,
+																				fake : result.fake,
 																				ttfb : result.firstByte,
 																				loadtime : result.loadTime,
+																				minTtfb : result.minTtfb,
+																				maxTtfb : result.maxTtfb,
+																				minTtfl : result.minTtfl,
+																				maxTtfl : result.maxTtfl,
 																				ttfbAverage : result.firstAverage,
 																				fullAverage : result.fullAverage,
 																				statusNum : result.statusCode,

@@ -43,6 +43,23 @@
 	width: 580px;
 	/* background:#F78E05; */
 }
+#numChartA{
+	height: 75px;
+	width: 450px;
+	/*background:#F78E05;
+	 webkit-transform: rotate(90deg); Chrome, Safari, Opera
+	transform: rotate(90deg); */
+	/* background:#F78E05; */
+}
+#numChartB{
+	height: 45px;
+	width: 450px;
+	barWidth: 10px;
+	/*background:#F78E05;
+	 webkit-transform: rotate(90deg); Chrome, Safari, Opera
+	transform: rotate(90deg); */
+	/* background:#F78E05; */
+}
 #collapse1{
 	padding: 20px;
 }
@@ -66,3 +83,23 @@ table{
 	position:relative;
 	margin-top:9px;
 }
+/* canvas {
+	-webkit-transform: rotate(90deg); Chrome, Safari, Opera
+	transform: rotate(90deg);
+} */
+ canvas{
+        width: 100% !important;
+        max-width: 800px;
+        height: auto !important;
+}
+.avgA{
+	position: relative;
+	bottom: 60px;
+	left: 460px;
+}
+.avgB {
+	position: relative;
+	bottom: 50px;
+	left: 460px;
+}
+   
