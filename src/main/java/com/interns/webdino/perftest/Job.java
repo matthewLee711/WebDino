@@ -164,7 +164,7 @@ public class Job{
         try {
             // load webpage
         	System.out.println("Inside ParseXML " + url);
-            doc = Jsoup.connect(url).get();
+            doc = Jsoup.connect(url).validateTLSCertificates(false).timeout(10 * 1000).get();
             System.out.println("load" + doc.toString());
 
             // extract webpage content
@@ -231,7 +231,7 @@ public class Job{
             //http://www.homedepot.com/p/Husky-16-oz-Fiberglass-Claw-Hammer-N-G16CHD-HN/205386272
         	//http://www.webpagetest.org/xmlResult/160608_N0_1GNM/
         	//Extract status code and data from parsedXml link  
-            doc = Jsoup.connect(xmlurl).get();
+            doc = Jsoup.connect(xmlurl).validateTLSCertificates(false).timeout(10 * 1000).get();
             //System.out.println("load" + doc.toString());
             
             //Retrieve status code

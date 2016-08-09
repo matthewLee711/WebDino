@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.interns.webdino.data.MongoDataHelper;
+import com.interns.webdino.perftest.Job;
 
 @RestController
 @RequestMapping("/data")
@@ -31,7 +32,7 @@ public class DataService {
     public ResponseEntity<String> addDoc(
             HttpServletRequest req,
             @RequestParam(name = "id", required = true) String id,
-            @RequestParam(name = "content", required = true) String content) {
+            @RequestParam(name = "content", required = true) Job content) {
 
         ResponseEntity<String> result = null;
 
